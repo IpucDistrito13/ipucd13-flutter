@@ -10,7 +10,7 @@ class EpisodiosDatasourceImpl extends EpisodiosDatasource {
 
   EpisodiosDatasourceImpl({required this.accessToken})
       : dio = Dio(BaseOptions(
-          baseUrl: Environment.apiProduccion,
+          baseUrl: Environment.apiUrl,
           headers: {
             'Authorization': 'Bearer $accessToken',
           },

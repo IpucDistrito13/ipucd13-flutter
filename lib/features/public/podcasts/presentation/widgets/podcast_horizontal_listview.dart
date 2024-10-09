@@ -56,7 +56,7 @@ class _PodcastHorizontalListviewState extends State<PodcastHorizontalListview> {
      * 2. CustomSliderHorizontalTextoImagen: Mostramo titulo y imagen
      */
     return SizedBox(
-      height: 325, //Altura sizedBox
+      height: 337, //Altura sizedBox
       child: Column(
         children: [
           if (widget.title != null || widget.subTitle != null)

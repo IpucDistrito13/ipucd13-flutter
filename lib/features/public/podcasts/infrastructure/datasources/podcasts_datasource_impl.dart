@@ -10,7 +10,7 @@ class PodcastsDatasourceImpl extends PodcastsDatasource {
 
   PodcastsDatasourceImpl({required this.accessToken})
       : dio = Dio(BaseOptions(
-          baseUrl: Environment.apiProduccion,
+          baseUrl: Environment.apiUrl,
           headers: {
             'Authorization': 'Bearer $accessToken',
           },

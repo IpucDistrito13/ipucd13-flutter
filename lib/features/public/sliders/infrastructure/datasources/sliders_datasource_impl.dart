@@ -9,7 +9,7 @@ class SlidersDatasourceImpl extends SlidersDatasource {
   final String accessToken;
 
   SlidersDatasourceImpl({required this.accessToken})
-      : dio = Dio(BaseOptions(baseUrl: Environment.apiProduccion, headers: {
+      : dio = Dio(BaseOptions(baseUrl: Environment.apiUrl, headers: {
           'Authorization': 'Bearer $accessToken',
         }));
 

@@ -12,7 +12,7 @@ class CongregacionesDatasourceImpl extends CongregacionesDatasource {
 
   CongregacionesDatasourceImpl({required this.accessToken})
       : dio = Dio(BaseOptions(
-          baseUrl: Environment.apiProduccion,
+          baseUrl: Environment.apiUrl,
           headers: {
             'Authorization': 'Bearer $accessToken',
           },
@@ -44,7 +44,7 @@ class CongregacionesDatasourceImpl extends CongregacionesDatasource {
       {int limit = 10, int offset = 0}) async {
     try {
       final key = Environment.apiKey;
-      final url = '/v2/congregaciones?limit=$limit&offset=$offset&api_key=$key';
+      final url = '/v1/congregaciones?limit=$limit&offset=$offset&api_key=$key';
 
       final response = await dio.get(url);
 

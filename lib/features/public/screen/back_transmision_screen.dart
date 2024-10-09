@@ -68,7 +68,9 @@ class BackTransmisionScreen extends ConsumerWidget {
             }
           },
           loading: () => const CircularProgressIndicator(),
-          error: (error, stackTrace) => Text('Error: $error'),
+          error: (error, stackTrace) => const Text(
+            'Error: Problemas de conexión.',
+          ),
         ),
       ),
     );

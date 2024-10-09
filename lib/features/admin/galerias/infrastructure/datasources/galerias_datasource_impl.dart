@@ -11,7 +11,7 @@ class GaleriasDatasourceImpl extends GaleriasDatasource {
 
   GaleriasDatasourceImpl({required this.accessToken})
       : dio = Dio(BaseOptions(
-          baseUrl: Environment.apiProduccion,
+          baseUrl: Environment.apiUrl,
           headers: {
             'Authorization': 'Bearer $accessToken',
           },

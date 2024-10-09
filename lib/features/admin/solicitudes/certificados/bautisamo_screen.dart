@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:path_provider/path_provider.dart';
 import 'dart:io';
+import 'package:path_provider/path_provider.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:open_file/open_file.dart';
 
 final dioProvider = Provider((ref) => Dio());
 
@@ -11,6 +13,43 @@ class CertificadoNotifier extends StateNotifier<AsyncValue<String?>> {
   CertificadoNotifier(this.ref) : super(const AsyncValue.data(null));
 
   final Ref ref;
+  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+      FlutterLocalNotificationsPlugin();
+
+  Future<void> initNotifications() async {
+    const AndroidInitializationSettings initializationSettingsAndroid =
+        AndroidInitializationSettings('@mipmap/ic_launcher');
+    final InitializationSettings initializationSettings =
+        InitializationSettings(android: initializationSettingsAndroid);
+    await flutterLocalNotificationsPlugin.initialize(
+      initializationSettings,
+      onDidReceiveNotificationResponse: (NotificationResponse details) async {
+        if (details.payload != null) {
+          await OpenFile.open(details.payload);
+        }
+      },
+    );
+  }
+
+  Future<void> showNotification(String filePath) async {
+    const AndroidNotificationDetails androidPlatformChannelSpecifics =
+        AndroidNotificationDetails(
+      'certificado_channel',
+      'Certificados',
+      importance: Importance.max,
+      priority: Priority.high,
+      showWhen: false,
+    );
+    const NotificationDetails platformChannelSpecifics =
+        NotificationDetails(android: androidPlatformChannelSpecifics);
+    await flutterLocalNotificationsPlugin.show(
+      0,
+      'Certificado descargado',
+      'Toca para abrir el archivo',
+      platformChannelSpecifics,
+      payload: filePath,
+    );
+  }
 
   Future<void> generarCertificado(Map<String, dynamic> params) async {
     state = const AsyncValue.loading();
@@ -36,14 +75,12 @@ class CertificadoNotifier extends StateNotifier<AsyncValue<String?>> {
 
       if (response.statusCode == 200) {
         final bytes = response.data;
-
-        // Usa el nombre del bautizado para nombrar el archivo
         final nombreBautizado = params['nombre'];
-
-        // Guardar el archivo en el almacenamiento externo
         final filePath = await guardarArchivo(nombreBautizado, bytes);
 
-        // Actualizar el estado con la ubicación del archivo
+        // Mostrar la notificación
+        await showNotification(filePath);
+
         state = AsyncValue.data(filePath);
       } else {
         throw Exception(
@@ -54,21 +91,20 @@ class CertificadoNotifier extends StateNotifier<AsyncValue<String?>> {
     }
   }
 
-  // Función para guardar el archivo en el almacenamiento externo
   Future<String> guardarArchivo(String nombreBautizado, List<int> bytes) async {
-    // Obtener el directorio de almacenamiento externo
-    final directory = await getExternalStorageDirectory();
+    try {
+      // Obtener el directorio de documentos de la aplicación
+      final appDocDir = await getApplicationDocumentsDirectory();
+      final file = File('${appDocDir.path}/$nombreBautizado.pdf');
 
-    if (directory != null) {
-      // Crear el archivo con el nombre del bautizado
-      final file = File('${directory.path}/$nombreBautizado.pdf');
+      // Escribir los bytes en el archivo
       await file.writeAsBytes(bytes);
 
       print('Archivo guardado en: ${file.path}');
       return file.path;
-    } else {
-      throw Exception(
-          'No se pudo acceder al directorio de almacenamiento externo.');
+    } catch (e) {
+      print('Error al guardar el archivo: $e');
+      rethrow;
     }
   }
 }
@@ -78,16 +114,27 @@ final certificadoProvider =
   return CertificadoNotifier(ref);
 });
 
-class BautisamoScreen extends ConsumerWidget {
+class BautisamoScreen extends ConsumerStatefulWidget {
+  const BautisamoScreen({Key? key}) : super(key: key);
+
+  @override
+  _BautisamoScreenState createState() => _BautisamoScreenState();
+}
+
+class _BautisamoScreenState extends ConsumerState<BautisamoScreen> {
   final _formKey = GlobalKey<FormState>();
   final _nombreController = TextEditingController();
   final _ubicacionController = TextEditingController();
   final _fechaController = TextEditingController();
 
-  BautisamoScreen({super.key});
+  @override
+  void initState() {
+    super.initState();
+    ref.read(certificadoProvider.notifier).initNotifications();
+  }
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final certificadoState = ref.watch(certificadoProvider);
 
     ref.listen<AsyncValue<String?>>(certificadoProvider, (_, state) {
@@ -95,9 +142,9 @@ class BautisamoScreen extends ConsumerWidget {
         data: (filePath) {
           if (filePath != null) {
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text('Certificado descargado: $filePath'),
-                //backgroundColor: Colors.green,
+              const SnackBar(
+                content: Text(
+                    'Certificado generado exitosamente. Revisa la notificación para obtener detalles.'),
               ),
             );
           }
@@ -173,9 +220,8 @@ class BautisamoScreen extends ConsumerWidget {
                 ElevatedButton(
                   onPressed: certificadoState.isLoading
                       ? null
-                      : () => _generarCertificado(ref),
+                      : () => _generarCertificado(),
                   style: ElevatedButton.styleFrom(
-                    //primary: Colors.blue,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
@@ -208,7 +254,6 @@ class BautisamoScreen extends ConsumerWidget {
       firstDate: DateTime(2024),
       lastDate: lastDate,
       selectableDayPredicate: (DateTime date) {
-        // Permite seleccionar fechas hasta una semana en el futuro
         return date.isBefore(lastDate.add(const Duration(days: 1)));
       },
     );
@@ -218,7 +263,7 @@ class BautisamoScreen extends ConsumerWidget {
     }
   }
 
-  void _generarCertificado(WidgetRef ref) {
+  void _generarCertificado() {
     if (_formKey.currentState!.validate()) {
       final params = {
         'nombre': _nombreController.text,

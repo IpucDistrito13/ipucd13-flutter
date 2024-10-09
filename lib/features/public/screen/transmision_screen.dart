@@ -78,8 +78,10 @@ class TransmisionScreenState extends ConsumerState<TransmisionScreen> {
                   },
                   loading: () =>
                       const Center(child: CircularProgressIndicator()),
-                  error: (error, stackTrace) =>
-                      Center(child: Text('Error: $error')),
+                  error: (error, stackTrace) => const Center(
+                      child: Text(
+                    'Error: Problemas de conexión.',
+                  )),
                 ),
                 if (!isPortrait)
                   Positioned(

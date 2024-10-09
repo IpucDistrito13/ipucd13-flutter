@@ -56,7 +56,7 @@ class _SerieHorizontalListviewState extends State<SerieHorizontalListview> {
      * 2. CustomSliderHorizontalTextoImagen: Mostramo titulo y imagen
      */
     return SizedBox(
-      height: 325, //Altura sizedBox
+      height: 337, //Altura sizedBox
       child: Column(
         children: [
           //Si lo dos son null no mostrar nada, Si uno de los dos tiene datos mostrar

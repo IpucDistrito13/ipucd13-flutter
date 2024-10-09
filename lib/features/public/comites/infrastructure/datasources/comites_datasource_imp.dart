@@ -8,7 +8,7 @@ class ComitesDatasourceImp extends ComitesDatasource {
   final String accessToken;
 
   ComitesDatasourceImp({required this.accessToken})
-      : dio = Dio(BaseOptions(baseUrl: Environment.apiProduccion, headers: {
+      : dio = Dio(BaseOptions(baseUrl: Environment.apiUrl, headers: {
           'Authorization': 'Bearer $accessToken',
         }));
 
@@ -22,9 +22,9 @@ class ComitesDatasourceImp extends ComitesDatasource {
   Future<Comite> getComiteById(String id) async {
     try {
       final key = Environment.apiKey;
-      final url = '/v2/comite/$id?api_key=$key';
+      final url = '/v1/comite/$id?api_key=$key';
       final response = await dio.get(url);
-      if (response.statusCode != 200) throw Exception('Comite no encontrado');
+      if (response.statusCode != 200) throw Exception('Comité no encontrado.');
 
       final comiteDetails = ComiteDetailsResponse.fromJson(response.data);
       final Comite comite = ComiteMapper.comiteDetailstoEntity(comiteDetails);
@@ -45,6 +45,8 @@ class ComitesDatasourceImp extends ComitesDatasource {
       final url = '/v2/comites?limit=$limit&offset=$offset&api_key=$key';
 
       final response = await dio.get(url);
+      print('URL: $url');
+
       final comitesResponse = ComitesServerResponse.fromJson(response.data);
 
       final List<Comite> comites = comitesResponse.data

@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ipucd13_flutter/config/constants/environment.dart';
-import 'package:ipucd13_flutter/config/router/app_router.dart';
-import 'package:ipucd13_flutter/features/presentation/theme_provider.dart';
-import 'package:ipucd13_flutter/features/shared/preferences.dart';
+
+import 'config/config.dart';
+import 'features/presentation/theme_provider.dart';
+import 'features/shared/shared.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Preferences.init(); // Inicializa las preferencias
+  await Preferences.init();
 
-  await Environment.initEnvironment(); // Inicializa el entorno, si es necesario
+  await Environment.initEnvironment();
 
   // Forzar la orientación a vertical
   SystemChrome.setPreferredOrientations([
@@ -26,14 +26,12 @@ class MainApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final appTheme =
-        ref.watch(themeNotifierProvider); // Obtenemos el tema actual
-
+    final appTheme = ref.watch(themeNotifierProvider);
     final appRouter = ref.watch(goRouterProvider);
 
     return MaterialApp.router(
-      routerConfig: appRouter, // Configuración de rutas
-      theme: appTheme.getTheme(), // Aplicamos el tema actual
+      routerConfig: appRouter,
+      theme: appTheme.getTheme(),
       debugShowCheckedModeBanner: false,
     );
   }

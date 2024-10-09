@@ -12,7 +12,7 @@ class SeriesDatasourceImpl extends SeriesDatasource {
   SeriesDatasourceImpl({required this.accessToken})
       : dio = Dio(
           BaseOptions(
-            baseUrl: Environment.apiProduccion,
+            baseUrl: Environment.apiUrl,
             headers: {
               'Authorization': 'Bearer $accessToken',
             },

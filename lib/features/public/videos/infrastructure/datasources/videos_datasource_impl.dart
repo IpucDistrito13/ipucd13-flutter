@@ -10,7 +10,7 @@ class VideosDatasourceImpl extends VideosDatasource {
 
   VideosDatasourceImpl({required this.accessToken})
       : dio = Dio(BaseOptions(
-          baseUrl: Environment.apiProduccion,
+          baseUrl: Environment.apiUrl,
           headers: {
             'Authorization': 'Bearer $accessToken',
           },

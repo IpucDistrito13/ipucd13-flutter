@@ -10,7 +10,7 @@ class CronogramasDatasourceImpl extends CronogramaDatasource {
 
   CronogramasDatasourceImpl({required this.accessToken})
       : dio = Dio(BaseOptions(
-          baseUrl: Environment.apiProduccion,
+          baseUrl: Environment.apiUrl,
           headers: {
             'Authorization': 'Bearer $accessToken',
           },

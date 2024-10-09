@@ -26,21 +26,34 @@ class _RadioScreenState extends State<RadioScreen> {
   }
 
   void _playPause() async {
-    if (_isPlaying) {
-      await _audioPlayer.pause();
-    } else {
-      const url =
-          'https://play14.tikast.com:22038/stream?type=http&nocache=2126';
-      try {
-        await _audioPlayer.play(UrlSource(url));
-        await _audioPlayer.setVolume(_volume);
-      } catch (e) {
-        print("Error de reproducción: $e");
+    const String streamUrl =
+        'https://play14.tikast.com:22038/stream?type=http&nocache=2126';
+    try {
+      if (_isPlaying) {
+        await _audioPlayer.pause();
+      } else {
+        // Verificar si el reproductor ya está reproduciendo
+        if (_audioPlayer.state != PlayerState.playing) {
+          await _audioPlayer
+              .setVolume(_volume); // Ajustar el volumen antes de reproducir
+          await _audioPlayer
+              .play(UrlSource(streamUrl)); // Reproducir la URL del stream
+        }
       }
+
+      setState(() {
+        _isPlaying = !_isPlaying;
+      });
+    } catch (e) {
+      // Mejor manejar errores de forma visible para el usuario
+      _showErrorSnackBar("Error de reproducción.");
     }
-    setState(() {
-      _isPlaying = !_isPlaying;
-    });
+  }
+
+// Función auxiliar para mostrar errores
+  void _showErrorSnackBar(String message) {
+    final snackBar = SnackBar(content: Text(message));
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
   void _changeVolume(double value) {

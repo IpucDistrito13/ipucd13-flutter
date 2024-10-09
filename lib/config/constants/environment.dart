@@ -8,11 +8,8 @@ class Environment {
   static String apiUrl =
       dotenv.env['API_URL'] ?? 'No está configurado el API_URL';
 
-  static String apiProduccion = dotenv.env['API_URL_PRODUCCION'] ??
-      'No está configurado el API_URL_PRODUCCION';
-
-  static String apiPruebas =
-      dotenv.env['API_URL_PRUEBAS'] ?? 'No está configurado el API_URL_PRUEBAS';
+  static String apiUrlBackend =
+      dotenv.env['API_URL_BACKEND'] ?? 'No está configurado el API_URL_BACKEND';
 
   static String apiStorage =
       dotenv.env['API_STORAGE'] ?? 'No está configurado el API_STORAGE';

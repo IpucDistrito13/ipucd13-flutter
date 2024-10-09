@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:open_file/open_file.dart';
 import '/features/public/archivos/presentation/providers/archivos_by_carpeta_provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../../../config/config.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:dio/dio.dart';
 
 class ArchivosCarpetaScreen extends ConsumerStatefulWidget {
   static const String name = 'archivos-screen';
@@ -21,6 +25,44 @@ class ArchivosCarpetaScreen extends ConsumerStatefulWidget {
 }
 
 class ArchivosCarpetaScreenState extends ConsumerState<ArchivosCarpetaScreen> {
+  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+      FlutterLocalNotificationsPlugin();
+
+  Future<void> initNotifications() async {
+    const AndroidInitializationSettings initializationSettingsAndroid =
+        AndroidInitializationSettings('@mipmap/ic_launcher');
+    final InitializationSettings initializationSettings =
+        InitializationSettings(android: initializationSettingsAndroid);
+    await flutterLocalNotificationsPlugin.initialize(
+      initializationSettings,
+      onDidReceiveNotificationResponse: (NotificationResponse details) async {
+        if (details.payload != null) {
+          await OpenFile.open(details.payload);
+        }
+      },
+    );
+  }
+
+  Future<void> showNotification(String filePath) async {
+    const AndroidNotificationDetails androidPlatformChannelSpecifics =
+        AndroidNotificationDetails(
+      'archivo_channel',
+      'Archivos',
+      importance: Importance.max,
+      priority: Priority.high,
+      showWhen: false,
+    );
+    const NotificationDetails platformChannelSpecifics =
+        NotificationDetails(android: androidPlatformChannelSpecifics);
+    await flutterLocalNotificationsPlugin.show(
+      0,
+      'Archivo descargado exitosamente.',
+      'Toca para abrir el archivo',
+      platformChannelSpecifics,
+      payload: filePath,
+    );
+  }
+
   // URL base para los archivos en la nube
   final String baseUrl = Environment.apiStorage;
 
@@ -43,40 +85,29 @@ class ArchivosCarpetaScreenState extends ConsumerState<ArchivosCarpetaScreen> {
   }
 
   Future<void> _downloadFile(String url, String fileName) async {
-    print('Descargando: $fileName');
-    /*
-    final status = await Permission.storage.request();
+    try {
+      // Directorio de descarga
+      final dir = await getApplicationDocumentsDirectory();
+      final filePath = '${dir.path}/$fileName';
 
-    if (status.isGranted) {
-      final dir = await getExternalStorageDirectory();
-      final savePath = '${dir!.path}/$fileName';
+      // Descarga del archivo
+      Dio dio = Dio();
+      await dio.download(url, filePath);
 
-      // Concatenar la URL base con la URL relativa del archivo
-      final fullUrl = baseUrl + '/' + url;
+      // Mostrar notificación al usuario cuando la descarga haya terminado
+      await showNotification(filePath);
 
-      try {
-        await Dio().download(fullUrl, savePath,
-            onReceiveProgress: (received, total) {
-          if (total != -1) {
-            print((received / total * 100).toStringAsFixed(0) + "%");
-            // Aquí podrías actualizar un indicador de progreso si lo deseas
-          }
-        });
-
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Archivo descargado en $savePath')),
-        );
-      } catch (e) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error al descargar el archivo: $e')),
-        );
-      }
-    } else {
+      // Mostrar mensaje de éxito
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Permiso de almacenamiento denegado')),
+        SnackBar(content: Text('Archivo descargado: $fileName')),
+      );
+    } catch (e) {
+      print(e);
+      // Manejo de errores
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error al descargar archivo: $e')),
       );
     }
-    */
   }
 
   @override
@@ -116,7 +147,9 @@ class ArchivosCarpetaScreenState extends ConsumerState<ArchivosCarpetaScreen> {
                       ),
                       onTap: () {
                         if (archivo.tipo == 'archivo') {
-                          _downloadFile(archivo.url, archivo.nombre);
+                          _downloadFile(
+                              '${Environment.apiStorage}/${archivo.url}',
+                              archivo.nombre);
                         } else if (archivo.tipo == 'enlace') {
                           _launchURL(archivo.url);
                         }

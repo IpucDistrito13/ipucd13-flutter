@@ -54,7 +54,7 @@ class _ComiteHorizontalListviewState extends State<ComiteHorizontalListview> {
      * 2. CustomSliderHorizontalTextoImagen: Mostramo titulo y imagen
      */
     return SizedBox(
-      height: 320, //350
+      height: 337, //350
       child: Column(
         children: [
           //Si lo dos son null no mostrar nada, Si uno de los dos tiene datos mostrar
