@@ -39,6 +39,7 @@ class CertificadoNotifier extends StateNotifier<AsyncValue<String?>> {
       importance: Importance.max,
       priority: Priority.high,
       showWhen: false,
+      icon: '@drawable/notificacion',
     );
     const NotificationDetails platformChannelSpecifics =
         NotificationDetails(android: androidPlatformChannelSpecifics);

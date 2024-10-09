@@ -51,12 +51,13 @@ class ArchivosCarpetaScreenState extends ConsumerState<ArchivosCarpetaScreen> {
       importance: Importance.max,
       priority: Priority.high,
       showWhen: false,
+      icon: '@drawable/notificacion',
     );
     const NotificationDetails platformChannelSpecifics =
         NotificationDetails(android: androidPlatformChannelSpecifics);
     await flutterLocalNotificationsPlugin.show(
       0,
-      'Archivo descargado exitosamente.',
+      'Archivo descargado',
       'Toca para abrir el archivo',
       platformChannelSpecifics,
       payload: filePath,
