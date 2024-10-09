@@ -11,6 +11,7 @@ dependencies:
   audioplayers: ^6.1.0
   calendar_view: ^1.2.0
   card_swiper: ^3.0.1
+  change_app_package_name: ^1.4.0
   dio: ^5.7.0
   flutter:
     sdk: flutter

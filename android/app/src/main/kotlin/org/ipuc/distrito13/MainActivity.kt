@@ -1,4 +1,4 @@
-package com.example.ipucd13_flutter
+package org.ipuc.distrito13
 
 import io.flutter.embedding.android.FlutterActivity
 
