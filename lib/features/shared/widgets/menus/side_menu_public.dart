@@ -1,0 +1,143 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import '../widgets.dart';
+
+class SideMenuPublic extends ConsumerStatefulWidget {
+  //3. Recibimos la informacion del scaffoldKey
+  final GlobalKey<ScaffoldState> scaffoldKey;
+
+  const SideMenuPublic({super.key, required this.scaffoldKey});
+
+  @override
+  SideMenuPublicState createState() => SideMenuPublicState();
+}
+
+Future<void> launchURL(String urlString) async {
+  final Uri url = Uri.parse(urlString);
+  if (!await launchUrl(url)) {
+    throw Exception('Could not launch $url');
+  }
+}
+
+class SideMenuPublicState extends ConsumerState<SideMenuPublic> {
+  //Cual de las opciones es seleccionada
+  int navDrawerIndex = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    /*
+    final hasNotchAux = MediaQuery.of(context).viewPadding.top;
+    if (Platform.isAndroid) {
+      // Es un dispositivo Android
+      print('Android $hasNotchAux');
+    } else if (Platform.isIOS) {
+      // Es un dispositivo iOS
+      print('IOS $hasNotchAux');
+    }
+    */
+
+    //hasNotch Nos indica la distancia en el top
+    final hasNotch = MediaQuery.of(context).viewPadding.top > 35;
+
+    return NavigationDrawer(
+        elevation: 1,
+        selectedIndex: navDrawerIndex,
+        onDestinationSelected: (value) {
+          setState(() {
+            navDrawerIndex = value;
+          });
+
+          final menuItem = appMenuItemsPublic[value];
+          context.push(menuItem.link);
+
+          //4. LLamamos el scaffoldKey,
+          //closeDrawer() siempre vamos a querer cerrar
+          widget.scaffoldKey.currentState?.closeDrawer();
+        },
+
+        //Opciones de menu
+        children: [
+          const SizedBox(
+            height: 20,
+          ),
+          Padding(
+            padding: EdgeInsets.fromLTRB(20, hasNotch ? 0 : 20, 16, 0),
+            child: const Text(
+              'IPUC DISTRITO 13',
+              style: TextStyle(
+                  fontFamily: 'MyriamPro',
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
+
+          //Mostrados menus items publicos
+          ...appMenuItemsPublic.map(
+            (item) => NavigationDrawerDestination(
+              icon: Icon(item.icon),
+              label: Text(item.title),
+            ),
+          ),
+
+          const Padding(
+            padding: EdgeInsets.fromLTRB(28, 16, 28, 10),
+            child: Divider(),
+          ),
+
+          const Padding(
+            padding: EdgeInsets.fromLTRB(28, 10, 16, 10),
+            child: Text('Siguenos en:'),
+          ),
+
+          //Abrir enlaces o aplicaciones mediante url
+          ListTile(
+            leading: const Icon(
+              Icons.facebook,
+              color: Colors.indigo,
+            ),
+            title: const Text('Facebook'),
+            onTap: () => launchURL(
+                'https://www.facebook.com/IPUCDistrito13Oficial?locale=es_LA'),
+          ),
+
+          ListTile(
+            leading: const FaIcon(
+              FontAwesomeIcons.instagram,
+              size: 24, // Tamaño del icono
+              color: Colors.purple,
+            ),
+            title: const Text('Instagram'),
+            onTap: () => launchURL(
+                'https://www.instagram.com/ipucdistrito13oficial?igsh=MTV1aWNuMXF0dDltMw=='),
+          ),
+
+          ListTile(
+            leading: const FaIcon(
+              FontAwesomeIcons.youtube,
+              size: 24, // Tamaño del icono
+              color: Colors.red,
+            ),
+            title: const Text('Youtube'),
+            onTap: () =>
+                launchURL('https://www.youtube.com/@IPUCDistrito13Oficial'),
+          ),
+
+          ListTile(
+            leading: const Icon(Icons.public),
+            title: const Text('Página web'),
+            onTap: () => launchURL('https://ipucdistrito13.org/'),
+          ),
+        ]);
+  }
+
+  Future<void> launchURL(String urlString) async {
+    final Uri url = Uri.parse(urlString);
+    if (!await launchUrl(url)) {
+      throw Exception('Could not launch $url');
+    }
+  }
+}

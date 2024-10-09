@@ -1,0 +1,1 @@
+class ArchivoNotFound implements Exception {}

@@ -1,0 +1,1 @@
+class CronogramaNotFound implements Exception {}

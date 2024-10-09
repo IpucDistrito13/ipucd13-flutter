@@ -1,0 +1,1 @@
+class VideoNotFound implements Exception {}

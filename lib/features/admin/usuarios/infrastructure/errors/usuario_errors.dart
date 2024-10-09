@@ -1,0 +1,1 @@
+class UsuarioNotFound implements Exception {}

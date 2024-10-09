@@ -1,0 +1,1 @@
+class SerieNotFound implements Exception {}

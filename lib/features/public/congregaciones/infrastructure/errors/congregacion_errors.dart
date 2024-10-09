@@ -1,0 +1,1 @@
+class CongregacionNotFound implements Exception {}

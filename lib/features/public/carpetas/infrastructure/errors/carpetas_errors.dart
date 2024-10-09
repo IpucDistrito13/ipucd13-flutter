@@ -1,0 +1,1 @@
+class CarpetaNotFound implements Exception {}
