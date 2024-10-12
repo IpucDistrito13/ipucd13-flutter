@@ -55,3 +55,27 @@ flutter:
     - assets/images/
     - assets/videos/
     - assets/gif/
+
+flutter_native_splash:
+  color: "#00338d"
+  color_dark: "#00338d"
+  
+  # Asegúrate de que esta ruta sea correcta
+  background_image: "assets/images/logo_texto_color_splash.png"
+  
+  android_12:
+    color: "#00338d"
+    color_dark: "#00338d"
+    # Asegúrate de que esta ruta sea correcta y que la imagen cumpla con los requisitos de tamaño para Android 12
+    image: "assets/images/logo_texto_color_splash.png"
+
+  # Configuraciones específicas de plataforma para asegurar consistencia
+  color_android: "#00338d"
+  color_dark_android: "#00338d"
+  color_ios: "#00338d"
+  color_dark_ios: "#00338d"
+
+  # Descomenta estas líneas si no quieres generar splash screen para web
+  # android: true
+  # ios: true
+  # web: false

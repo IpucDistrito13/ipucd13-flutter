@@ -2,7 +2,7 @@
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
-        android:label="ipucd13_flutter"
+        android:label="IPUC Dirstrito13"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity

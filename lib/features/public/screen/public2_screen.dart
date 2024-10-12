@@ -59,18 +59,23 @@ class _ComitesViewState extends ConsumerState {
         children: [
           //MENSAJE CARGANDO
           if (comitesState.comites.isEmpty)
-            const Center(
-              child: Text('Cargando...'),
+            Center(
+              child: Column(
+                mainAxisSize:
+                    MainAxisSize.min, // Ensure the column takes minimum height
+                children: [
+                  const Text('Cargando...'),
+                  const SizedBox(height: 10),
+
+                  // SLIDER PRINCIPAL
+                  CustomSliderPrincipal(sliders: sliderState.sliders),
+
+                  // RADIO-TRANSMISION
+                  const SizedBox(height: 15),
+                  const CustomRadioTransmision(),
+                ],
+              ),
             ),
-          const SizedBox(height: 10),
-
-          //SLIDER PRINCIPAL
-          CustomSliderPrincipal(sliders: sliderState.sliders),
-
-          //RADIO-TRANSMISION
-          const SizedBox(height: 15),
-
-          const CustomRadioTransmision(),
 
           //COMITES
 
