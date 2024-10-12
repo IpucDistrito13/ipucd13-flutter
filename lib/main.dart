@@ -10,7 +10,15 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Preferences.init();
 
-  await Environment.initEnvironment();
+/*
+flutter run --release --dart-define=ENV=local
+flutter run --release --dart-define=ENV=production
+flutter run --release --dart-define=ENV=post_production
+
+*/
+  // Cargar el archivo de entorno basado en el argumento de ejecución
+  const environment = String.fromEnvironment('ENV', defaultValue: 'local');
+  await Environment.initEnvironment(environment);
 
   // Forzar la orientación a vertical
   SystemChrome.setPreferredOrientations([

@@ -38,7 +38,7 @@ class _PodcatsHorizontalListViewState
       // Posicicon maxima es superada llamamos la funcion loadnextPage
       if ((scrollController.position.pixels + 200) >=
           scrollController.position.maxScrollExtent) {
-        print('Load next podcasts info');
+        //print('Load next podcasts info');
 
         widget.loadNextPage!();
       }
@@ -127,7 +127,7 @@ class _Title extends StatelessWidget {
                 //Estilo para el subtitulo
                 style: const ButtonStyle(visualDensity: VisualDensity.compact),
                 onPressed: () {
-                  print('Subtitle pressed');
+                  //print('Subtitle pressed');
                 },
                 child: Text(subTitle!))
         ],

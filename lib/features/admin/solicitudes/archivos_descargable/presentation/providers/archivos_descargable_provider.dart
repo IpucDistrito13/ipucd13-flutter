@@ -41,7 +41,7 @@ class ArchivosDescargableNotifier
         offset: state.offset + 10,
         archivos: [...state.archivos, ...archivos]);
 
-    print('Nuevas congregaciones');
+    //print('Nuevas congregaciones');
   }
 } //2.
 

@@ -34,7 +34,7 @@ class VideoNotifier extends StateNotifier<VideoState> {
         video: video, //Opcional
       );
     } catch (e) {
-      print('Error loading video: $e');
+      //print('Error loading video: $e');
       //setState(() => VideoState(isLoading: false));
     }
   }

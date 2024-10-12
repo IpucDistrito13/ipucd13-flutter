@@ -7,7 +7,7 @@ import '../presentations.dart';
 
 final usuarioMyPerfilProvider = StateNotifierProvider.autoDispose
     .family<UsuarioPerfilNotifier, UsuarioMyPerfilState, String>((ref, uuid) {
-  print('usuarioMyPerfilProvider: $uuid');
+  //print('usuarioMyPerfilProvider: $uuid');
   final usuariosRepository = ref.watch(usuariosRepositoryProvider);
 
   return UsuarioPerfilNotifier(
@@ -28,17 +28,17 @@ class UsuarioPerfilNotifier extends StateNotifier<UsuarioMyPerfilState> {
 
   Future<void> loadUsuarioPerfil() async {
     try {
-      print('Cargando usuario con UUID: ${state.uuid}');
+      //print('Cargando usuario con UUID: ${state.uuid}');
       final usuario = await usuariosRepository.getMyPerfil();
 
-      print('Usuario cargado: $usuario');
+      //print('Usuario cargado: $usuario');
       state = state.copyWith(
         isLoading: false,
         usuario: usuario,
       );
     } catch (e, stackTrace) {
-      print('Error loading usuario: $e');
-      print('Stack trace: $stackTrace');
+      //print('Error loading usuario: $e');
+      //print('Stack trace: $stackTrace');
       // Manejar el error adecuadamente
     }
   }

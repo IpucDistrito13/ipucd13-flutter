@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../config/config.dart';
 import '/features/public/screen/transmision_screen.dart';
 
 class BackTransmisionScreen extends ConsumerWidget {
@@ -88,8 +89,8 @@ class TransmisionService {
 
   Future<Map<String, dynamic>> fetchTransmision() async {
     try {
-      final response = await _dio
-          .get('https://ipucdistrito13.org/api/v2/transmision/envivo');
+      final response =
+          await _dio.get('${Environment.apiUrlBackend}/v1/transmision/envivo');
       return response.data;
     } catch (e) {
       throw Exception('Error fetching transmision');

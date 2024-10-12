@@ -32,7 +32,7 @@ class ArchivosCarpetaScreenState extends ConsumerState<ArchivosCarpetaScreen> {
     const AndroidInitializationSettings initializationSettingsAndroid =
         AndroidInitializationSettings('@mipmap/ic_launcher');
     final InitializationSettings initializationSettings =
-        InitializationSettings(android: initializationSettingsAndroid);
+        const InitializationSettings(android: initializationSettingsAndroid);
     await flutterLocalNotificationsPlugin.initialize(
       initializationSettings,
       onDidReceiveNotificationResponse: (NotificationResponse details) async {
@@ -103,7 +103,7 @@ class ArchivosCarpetaScreenState extends ConsumerState<ArchivosCarpetaScreen> {
         SnackBar(content: Text('Archivo descargado: $fileName')),
       );
     } catch (e) {
-      print(e);
+      //print(e);
       // Manejo de errores
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error al descargar archivo: $e')),

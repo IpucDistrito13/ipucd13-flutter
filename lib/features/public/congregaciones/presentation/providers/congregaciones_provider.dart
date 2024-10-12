@@ -38,7 +38,7 @@ class ComitesNotifier extends StateNotifier<CongregacionesState> {
         offset: state.offset + 10,
         congregaciones: [...state.congregaciones, ...congregaciones]);
 
-    print('Nuevas congregaciones');
+    //print('Nuevas congregaciones');
   }
 } //2.
 

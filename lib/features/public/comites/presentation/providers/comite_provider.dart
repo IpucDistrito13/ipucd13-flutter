@@ -33,7 +33,7 @@ class ComiteNotifier extends StateNotifier<ComiteState> {
         comite: comite, //Opcional
       );
     } catch (e) {
-      print('Error loading comite: $e');
+      //print('Error loading comite: $e');
       //setState(() => ComiteState(isLoading: false));
     }
   }

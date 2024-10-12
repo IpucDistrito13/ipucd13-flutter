@@ -111,7 +111,6 @@ class SlideCustom extends StatelessWidget {
       onTap: () {
         //final route = widget.route;
         final route = usuario.uuid;
-        print('Route: $route');
         context.push('/usuario-perfil/$route');
       },
       child: Padding(

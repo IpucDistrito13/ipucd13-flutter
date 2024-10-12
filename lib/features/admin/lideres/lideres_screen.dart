@@ -110,7 +110,7 @@ class SlideCustom extends StatelessWidget {
                   ),
                 ),
                 child: usuario.imagen == null
-                    ? Icon(Icons.person, size: 60)
+                    ? const Icon(Icons.person, size: 60)
                     : null,
               ),
               const SizedBox(width: 16),

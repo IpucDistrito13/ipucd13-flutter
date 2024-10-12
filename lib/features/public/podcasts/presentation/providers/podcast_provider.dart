@@ -32,7 +32,7 @@ class PodcastNotifier extends StateNotifier<PodcastState> {
         podcast: podcast,
       );
     } catch (e) {
-      print('Error loading podcast: $e');
+      //print('Error loading podcast: $e');
       //setState(() => ComiteState(isLoading: false));
     }
   }

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:calendar_view/calendar_view.dart';
 import 'package:intl/intl.dart';
 
+import '../../../../../config/config.dart';
+
 // Define el modelo para los eventos de la API
 class ApiEvent {
   final int id;
@@ -96,7 +98,7 @@ class _EventosScreenState extends State<EventosScreen>
   Future<void> _fetchAndAddEvents() async {
     try {
       final url =
-          'https://ipucdistrito13.org/api/v2/eventos?limit=10&offset=0&api_key=EPcOwNCTHvpjtaJDEfO8beeGdavjWL3j';
+          '${Environment.apiUrlBackend}/v1/eventos?limit=10&offset=0&api_key=EPcOwNCTHvpjtaJDEfO8beeGdavjWL3j';
 
       final response = await Dio().get(url);
 
@@ -108,7 +110,7 @@ class _EventosScreenState extends State<EventosScreen>
       }
     } catch (e) {
       // Manejar errores de la solicitud
-      print('Error: $e');
+      //print('Error: $e');
       // Opcional: Puedes mostrar un mensaje de error en la UI
     } finally {
       setState(() {

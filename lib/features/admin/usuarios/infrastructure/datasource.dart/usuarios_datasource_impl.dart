@@ -63,7 +63,7 @@ class UsuariosDatasourceImpl extends UsuariosDatasource {
       return pastores;
     } catch (e) {
       // Manejo de errores
-      print('Error fetching usuario: $e');
+      //print('Error fetching usuario: $e');
       return []; // O maneja el error de otra manera, como lanzando una excepción
     }
   }
@@ -81,11 +81,9 @@ class UsuariosDatasourceImpl extends UsuariosDatasource {
       final url = '/v2/usuario/perfil/$uuid';
 
       final response = await dio.get(url);
-      print(response.data);
       final usuarioServer = UsuarioDetailsResponse.fromJson(response.data);
       final Usuario usuario =
           UsuariosMapper.usuarioPerfilToEntity(usuarioServer);
-      print(usuario);
 
       return usuario;
     } on DioError catch (e) {
@@ -93,7 +91,7 @@ class UsuariosDatasourceImpl extends UsuariosDatasource {
       throw Exception();
     } catch (e) {
       // Manejo de errores
-      print('Error fetching perfil: $e');
+      //print('Error fetching perfil: $e');
       throw Exception();
     }
   }
@@ -121,7 +119,7 @@ class UsuariosDatasourceImpl extends UsuariosDatasource {
       return lideres;
     } catch (e) {
       // Manejo de errores
-      print('Error fetching lideres: $e');
+      //print('Error fetching lideres: $e');
       return []; // O maneja el error de otra manera, como lanzando una excepción
     }
   }
@@ -161,7 +159,7 @@ class UsuariosDatasourceImpl extends UsuariosDatasource {
       throw Exception();
     } catch (e) {
       // Manejo de errores
-      print('Error fetching perfil: $e');
+      //print('Error fetching perfil: $e');
       throw Exception();
     }
   }

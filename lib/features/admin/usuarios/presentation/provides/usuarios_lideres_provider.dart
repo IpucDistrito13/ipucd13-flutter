@@ -39,6 +39,6 @@ class UsuariosNotifier extends StateNotifier<UsuariosState> {
         offset: state.offset + 10,
         usuarios: [...state.usuarios, ...usuarios]);
 
-    print('Cargando nuevos lideres...');
+    //print('Cargando nuevos lideres...');
   }
 } //2.

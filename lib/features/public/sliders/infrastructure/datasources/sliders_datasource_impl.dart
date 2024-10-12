@@ -9,7 +9,7 @@ class SlidersDatasourceImpl extends SlidersDatasource {
   final String accessToken;
 
   SlidersDatasourceImpl({required this.accessToken})
-      : dio = Dio(BaseOptions(baseUrl: Environment.apiUrl, headers: {
+      : dio = Dio(BaseOptions(baseUrl: Environment.apiUrlBackend, headers: {
           'Authorization': 'Bearer $accessToken',
         }));
 
@@ -18,7 +18,7 @@ class SlidersDatasourceImpl extends SlidersDatasource {
       {int limit = 10, int offset = 0}) async {
     try {
       final key = Environment.apiKey;
-      final url = '/v2/sliders?limit=$limit&offset=$offset&api_key=$key';
+      final url = '/v1/sliders?limit=$limit&offset=$offset&api_key=$key';
 
       final response = await dio.get(url);
       final slidersResponse = SliderResponse.fromJson(response.data);
@@ -28,10 +28,10 @@ class SlidersDatasourceImpl extends SlidersDatasource {
       return sliders;
     } catch (e) {
       if (e is DioError) {
-        print('Error status code: ${e.response?.statusCode}');
-        print('Error response data: ${e.response?.data}');
+        //print('Error status code: ${e.response?.statusCode}');
+        //print('Error response data: ${e.response?.data}');
       } else {
-        print('Error: $e');
+        //print('Error slider: $e');
       }
       return [];
     }

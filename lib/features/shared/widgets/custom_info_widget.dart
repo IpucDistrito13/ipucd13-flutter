@@ -85,7 +85,6 @@ class _CustomPrincipalImagenTituloState extends State<CustomInfoWidget> {
                           final url = widget.url;
                           final route = '$videoId?url=$url';
                           context.push(route);
-                          //print('Testtttttt: $route');
                         },
                         child: FadeInRight(child: child),
                       );

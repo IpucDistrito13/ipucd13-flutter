@@ -10,7 +10,7 @@ class LideresDatasourceImpl extends LideresDatasource {
 
   LideresDatasourceImpl({required this.accessToken})
       : dio = Dio(BaseOptions(
-          baseUrl: Environment.apiUrl,
+          baseUrl: Environment.apiUrlBackend,
           headers: {
             'Authorization': 'Bearer $accessToken',
           },
@@ -32,11 +32,14 @@ class LideresDatasourceImpl extends LideresDatasource {
     try {
       final key = Environment.apiKey;
       final url =
-          '/v2/lideres/comite/$comiteId?limit=$limit&offset=$offset&api_key=$key';
+          '/v1/lideres/comite/$comiteId?limit=$limit&offset=$offset&api_key=$key';
       final response = await dio.get(url);
+
       if (response.statusCode != 200) throw Exception('Lideres no encontrado');
 
       final lideresServer = LideresByComiteResponse.fromJson(response.data);
+      //print('lideresServer $lideresServer');
+
       final List<Lider> lideres = lideresServer.data
           .map((lideresServer) => LiderMapper.lideresByComite(lideresServer))
           .toList();
@@ -44,10 +47,11 @@ class LideresDatasourceImpl extends LideresDatasource {
       return lideres;
     } catch (e) {
       // Registra el error o manejalo según sea necesario
-      print('Error fetching lider: $e');
+      //print('Error fetching lider: $e');
       // Es posible que quieras lanzar una excepción personalizada o devolver una lista vacía
       // dependiendo de tu estrategia de manejo de errores
-      throw Exception('Failed to fetch lider');
+      //throw Exception('Failed to fetch lider ');
+      return [];
     }
   }
 

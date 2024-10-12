@@ -108,7 +108,7 @@ class _LoginForm extends ConsumerWidget {
             height: 60,
             child: CustomFilledButton(
               text: 'Ingresar',
-              buttonColor: Color(0xFFF0AB00),
+              buttonColor: const Color(0xFFF0AB00),
               textColor:
                   Colors.white, // Añadido para especificar el color del texto
               onPressed: loginForm.isPosting

@@ -19,7 +19,6 @@ class ComitesNotifier extends StateNotifier<SlidersState> {
   }
 
   Future loadNextPage() async {
-    print('Petición sliders ');
     if (state.isLoading || state.isLastPage) return;
 
     state = state.copyWith(isLoading: true);

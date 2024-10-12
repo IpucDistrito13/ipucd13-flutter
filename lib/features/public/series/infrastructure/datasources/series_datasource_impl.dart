@@ -12,7 +12,7 @@ class SeriesDatasourceImpl extends SeriesDatasource {
   SeriesDatasourceImpl({required this.accessToken})
       : dio = Dio(
           BaseOptions(
-            baseUrl: Environment.apiUrl,
+            baseUrl: Environment.apiUrlBackend,
             headers: {
               'Authorization': 'Bearer $accessToken',
             },
@@ -30,7 +30,7 @@ class SeriesDatasourceImpl extends SeriesDatasource {
     try {
       //
       final key = Environment.apiKey;
-      final url = '/v2/serie/$id?api_key=$key';
+      final url = '/v1/serie/$id?api_key=$key';
       final response = await dio.get(url);
       final serieDetails = SerieDetailsResponse.fromJson(response.data);
       final Serie serie = SeriesMapper.serieDetailsToEntity(serieDetails);
@@ -46,7 +46,7 @@ class SeriesDatasourceImpl extends SeriesDatasource {
       {int limit = 10, int offset = 0, String apikey = ''}) async {
     try {
       final key = Environment.apiKey;
-      final url = '/v2/series?limit=$limit&offset=$offset&api_key=$key';
+      final url = '/v1/series?limit=$limit&offset=$offset&api_key=$key';
 
       final response = await dio.get(url);
       final seriesServer = SeriesServerResponse.fromJson(response.data);
@@ -77,7 +77,7 @@ class SeriesDatasourceImpl extends SeriesDatasource {
       String apikey = ''}) async {
     final key = Environment.apiKey;
     final url =
-        '/v2/series/comite/$comiteId?limit=$limit&offset=$offset&api_key=$key';
+        '/v1/series/comite/$comiteId?limit=$limit&offset=$offset&api_key=$key';
 
     try {
       final response = await dio.get(url);
@@ -96,8 +96,9 @@ class SeriesDatasourceImpl extends SeriesDatasource {
       }
     } catch (e) {
       // Maneja cualquier excepción ocurrida durante la solicitud o el procesamiento
-      print('Exception caught: $e');
-      throw Exception('Error al obtener las series: $e');
+      //print('Exception caught: $e');
+      //throw Exception('Error al obtener las series: $e');
+      return []; // O maneja el error de otra manera, como lanzando una excepción
     }
   }
 }

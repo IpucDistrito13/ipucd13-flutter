@@ -106,7 +106,7 @@ class SolicitudesScreenState extends ConsumerState<SolicitudesScreen> {
                       ),
 
             // Tab 2: Certificado de bautismo
-            BautisamoScreen(),
+            const BautisamoScreen(),
           ],
         ),
       ),
@@ -124,7 +124,7 @@ class SolicitudesScreenState extends ConsumerState<SolicitudesScreen> {
   }
 
   Future<void> _downloadFile(String url, String fileName) async {
-    print('Nombre archivo: $fileName');
+    //print('Nombre archivo: $fileName');
     // Implementación de descarga aquí
   }
 }

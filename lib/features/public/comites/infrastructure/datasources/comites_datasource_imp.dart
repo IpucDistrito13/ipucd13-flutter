@@ -8,7 +8,7 @@ class ComitesDatasourceImp extends ComitesDatasource {
   final String accessToken;
 
   ComitesDatasourceImp({required this.accessToken})
-      : dio = Dio(BaseOptions(baseUrl: Environment.apiUrl, headers: {
+      : dio = Dio(BaseOptions(baseUrl: Environment.apiUrlBackend, headers: {
           'Authorization': 'Bearer $accessToken',
         }));
 
@@ -24,6 +24,7 @@ class ComitesDatasourceImp extends ComitesDatasource {
       final key = Environment.apiKey;
       final url = '/v1/comite/$id?api_key=$key';
       final response = await dio.get(url);
+      //print('URL: $response');
       if (response.statusCode != 200) throw Exception('Comité no encontrado.');
 
       final comiteDetails = ComiteDetailsResponse.fromJson(response.data);
@@ -31,7 +32,7 @@ class ComitesDatasourceImp extends ComitesDatasource {
       return comite;
     } catch (e) {
       // Registra el error o manejalo según sea necesario
-      print('Error fetching comite: $e');
+      //print('Error fetching comite: $e');
       // Es posible que quieras lanzar una excepción personalizada o devolver una lista vacía
       // dependiendo de tu estrategia de manejo de errores
       throw Exception('Failed to fetch comite');
@@ -39,13 +40,12 @@ class ComitesDatasourceImp extends ComitesDatasource {
   }
 
   @override
-  Future<List<Comite>> getComiteByPage({int limit = 13, int offset = 0}) async {
+  Future<List<Comite>> getComiteByPage({int limit = 10, int offset = 0}) async {
     try {
       final key = Environment.apiKey;
-      final url = '/v2/comites?limit=$limit&offset=$offset&api_key=$key';
+      final url = '/v1/comites?limit=$limit&offset=$offset&api_key=$key';
 
       final response = await dio.get(url);
-      print('URL: $url');
 
       final comitesResponse = ComitesServerResponse.fromJson(response.data);
 

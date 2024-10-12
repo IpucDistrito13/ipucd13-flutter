@@ -30,9 +30,7 @@ class CustomTituloSubtitulo extends StatelessWidget {
             FilledButton.tonal(
                 //Estilo para el subtitulo
                 style: const ButtonStyle(visualDensity: VisualDensity.compact),
-                onPressed: () {
-                  print('Subtitle pressed');
-                },
+                onPressed: () {},
                 child: Text(subTitle!))
         ],
       ),

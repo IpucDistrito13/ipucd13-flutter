@@ -61,7 +61,7 @@ class CertificadoNotifier extends StateNotifier<AsyncValue<String?>> {
           'https://ipucdistrito13.org/api/v2/certificado/bautismo/download';
 
       final Uri uri = Uri.parse(baseUrl).replace(queryParameters: params);
-      print('URL completa: $uri');
+      //print('URL completa: $uri');
 
       final response = await dio.getUri(
         uri,
@@ -101,10 +101,10 @@ class CertificadoNotifier extends StateNotifier<AsyncValue<String?>> {
       // Escribir los bytes en el archivo
       await file.writeAsBytes(bytes);
 
-      print('Archivo guardado en: ${file.path}');
+      //print('Archivo guardado en: ${file.path}');
       return file.path;
     } catch (e) {
-      print('Error al guardar el archivo: $e');
+      //print('Error al guardar el archivo: $e');
       rethrow;
     }
   }

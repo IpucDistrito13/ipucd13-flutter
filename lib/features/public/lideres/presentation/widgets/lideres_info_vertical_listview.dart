@@ -38,7 +38,7 @@ class _LideresInfoVerticalListviewState
       // Posicicon maxima es superada llamamos la funcion loadnextPage
       if ((scrollController.position.pixels + 200) >=
           scrollController.position.maxScrollExtent) {
-        print('Load next lider info');
+        //print('Load next lider info');
 
         widget.loadNextPage!();
       }

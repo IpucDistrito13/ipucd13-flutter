@@ -39,7 +39,7 @@ class ArchivosDatasourceImpl extends ArchivosDatasource {
 
       return archivos;
     } catch (e) {
-      print('Error fetching archivos: $e');
+      //print('Error fetching archivos: $e');
       return [];
     }
   }

@@ -33,9 +33,6 @@ class DescargableComiteCarpetasState
   Widget build(BuildContext context) {
     final carpetasState = ref.watch(carpetasByComiteProvider(widget.slug));
 
-    print(widget.slug);
-    print(widget.comite);
-
     return Scaffold(
       appBar: AppBar(
         title: Text('Descargables Privado - ${widget.comite}'),
@@ -104,7 +101,7 @@ class DescargableComiteCarpetasState
 class FolderItem extends StatelessWidget {
   final String folderName;
 
-  const FolderItem({required this.folderName});
+  const FolderItem({super.key, required this.folderName});
 
   @override
   Widget build(BuildContext context) {

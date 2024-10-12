@@ -19,7 +19,7 @@ class ComitesNotifier extends StateNotifier<ComitesState> {
   }
 
   Future loadNextPage() async {
-    print('Petición comites ');
+    //print('Petición comites ');
     if (state.isLoading || state.isLastPage) return;
 
     state = state.copyWith(isLoading: true);

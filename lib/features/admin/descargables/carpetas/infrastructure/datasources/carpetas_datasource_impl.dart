@@ -63,7 +63,7 @@ class CarpetasDatasourceImp extends CarpetasDatasource {
       return carpetas;
     } catch (e) {
       // Handle exceptions, such as network errors, API errors, or JSON parsing errors.
-      print('Error fetching carpetas: $e');
+      //print('Error fetching carpetas: $e');
       return []; // Return an empty list or handle the error accordingly.
     }
   }
@@ -88,21 +88,19 @@ class CarpetasDatasourceImp extends CarpetasDatasource {
         ),
       );
 
-      print(url);
-
       // Imprimir el status code para ver la respuesta
       if (response.statusCode == 200) {
         return _jsonToCarpeta(response.data);
       } else {
-        print('Request failed with status: ${response.statusCode}');
+        //print('Request failed with status: ${response.statusCode}');
         return [];
       }
     } catch (e) {
       if (e is DioError) {
-        print('Error status code: ${e.response?.statusCode}');
-        print('Error response data: ${e.response?.data}');
+        //print('Error status code: ${e.response?.statusCode}');
+        //print('Error response data: ${e.response?.data}');
       } else {
-        print('Error: $e');
+        //print('Error: $e');
       }
       return [];
     }

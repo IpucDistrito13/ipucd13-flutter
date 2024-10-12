@@ -125,7 +125,7 @@ class _Title extends StatelessWidget {
                 //Estilo para el subtitulo
                 style: const ButtonStyle(visualDensity: VisualDensity.compact),
                 onPressed: () {
-                  print('Subtitle pressed');
+                  //print('Subtitle pressed');
                 },
                 child: Text(subTitle!))
         ],

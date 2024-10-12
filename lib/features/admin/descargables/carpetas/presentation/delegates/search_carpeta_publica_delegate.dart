@@ -167,7 +167,7 @@ class _CarpetaItem extends StatelessWidget {
               carpeta
                   .nombre, // Asumiendo que 'nombre' es un atributo de 'Carpeta'
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 14),
+              style: const TextStyle(fontSize: 14),
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ),

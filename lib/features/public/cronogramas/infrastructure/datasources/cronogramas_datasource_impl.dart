@@ -10,7 +10,7 @@ class CronogramasDatasourceImpl extends CronogramaDatasource {
 
   CronogramasDatasourceImpl({required this.accessToken})
       : dio = Dio(BaseOptions(
-          baseUrl: Environment.apiUrl,
+          baseUrl: Environment.apiUrlBackend,
           headers: {
             'Authorization': 'Bearer $accessToken',
           },
@@ -21,7 +21,7 @@ class CronogramasDatasourceImpl extends CronogramaDatasource {
       {int limit = 10, int offset = 0, String apikey = ''}) async {
     try {
       final key = Environment.apiKey;
-      final url = '/v2/cronogramas?limit=$limit&offset=$offset&api_key=$key';
+      final url = '/v1/cronogramas?limit=$limit&offset=$offset&api_key=$key';
       final response = await dio.get(url);
       final cronogramasServer = CronogramaResponse.fromJson(response.data);
       final List<Cronograma> cronogramas = cronogramasServer.data
@@ -30,11 +30,11 @@ class CronogramasDatasourceImpl extends CronogramaDatasource {
           .toList();
       return cronogramas;
     } on DioException catch (e) {
-      print('DioException occurred: ${e.message}');
+      //print('DioException occurred: ${e.message}');
       // Handle the error (e.g., return an empty list or rethrow)
       return [];
     } catch (e) {
-      print('An unexpected error occurred: $e');
+      //print('An unexpected error occurred: $e');
       // Handle other types of errors
       return [];
     }

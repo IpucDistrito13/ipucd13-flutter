@@ -61,11 +61,7 @@ class CongregacionesScreenState extends ConsumerState<CongregacionesScreen> {
                         .searchCongregacionesByQuery(term);
                   },
                 ),
-              ).then((congregacion) {
-                //Cuando no hay peliculas no realice nada
-                //if (congregacion == null) return;
-                //context.push(location)
-              });
+              ).then((congregacion) {});
             },
           ),
         ],
@@ -104,15 +100,11 @@ class CongregacionesListView extends StatelessWidget {
       physics: const BouncingScrollPhysics(),
       itemBuilder: (context, index) {
         final congregacion = congregaciones[index];
-        return FadeInLeft(
-          duration: const Duration(milliseconds: 200),
-          delay: Duration(milliseconds: 20 * index),
-          child: Column(
-            children: [
-              CustomSliderCongregaciones(congregacion: congregacion),
-              if (index < congregaciones.length - 1) const Divider(),
-            ],
-          ),
+        return Column(
+          children: [
+            CustomSliderCongregaciones(congregacion: congregacion),
+            if (index < congregaciones.length - 1) const Divider(),
+          ],
         );
       },
     );

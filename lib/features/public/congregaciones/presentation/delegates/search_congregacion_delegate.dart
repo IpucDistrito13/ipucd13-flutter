@@ -30,7 +30,7 @@ class SearchCongregacionDelegate extends SearchDelegate<Congregacion?> {
     //Cuando escribe, comienza a girar la animacion de cargando
     isLoadingStream.add(true);
     //
-    print('Query stream cambio');
+    //print('Query stream cambio');
 
     if (_debounceTimer?.isActive ?? false) _debounceTimer!.cancel();
     _debounceTimer = Timer(const Duration(milliseconds: 500), () async {
@@ -47,7 +47,7 @@ class SearchCongregacionDelegate extends SearchDelegate<Congregacion?> {
       isLoadingStream.add(false);
 
       //Cuando deja de escribir, muestra
-      print('Buscando congregación');
+      //print('Buscando congregación');
     });
   }
 

@@ -36,7 +36,7 @@ class _PodcatsHorizontalListViewState
 
       if ((scrollController.position.pixels + 200) >=
           scrollController.position.maxScrollExtent) {
-        print('Load next videos info');
+        //print('Load next videos info');
 
         widget.loadNextPage!();
       }
@@ -131,7 +131,7 @@ class _Title extends StatelessWidget {
                 backgroundColor: MaterialStateProperty.all(Colors.blueAccent),
               ),
               onPressed: () {
-                print('Subtitle pressed');
+                //print('Subtitle pressed');
               },
               child: Row(
                 children: [

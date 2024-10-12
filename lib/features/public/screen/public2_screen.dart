@@ -82,7 +82,7 @@ class _ComitesViewState extends ConsumerState {
                 ref.read(comitesProvider.notifier).loadNextPage();
               },
             ),
-          //
+
           if (podcastsState.podcasts.isNotEmpty)
             PodcastHorizontalListview(
               title: 'Podcats',

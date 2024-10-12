@@ -20,7 +20,7 @@ class CronogramasNotifier extends StateNotifier<CronogramasState> {
   }
 
   Future loadNextPage() async {
-    print('Petición eventos ');
+    //print('Petición eventos ');
     if (state.isLoading || state.isLastPage) return;
 
     state = state.copyWith(isLoading: true);

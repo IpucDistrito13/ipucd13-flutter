@@ -50,6 +50,7 @@ flutter:
   assets:
     - .env.local
     - .env.production
+    - .env.post_production
     - assets/loaders/
     - assets/images/
     - assets/videos/

@@ -50,11 +50,11 @@ class GaleriasDatasourceImpl extends GaleriasDatasource {
     } catch (e) {
       if (e is DioException) {
         // Handle Dio-specific exceptions
-        print('Dio error occurred: ${e.message}');
-        print('Response data: ${e.response?.data}');
+        //print('Dio error occurred: ${e.message}');
+        //print('Response data: ${e.response?.data}');
       } else {
         // Handle other types of exceptions
-        print('An error occurred: $e');
+        //print('An error occurred: $e');
       }
       return []; // Return an empty list or handle the error as needed
     }

@@ -3,6 +3,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../../../../../config/config.dart';
+
 // Define el modelo para los eventos de la API
 class ApiEvent {
   final int id;
@@ -94,7 +96,7 @@ class _CronogramaScreenState extends State<CronogramasScreen>
   Future<void> _fetchAndAddEvents() async {
     try {
       final url =
-          'https://ipucdistrito13.org/api/v2/cronogramas?limit=10&offset=0&api_key=EPcOwNCTHvpjtaJDEfO8beeGdavjWL3j';
+          '${Environment.apiUrlBackend}/v1/cronogramas?limit=10&offset=0&api_key=EPcOwNCTHvpjtaJDEfO8beeGdavjWL3j';
       final response = await Dio().get(url);
 
       if (response.statusCode == 200) {
@@ -105,7 +107,7 @@ class _CronogramaScreenState extends State<CronogramasScreen>
       }
     } catch (e) {
       // Manejar errores de la solicitud
-      print('Error: $e');
+      //print('Error: $e');
       // Opcional: Puedes mostrar un mensaje de error en la UI
     } finally {
       setState(() {

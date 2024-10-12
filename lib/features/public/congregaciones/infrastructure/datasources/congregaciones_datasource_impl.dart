@@ -12,7 +12,7 @@ class CongregacionesDatasourceImpl extends CongregacionesDatasource {
 
   CongregacionesDatasourceImpl({required this.accessToken})
       : dio = Dio(BaseOptions(
-          baseUrl: Environment.apiUrl,
+          baseUrl: Environment.apiUrlBackend,
           headers: {
             'Authorization': 'Bearer $accessToken',
           },
@@ -23,8 +23,8 @@ class CongregacionesDatasourceImpl extends CongregacionesDatasource {
         CongregacionesServerResponse.fromJson(json);
 
     final List<Congregacion> congregaciones = congregacionServerResponse.data
-        .where((congregacionesServer) =>
-            congregacionesServer.direccion != 'PENDIENTE')
+        //.where((congregacionesServer) =>
+        //    congregacionesServer.direccion != 'PENDIENTE')
         .map((congregacionesServer) =>
             CongregacionMapper.congregacionesToEntity(congregacionesServer))
         .toList();
@@ -45,21 +45,20 @@ class CongregacionesDatasourceImpl extends CongregacionesDatasource {
     try {
       final key = Environment.apiKey;
       final url = '/v1/congregaciones?limit=$limit&offset=$offset&api_key=$key';
-
       final response = await dio.get(url);
 
       if (response.statusCode == 200) {
         return _jsonToCongregacion(response.data);
       } else {
-        print('Request failed with status: ${response.statusCode}');
+        //print('Request failed with status: ${response.statusCode}');
         return [];
       }
     } catch (e) {
       if (e is DioError) {
-        print('Error status code: ${e.response?.statusCode}');
-        print('Error response data: ${e.response?.data}');
+        //print('Error status code: ${e.response?.statusCode}');
+        //print('Error response data: ${e.response?.data}');
       } else {
-        print('Error: $e');
+        //print('Error: $e');
       }
       return [];
     }
@@ -77,7 +76,7 @@ class CongregacionesDatasourceImpl extends CongregacionesDatasource {
 
     try {
       final key = Environment.apiKey;
-      final url = '/v2/congregaciones/search?api_key=$key';
+      final url = '/v1/congregaciones/search?api_key=$key';
 
       final response = await dio.get(
         url,
@@ -92,15 +91,15 @@ class CongregacionesDatasourceImpl extends CongregacionesDatasource {
       if (response.statusCode == 200) {
         return _jsonToCongregacion(response.data);
       } else {
-        print('Request failed with status: ${response.statusCode}');
+        //print('Request failed with status: ${response.statusCode}');
         return [];
       }
     } catch (e) {
       if (e is DioError) {
-        print('Error status code: ${e.response?.statusCode}');
-        print('Error response data: ${e.response?.data}');
+        //print('Error status code: ${e.response?.statusCode}');
+        //print('Error response data: ${e.response?.data}');
       } else {
-        print('Error: $e');
+        //print('Error: $e');
       }
       return [];
     }

@@ -33,7 +33,7 @@ class SerieNotifier extends StateNotifier<SerieState> {
         serie: serie,
       );
     } catch (e) {
-      print('Error loading serie: $e');
+      //print('Error loading serie: $e');
       //setState(() => ComiteState(isLoading: false));
     }
   }

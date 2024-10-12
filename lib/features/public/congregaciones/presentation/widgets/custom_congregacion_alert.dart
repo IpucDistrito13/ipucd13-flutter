@@ -133,7 +133,7 @@ class CustomCongregacionAlertStatehURL extends State<CustomCongregacionAlert>
         throw 'Could not launch Facebook';
       }
     } catch (e) {
-      print('Error al abrir Facebook: $e');
+      //print('Error al abrir Facebook: $e');
     }
   }
 
@@ -146,7 +146,7 @@ class CustomCongregacionAlertStatehURL extends State<CustomCongregacionAlert>
         throw 'Could not launch Google Maps';
       }
     } catch (e) {
-      print('Error al abrir Google Maps: $e');
+      //print('Error al abrir Google Maps: $e');
     }
   }
 }

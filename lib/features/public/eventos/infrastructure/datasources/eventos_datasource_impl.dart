@@ -10,7 +10,7 @@ class EventosDatasourceImpl extends EventosDatasource {
 
   EventosDatasourceImpl({required this.accessToken})
       : dio = Dio(BaseOptions(
-          baseUrl: Environment.apiUrl,
+          baseUrl: Environment.apiUrlBackend,
           headers: {
             'Authorization': 'Bearer $accessToken',
           },
@@ -21,7 +21,7 @@ class EventosDatasourceImpl extends EventosDatasource {
       {int limit = 10, int offset = 0, String apikey = ''}) async {
     try {
       final key = Environment.apiKey;
-      final url = '/v2/eventos?limit=$limit&offset=$offset&api_key=$key';
+      final url = '/v1/eventos?limit=$limit&offset=$offset&api_key=$key';
       final response = await dio.get(url);
       final eventosServer = EventoResponse.fromJson(response.data);
       final List<Evento> eventos = eventosServer.data
@@ -29,11 +29,11 @@ class EventosDatasourceImpl extends EventosDatasource {
           .toList();
       return eventos;
     } on DioException catch (e) {
-      print('DioException occurred: ${e.message}');
+      //print('DioException occurred: ${e.message}');
       // Handle the error (e.g., return an empty list or rethrow)
       return [];
     } catch (e) {
-      print('An unexpected error occurred: $e');
+      //print('An unexpected error occurred: $e');
       // Handle other types of errors
       return [];
     }

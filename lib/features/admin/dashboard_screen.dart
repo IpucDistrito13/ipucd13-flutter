@@ -59,7 +59,7 @@ class _ResponsiveGridView extends StatelessWidget {
     int crossAxisCount;
     double childAspectRatio;
 
-    print('maxWidth: ${maxWidth}'); //376.7 cell grande - 304
+    //print('maxWidth: ${maxWidth}'); //376.7 cell grande - 304
 
     //600
     if (maxWidth < 376) {

@@ -355,7 +355,7 @@ class EnlargedImageView extends StatelessWidget {
             top: 40,
             right: 20,
             child: IconButton(
-              icon: Icon(Icons.close, color: Colors.white, size: 30),
+              icon: const Icon(Icons.close, color: Colors.white, size: 30),
               onPressed: () => Navigator.of(context).pop(),
             ),
           ),

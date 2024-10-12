@@ -10,7 +10,7 @@ class PodcastsDatasourceImpl extends PodcastsDatasource {
 
   PodcastsDatasourceImpl({required this.accessToken})
       : dio = Dio(BaseOptions(
-          baseUrl: Environment.apiUrl,
+          baseUrl: Environment.apiUrlBackend,
           headers: {
             'Authorization': 'Bearer $accessToken',
           },
@@ -26,7 +26,7 @@ class PodcastsDatasourceImpl extends PodcastsDatasource {
   Future<Podcast> getPodcastById(String id) async {
     try {
       final key = Environment.apiKey;
-      final url = '/v2/podcast/$id?api_key=$key';
+      final url = '/v1/podcast/$id?api_key=$key';
       final response = await dio.get(url);
       final podcastDetails = PodcastDetailsResponse.fromJson(response.data);
       final Podcast podcast =
@@ -34,7 +34,7 @@ class PodcastsDatasourceImpl extends PodcastsDatasource {
       return podcast;
     } catch (e) {
       // Registra el error o manejalo según sea necesario
-      print('Error fetching podcast: $e');
+      //print('Error fetching podcast: $e');
       // Es posible que quieras lanzar una excepción personalizada o devolver una lista vacía
       // dependiendo de tu estrategia de manejo de errores
       throw Exception('Failed to fetch podcast');
@@ -46,7 +46,9 @@ class PodcastsDatasourceImpl extends PodcastsDatasource {
       {int limit = 10, int offset = 0, String apikey = ''}) async {
     try {
       final key = Environment.apiKey;
-      final url = '/v2/podcasts?limit=$limit&offset=$offset&api_key=$key';
+      //final url = '/v2/podcasts?limit=$limit&offset=$offset&api_key=$key';
+      final url = '/v1/podcasts?limit=$limit&offset=$offset&api_key=$key';
+
       final response = await dio.get(url);
       final podcastsServer = PodcastResponse.fromJson(response.data);
       final List<Podcast> podcasts = podcastsServer.data
@@ -55,11 +57,11 @@ class PodcastsDatasourceImpl extends PodcastsDatasource {
           .toList();
       return podcasts;
     } on DioException catch (e) {
-      print('DioException occurred: ${e.message}');
+      //print('DioException occurred: ${e.message}');
       // Handle the error (e.g., return an empty list or rethrow)
       return [];
     } catch (e) {
-      print('An unexpected error occurred: $e');
+      //print('An unexpected error occurred: $e');
       // Handle other types of errors
       return [];
     }
@@ -81,9 +83,10 @@ class PodcastsDatasourceImpl extends PodcastsDatasource {
     try {
       final key = Environment.apiKey;
       final url =
-          '/v2/podcasts/comite/$comiteId?limit=$limit&offset=$offset&api_key=$key';
+          '/v1/podcasts/comite/$comiteId?limit=$limit&offset=$offset&api_key=$key';
 
       final response = await dio.get(url);
+      //print('URL podcast by comite: $response');
 
       final podcastsServer = PodcastsByComiteResponse.fromJson(response.data);
       final List<Podcast> podcasts = podcastsServer.data
@@ -94,10 +97,8 @@ class PodcastsDatasourceImpl extends PodcastsDatasource {
       return podcasts;
     } catch (e) {
       // Log the error or handle it as needed
-      print('Error fetching podcasts: $e');
-      // You might want to throw a custom exception or return an empty list
-      // depending on your error handling strategy
-      throw Exception('Failed to fetch podcasts');
+      print('Error fetching - No existe podcasts by comite: $e');
+      return [];
     }
   }
 }

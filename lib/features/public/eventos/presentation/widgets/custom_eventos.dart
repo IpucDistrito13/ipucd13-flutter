@@ -72,7 +72,7 @@ class _CustomEventosState extends State<CustomEventos> {
                         0.5), // Fondo oscuro semitransparente para mejor legibilidad
                     child: Text(
                       widget.nombre,
-                      style: TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.white),
                       textAlign: TextAlign.left,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 4, // Maximo 2 lineas
