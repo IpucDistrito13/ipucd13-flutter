@@ -21,7 +21,7 @@ class AuthDataSourceImpl extends AuthDataSource {
 
       final user = UserMapper.userJsonToEntity(response.data);
       return user;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       if (e.response?.statusCode == 401) {
         throw CustomError('Token incorrecto');
       }
@@ -42,20 +42,17 @@ class AuthDataSourceImpl extends AuthDataSource {
 
       final user = UserMapper.userJsonToEntity(response.data);
       return user;
-    } on DioError catch (e) {
-      // Imprimir el status code en caso de error
+    } on DioException catch (e) {
+      //MUESTRA ERROR SEGUN RESPUESTA DEL SERVIDOR
       if (e.response != null) {
         //print(e.response.toString());
         if (e.response?.statusCode == 401) {
           throw CustomError(
-              e.response?.data['message'] ?? 'Credenciales incorrectas');
+              e.response?.data['message'] ?? 'Credenciales incorrectas.');
         }
       } else {
-        //print('Error sin respuesta: ${e.message}');
-        if (e.message ==
-            'The connection errored: Connection failed This indicates an error which most likely cannot be solved by the library.') {
-          throw CustomError('Revisar conexión a internet');
-        }
+        //print('Error sin respuesta: ${e.type}');
+        throw CustomError('Revisar conexión a internet');
       }
 
       if (e.type == DioErrorType.connectionTimeout) {
@@ -63,14 +60,12 @@ class AuthDataSourceImpl extends AuthDataSource {
       }
       throw Exception();
     } catch (e) {
-      //print('Error: $e');
       throw Exception();
     }
   }
 
   @override
   Future<UsuarioAuth> register(String email, String password, String fullName) {
-    // TODO: implement register
     throw UnimplementedError();
   }
 }

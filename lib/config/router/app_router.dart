@@ -28,7 +28,7 @@ final goRouterProvider = Provider((ref) {
     initialLocation: '/splash',
     refreshListenable: goRouterNotifier,
     routes: [
-      ///* Primera pantalla
+      //PANTALLA A MOSTRAR AL INGRESAR AL LOGIN
       GoRoute(
         path: '/splash',
         builder: (context, state) => const CheckAuthStatusScreen(),
@@ -69,7 +69,7 @@ final goRouterProvider = Provider((ref) {
             PastorScreen(uuid: state.pathParameters['id'] ?? 'no-id'),
       ),
 
-      //Carpetas publico
+      //CARPETAS PUBLICO
       GoRoute(
         path: '/descargable-publico-carpetas/:comite/:slug',
         builder: (context, state) {
@@ -80,7 +80,7 @@ final goRouterProvider = Provider((ref) {
         },
       ),
 
-      //Carpetas privado
+      //CARPETAS PRIVADO
       GoRoute(
         path: '/descargable-privado-carpetas/:comite/:slug',
         builder: (context, state) {
@@ -91,7 +91,7 @@ final goRouterProvider = Provider((ref) {
         },
       ),
 
-      //Archivos publico
+      //ARCHIVOS PUBLICO
       GoRoute(
         path: '/descargable-publico-archivos/:carpeta/:uuid',
         builder: (context, state) {
@@ -112,19 +112,30 @@ final goRouterProvider = Provider((ref) {
         builder: (context, state) => const CronogramasScreen(),
       ),
 
-      ///* Auth Routes
+      GoRoute(
+        path: '/congregaciones',
+        builder: (context, state) => const CongregacionesScreen(),
+      ),
+
+      GoRoute(
+        path: '/video/:url',
+        builder: (context, state) {
+          final url = state.pathParameters['url'] ?? 'no-url';
+          return VideoScreen(url: url);
+        },
+      ),
+
       GoRoute(
         path: '/login',
         builder: (context, state) => const LoginScreen(),
       ),
 
+      ////////////////////////////////
+      // RUTAS PARA USUARIOS LOGUEADOS
+
       GoRoute(
-        path: '/super',
-        builder: (context, state) => const SuperScreen(),
-      ),
-      GoRoute(
-        path: '/super_aux1',
-        builder: (context, state) => const SuperAux1Screen(),
+        path: '/dashboard',
+        builder: (context, state) => const DashboardScreen(),
       ),
 
       GoRoute(
@@ -136,11 +147,6 @@ final goRouterProvider = Provider((ref) {
         path: '/podcast/:id',
         builder: (context, state) =>
             PodcastScreen(podcastId: state.pathParameters['id'] ?? 'no-id'),
-      ),
-
-      GoRoute(
-        path: '/congregaciones',
-        builder: (context, state) => const CongregacionesScreen(),
       ),
 
       GoRoute(
@@ -175,26 +181,8 @@ final goRouterProvider = Provider((ref) {
       ),
 
       GoRoute(
-        path: '/admin_aux1',
-        builder: (context, state) => const AdminAux1Screen(),
-      ),
-
-      GoRoute(
-        path: '/admin_aux2',
-        builder: (context, state) => const AdminAux2Screen(),
-      ),
-
-      GoRoute(
-        path: '/register',
+        path: '/registro',
         builder: (context, state) => const RegisterScreen(),
-      ),
-
-      GoRoute(
-        path: '/video/:url',
-        builder: (context, state) {
-          final url = state.pathParameters['url'] ?? 'no-url';
-          return VideoScreen(url: url);
-        },
       ),
 
       GoRoute(
@@ -202,40 +190,23 @@ final goRouterProvider = Provider((ref) {
         builder: (context, state) =>
             SerieScreen(serieId: state.pathParameters['id'] ?? 'no-id'),
       ),
-
-      ///* Login Routes
-      GoRoute(
-        path: '/',
-        builder: (context, state) => const ProductsScreen(),
-      ),
-
-      GoRoute(
-        path: '/dashboard',
-        builder: (context, state) => const DashboardScreen(),
-      ),
-
-      GoRoute(
-        path: '/product/:id', // /product/new
-        builder: (context, state) => ProductScreen(
-          productId: state.pathParameters['id'] ?? 'no-id',
-        ),
-      ),
     ],
     redirect: (context, state) {
       final isGoingTo = state.matchedLocation;
       final authStatus = goRouterNotifier.authStatus;
 
-      // Si aún está verificando la autenticación, permanece en la pantalla de splash
-      if (isGoingTo == '/splash' && authStatus == AuthStatus.checking) {
-        return null;
-      }
+      ////////////////////////////////
+      ///RUTAS USUARIOS PUBLICOSf
 
-      // Si no está autenticado, permite acceder a ciertas rutas públicas
+      /**
+       * Cuando no está autenticado
+       * permite acceder a ciertas rutas públicas
+       */
       if (authStatus == AuthStatus.notAuthenticated) {
         final allowedRoutes = [
           '/comite',
           '/login',
-          '/register',
+          '/registro',
           '/tema',
           '/radio',
           '/transmision',
@@ -253,36 +224,34 @@ final goRouterProvider = Provider((ref) {
           '/cronogramas',
         ];
         if (allowedRoutes.any((route) => isGoingTo.startsWith(route))) {
-          return null; // Permite acceder a estas rutas
+          //PERMITE ACCEDER A LAS RUTAS NOMBRADAS
+          return null;
         }
-        // Redirige al home público si intenta acceder a cualquier otra ruta
+        //CUANDO INTENTA ACCEDER A OTRAS RURAS, REDIRIGUE A
         return '/home/0';
       }
 
-      // Si está autenticado
+      ////////////////////////////////
+      ///RUTAS USUARIO AUTENTICADO
+
+      /**
+       * Cuando se esta verrificando, la autentificación,
+       * permanece en la pantalla splash
+       */
+      if (isGoingTo == '/splash' && authStatus == AuthStatus.checking) {
+        return null;
+      }
+
+      //CUANDO EL USUARIO ESTA AUTENTICADO
       if (authStatus == AuthStatus.authenticated) {
         final user = goRouterNotifier.user;
-/*
-        // Redirige al home si intenta acceder a las pantallas de login o registro estando autenticado
-        if (isGoingTo == '/congregaciones' ||
-            isGoingTo == '/eventos' ||
-            isGoingTo == '/cronogramas' ||
-            isGoingTo == '/descargables' ||
-            isGoingTo == '/solicitudes' ||
-            isGoingTo == '/ipuc-en-linea' ||
-            isGoingTo == '/pastores' ||
-            isGoingTo == '/lideres' ||
-            isGoingTo == '/perfil' ||
-            isGoingTo == '/tema' ||
-            isGoingTo == '/splash') {
-          return '/dashboard';
-        }
-        */
 
-        // Verifica los roles del admin y redirige a las pantallas correspondientes
+        /**
+         * Verifica los roles que tiene el usuario.
+         * Enruta segun el rol
+         */
         if (user != null) {
           if (user.isAdmin) {
-            // Si es admin, permite navegación para los siguientes
             final allowedRoutes = [
               '/dashboard',
               '/congregaciones',
@@ -302,15 +271,16 @@ final goRouterProvider = Provider((ref) {
               '/descargable-privado-carpetas',
             ];
             if (allowedRoutes.any((route) => isGoingTo.startsWith(route))) {
-              return null; // Permite acceder a estas rutas
+              //PERMITE ACCEDER A LAS RUTAS MENCIONADA
+              return null;
             }
-            // Redirige al home público si intenta acceder a cualquier otra ruta
+            //CUANDO INTENTA ACCEDER A OTRAS RURAS, REDIRIGUE A
             return '/dashboard';
           }
         }
       }
 
-      return null; // No redirige a ninguna otra parte
+      return null;
     },
   );
 });

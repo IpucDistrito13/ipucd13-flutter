@@ -1,14 +1,13 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '/features/public/comites/domain/domain.dart';
-import '/features/public/cronogramas/presentation/widgets/cronograma_horizontal_listview.dart';
-import '/features/shared/widgets/custom_radio_transmision.dart';
-
 import '../../shared/shared.dart';
 import '../comites/presentation/presentations.dart';
 import '../podcasts/presentation/presentations.dart';
 import '../series/presentation/presentations.dart';
 import '../sliders/presentation/providers/providers.dart';
+import '/features/public/comites/domain/domain.dart';
+import '/features/public/cronogramas/presentation/widgets/cronograma_horizontal_listview.dart';
+import '/features/shared/widgets/custom_radio_transmision.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/material.dart';
 
 class Public2Screen extends StatelessWidget {
   const Public2Screen({super.key});
@@ -58,11 +57,10 @@ class _ComitesViewState extends ConsumerState {
       child: Column(
         children: [
           //MENSAJE CARGANDO
-          if (comitesState.comites.isEmpty)
+          if (comitesState.comites.isNotEmpty)
             Center(
               child: Column(
-                mainAxisSize:
-                    MainAxisSize.min, // Ensure the column takes minimum height
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   const Text('Cargando...'),
                   const SizedBox(height: 10),
@@ -76,8 +74,6 @@ class _ComitesViewState extends ConsumerState {
                 ],
               ),
             ),
-
-          //COMITES
 
           if (comitesState.comites.isNotEmpty)
             ComiteHorizontalListview(
