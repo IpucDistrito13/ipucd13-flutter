@@ -1,8 +1,10 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '/features/admin/galerias/domain/entities/galeria.dart';
 import '/features/admin/galerias/domain/repositories/galerias_repository.dart';
 import '/features/admin/galerias/presentation/provider/galerias_repository_provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+//3.
+//CADA VEZ QUE SE CIERRA LA PANTALLA REALIZA EL autoDisponse, PARA LIMPIAR DATOS
 final galeriaByUsuarioProvider = StateNotifierProvider.family
     .autoDispose<GaleriasNotifier, GaleriasState, String>((ref, uuid) {
   final galeriasRepository = ref.watch(galeriasRepositoryProvider);
@@ -10,7 +12,7 @@ final galeriaByUsuarioProvider = StateNotifierProvider.family
 });
 //3.
 
-//2
+//2.
 class GaleriasNotifier extends StateNotifier<GaleriasState> {
   final GaleriasRepository galeriasRepository;
 
@@ -45,7 +47,6 @@ class GaleriasNotifier extends StateNotifier<GaleriasState> {
 
 //1.
 class GaleriasState {
-  //final String? podcastId;
   final String? uuid;
   final bool isLastPage;
   final int limit;
@@ -54,7 +55,6 @@ class GaleriasState {
   final List<Galeria> galerias;
 
   GaleriasState({
-    //required this.podcastId,
     required this.uuid,
     this.isLastPage = false,
     this.limit = 10,
@@ -64,7 +64,6 @@ class GaleriasState {
   });
 
   GaleriasState copyWith({
-    //String? podcastId,
     String? uuid,
     bool? isLastPage,
     int? limit,
@@ -73,7 +72,6 @@ class GaleriasState {
     List<Galeria>? galerias,
   }) =>
       GaleriasState(
-        //podcastId: podcastId ?? this.podcastId,
         uuid: uuid ?? this.uuid,
         isLastPage: isLastPage ?? this.isLastPage,
         limit: limit ?? this.limit,

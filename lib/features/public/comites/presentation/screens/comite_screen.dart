@@ -1,9 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
-import '/features/public/podcasts/presentation/providers/podcasts_by_comite_provider.dart';
-import '/features/public/series/presentation/providers/series_by_comite_provider.dart';
-
 import '../../../lideres/domain/domains.dart';
 import '../../../lideres/presentation/presentations.dart';
 import '../../../podcasts/domain/domains.dart';
@@ -12,6 +6,11 @@ import '../../../series/domain/domains.dart';
 import '../../../series/presentation/presentations.dart';
 import '../../domain/domain.dart';
 import '../presentations.dart';
+import '/features/public/podcasts/presentation/providers/podcasts_by_comite_provider.dart';
+import '/features/public/series/presentation/providers/series_by_comite_provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class ComiteScreen extends ConsumerStatefulWidget {
   static const name = 'comite-screen';
@@ -36,12 +35,12 @@ class ComiteScreenState extends ConsumerState<ComiteScreen> {
 
       ref.read(seriesByComiteProvider(widget.comiteId).notifier).loadNextPage();
 
-      /*
       
-      ref
-          .read(informesByComiteProvider(widget.comiteId).notifier)
-          .loadNextPage();
-          */
+      // ref
+      //     .read(informesByComiteProvider(widget.comiteId).notifier)
+      //     .loadNextPage();
+  
+        
     });
   }
 
@@ -111,12 +110,10 @@ class _ComiteDetails extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Imagen
 
               const SizedBox(width: 10),
-              // Descripción
+              //DESCRIPCION
               SizedBox(
-                //width: (size.width - 40) * 0.7,
                 width: (size.width - 40) * 1,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -130,7 +127,7 @@ class _ComiteDetails extends StatelessWidget {
           ),
         ),
 
-        //Lideres
+        //SECCION LIDERES SEGUN EL COMITE
         const SizedBox(height: 5),
         if (lideres.isNotEmpty)
           LideresInfoVerticalListview(
@@ -138,8 +135,7 @@ class _ComiteDetails extends StatelessWidget {
             title: 'Lideres',
             //subTitle: 'Ver más',
             loadNextPage: () {
-              // Pass the appropriate function to load the next page
-              // This should match the logic you use in your app
+              //
             },
           ),
 
@@ -150,8 +146,7 @@ class _ComiteDetails extends StatelessWidget {
             title: 'Podcasts',
             //subTitle: 'Ver más',
             loadNextPage: () {
-              // Pass the appropriate function to load the next page
-              // This should match the logic you use in your app
+              //
             },
           ),
 
@@ -162,8 +157,7 @@ class _ComiteDetails extends StatelessWidget {
             title: 'Series',
             //subTitle: 'Ver más',
             loadNextPage: () {
-              // Pass the appropriate function to load the next page
-              // This should match the logic you use in your app
+              //
             },
           ),
 

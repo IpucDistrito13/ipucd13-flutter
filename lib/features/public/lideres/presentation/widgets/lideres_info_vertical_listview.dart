@@ -53,20 +53,25 @@ class _LideresInfoVerticalListviewState
 
   @override
   Widget build(BuildContext context) {
+    /**
+     * 1. CustomTituloSubtitulo: Mostramos titulo o subtitulo
+     * 2. CustomSliderHorizontalTextoImagen: Mostramo titulo y imagen
+     */
     return SizedBox(
       height: 315,
       child: Column(
         children: [
-          // Si lo dos son null no mostrar nada, Si uno de los dos tiene datos mostrar
+          //SI LOS DOS SON null NO MOSTRAR NADA, CUANDO TIENE DATOS UNO DE LOS DOS MOSTRAR
           if (widget.title != null || widget.subTitle != null)
             _Title(title: widget.title, subTitle: widget.subTitle),
 
-          // Mostrar el ListView solo si podcasts no está vacío o es null
+          //MOSTRAR EL ListView, CUANDO SI EXISTE DATOS
           Expanded(
             child: ListView.builder(
               controller: scrollController,
               itemCount: widget.lideres.length,
               scrollDirection: Axis.horizontal,
+              //FISICAS TANTO ANDROID COMO IOS
               physics: const BouncingScrollPhysics(),
               itemBuilder: (context, index) {
                 return FadeInRight(
@@ -126,7 +131,7 @@ class _Title extends StatelessWidget {
           const Spacer(),
           if (subTitle != null)
             FilledButton.tonal(
-                //Estilo para el subtitulo
+                //ESTILO PARA EL SUBTITULO
                 style: const ButtonStyle(visualDensity: VisualDensity.compact),
                 onPressed: () {
                   // print('Subtitle pressed');

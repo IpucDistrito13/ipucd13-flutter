@@ -34,7 +34,7 @@ class UsuarioServer {
         apellidos: json["apellidos"],
         email: json["email"] ?? '',
         celular: json["celular"],
-        // Convert 1 to true, 0 to false
+        //CONVERTIR 1 EN true, 0 EN falso
         visibleCelular: json["visibleCelular"] == 1,
         congregacion: json["congregacion"],
         municipio: json["municipio"],

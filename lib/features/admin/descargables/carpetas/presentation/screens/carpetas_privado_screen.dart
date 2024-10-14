@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-
 import '../../domain/domains.dart';
 import '../presentations.dart';
 import '../providers/search/search_carpetas_provider.dart';
@@ -70,17 +69,19 @@ class DescargableComiteCarpetasState
                   child: GridView.builder(
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3, // Número de columnas
+                      //NUMERO DE COLUMNAS
+                      crossAxisCount: 3,
                       crossAxisSpacing:
-                          10.0, // Espacio horizontal entre los ítems
-                      mainAxisSpacing: 10.0, // Espacio vertical entre los ítems
+                      //ESPACIO HORIZONTAL ENTRE LOS ITEMS
+                          10.0,
+                      //ESPACIO VERTICAL ENTRE LOS ITEMS
+                      mainAxisSpacing: 10.0,
                     ),
                     itemCount: carpetasState.carpetas.length,
                     itemBuilder: (context, index) {
                       final carpeta = carpetasState.carpetas![index];
                       return GestureDetector(
                         onTap: () {
-                          // Navegar a la nueva ruta usando GoRouter
                           context.push(
                             '/descargable-publico-archivos/${carpeta.nombre}/${carpeta.slug}',
                           );
@@ -93,7 +94,7 @@ class DescargableComiteCarpetasState
                   ),
                 )
               : const Center(
-                  child: Text('No se encontró información del comité')),
+                  child: Text('No se encontró información del comité.')),
     );
   }
 }

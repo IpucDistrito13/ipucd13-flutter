@@ -6,5 +6,5 @@ export 'geometrical_background.dart';
 export 'menus/side_menu_admin.dart';
 export 'custom_slider_horizontal_texto_imagen.dart';
 export 'custom_titulo_subtitulo.dart';
-export 'menus/app_menu_public__items.dart';
+export 'menus/app_menu_public_items.dart';
 export 'custom_buttom_navigation.dart';

@@ -1,9 +1,8 @@
-import 'package:animate_do/animate_do.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
-
 import '../../public/comites/domain/domain.dart';
+import 'package:animate_do/animate_do.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class DescargablesScreen extends ConsumerStatefulWidget {
   static const name = 'descargable-screen';
@@ -24,7 +23,7 @@ class DescargablesScreenState extends ConsumerState<DescargablesScreen>
     _tabController = TabController(length: 2, vsync: this);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(comitesProvider.notifier).loadNextPage();
-      // Aquí podrías cargar los descargables privados si tienes un provider separado para ellos
+      //AQUI SE PUEDE CARGAR DESCARGABLES PRIVADOS
     });
     scrollController.addListener(_onScroll);
   }
@@ -41,7 +40,7 @@ class DescargablesScreenState extends ConsumerState<DescargablesScreen>
     if (scrollController.position.pixels >=
         scrollController.position.maxScrollExtent - 200) {
       ref.read(comitesProvider.notifier).loadNextPage();
-      // Aquí podrías cargar más descargables privados si es necesario
+      //AQUI CARGAR LOS DESCARGABLES PRIVADOS
     }
   }
 
@@ -82,7 +81,6 @@ class DescargablesScreenState extends ConsumerState<DescargablesScreen>
   }
 }
 
-// El resto de las clases (ComiteGridView y _ComiteGridItem) permanecen sin cambios
 class ComitePublicoGridView extends StatelessWidget {
   final List<Comite> comites;
   final ScrollController scrollController;

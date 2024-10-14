@@ -60,15 +60,14 @@ class _CustomPrincipalImagenTituloState extends State<CustomInfoWidget> {
                   borderRadius: BorderRadius.circular(20),
                   child: Image.network(
                     widget.imagenportada ?? '',
-                    //Aun cuando cargue tenga el espacio asignado
+                    //AUN CUANDO CARGUE TENGA EL ESPACIO ASIGNADO
                     width: 100,
                     //fit: BoxFit.cover,
 
-                    // Cuando ya se construya o cargamos ejecutamos
+                    //CUANDO SE CONSTRUYA O CARGAMOS EJECUTAMOS
                     loadingBuilder: (context, child, loadingProgress) {
-                      //Cuando esta cargando
+                      //CUANDO ESTA CARGANDO
                       if (loadingProgress != null) {
-                        //Cuando aun no obtenemos la imagen mostrar indicador cargando
                         return const Padding(
                           padding: EdgeInsets.all(10),
                           child: Center(
@@ -93,25 +92,25 @@ class _CustomPrincipalImagenTituloState extends State<CustomInfoWidget> {
                 ),
               ),
 
-              const SizedBox(width: 5), // Espacio entre imagen y texto
+              const SizedBox(width: 5),
 
               Column(
                 children: [
-                  //Titulo
+                  //TITULO
                   SizedBox(
                     width: 210,
                     child: Text(
                       widget.nombre,
                       style: titleStyle,
                       overflow: TextOverflow.ellipsis,
-                      maxLines: 2, //Maximo 2 lineas
+                      maxLines: 2,
                       textAlign:
-                          TextAlign.left, // Centra el texto horizontalmente
+                          TextAlign.left,
                     ),
                   ),
 
                   const SizedBox(
-                      height: 4), // Espacio entre título y descripción
+                      height: 4),
 
                   SizedBox(
                     width: 210,
@@ -119,14 +118,14 @@ class _CustomPrincipalImagenTituloState extends State<CustomInfoWidget> {
                       widget.categoria ?? '',
                       style: subtitleStyle,
                       overflow: TextOverflow.ellipsis,
-                      maxLines: 2, //Maximo 2 lineas
+                      maxLines: 2,
                       textAlign:
-                          TextAlign.left, // Centra el texto horizontalmente
+                          TextAlign.left,
                     ),
                   ),
 
                   const SizedBox(
-                      height: 5), // Espacio entre título y descripción
+                      height: 5),
 
                   SizedBox(
                     width: 210,
@@ -134,18 +133,18 @@ class _CustomPrincipalImagenTituloState extends State<CustomInfoWidget> {
                       widget.descripcion ?? '',
                       style: descripcionStyle,
                       overflow: TextOverflow.ellipsis,
-                      maxLines: 3, //Maximo 2 lineas
+                      maxLines: 3,
                       textAlign:
-                          TextAlign.left, // Centra el texto horizontalmente
+                          TextAlign.left,
                     ),
                   ),
                 ],
               )
             ],
           ),
-
+          
           // FIN DE IMAGEN
-          //
+          
         ],
       ),
     );

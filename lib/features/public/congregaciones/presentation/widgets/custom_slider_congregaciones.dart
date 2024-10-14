@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../domain/domains.dart';
 import '../presentations.dart';
 
@@ -21,11 +20,13 @@ class CustomSliderCongregaciones extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  width: 80, // Ajusta el ancho según lo que prefieras
-                  height: 120, // Ajusta la altura según lo que prefieras
+                  //AJUSTA EL ANCHO
+                  width: 80,
+                  //AJUSTA LA ALTURA
+                  height: 120,
                   decoration: BoxDecoration(
                     borderRadius:
-                        BorderRadius.circular(8), // Bordes redondeados
+                        BorderRadius.circular(8),
                     image: congregacion.fotocongregacion != null
                         ? DecorationImage(
                             image: NetworkImage(congregacion.fotocongregacion),
@@ -37,8 +38,9 @@ class CustomSliderCongregaciones extends StatelessWidget {
                       ? const Icon(Icons.person, size: 60)
                       : null,
                 ),
+                //ESPACIO ENTRE IMAGEN Y TEXTO
                 const SizedBox(
-                    width: 16), // Espacio entre la imagen y los textos
+                    width: 16),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

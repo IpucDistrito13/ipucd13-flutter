@@ -8,6 +8,11 @@ Los pastores y lideres distrital, tiene la posibilidad de acceder con usuario y 
 Desarrollado por Harold German Granados.
 haresje@gmail.com
 
+# ABRIR MAPA  DE FORMA NATIVA
+
+Configurar cuando se registre la geoposicion de las congregaciones 
+_openMaps
+
 # COMANDOS A APLICAR ANTES DE SUBIR A PRODUCCION
 
 flutter run --release --dart-define=ENV=local
@@ -38,6 +43,14 @@ dart run flutter_launcher_icons
 # Actualizar splash
 
 dart run flutter_native_splash:create
+
+
+# url_launcher - Info.plist
+
+<key>LSApplicationQueriesSchemes</key>
+<array>
+  <string>tel</string>
+</array>
 
 
 # image_picker - iOS

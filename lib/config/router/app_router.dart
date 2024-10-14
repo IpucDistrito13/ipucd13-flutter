@@ -1,5 +1,3 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import '../../features/admin/auth/presentation/providers/providers.dart';
 import '../../features/admin/auth/presentation/screens/screens.dart';
 import '../../features/admin/dashboard_screen.dart';
@@ -11,7 +9,6 @@ import '../../features/admin/pastores/pastor_screen.dart';
 import '../../features/admin/pastores/pastores_screen.dart';
 import '../../features/admin/perfil/perfil_screen.dart';
 import '../../features/admin/solicitudes/solicitudes_screen.dart';
-import '../../features/products/products.dart';
 import '../../features/public/archivos/presentation/presentations.dart';
 import '../../features/public/cronogramas/presentation/presentations.dart';
 import '../../features/public/eventos/presentation/widgets/widgets.dart';
@@ -20,6 +17,8 @@ import '../../features/public/screen/screens.dart';
 import '../../features/public/series/presentation/presentations.dart';
 import '../../features/public/videos/presentation/presentations.dart';
 import 'app_router_notifier.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 final goRouterProvider = Provider((ref) {
   final goRouterNotifier = ref.read(goRouterNotifierProvider);
@@ -139,11 +138,6 @@ final goRouterProvider = Provider((ref) {
       ),
 
       GoRoute(
-        path: '/admin',
-        builder: (context, state) => const AdminScreen(),
-      ),
-
-      GoRoute(
         path: '/podcast/:id',
         builder: (context, state) =>
             PodcastScreen(podcastId: state.pathParameters['id'] ?? 'no-id'),
@@ -161,7 +155,7 @@ final goRouterProvider = Provider((ref) {
 
       GoRoute(
         path: '/ipuc-en-linea',
-        builder: (context, state) => const IpucEnLineaScreen(),
+        builder: (context, state) =>  IpucEnLineaScreen(),
       ),
 
       GoRoute(
@@ -196,7 +190,7 @@ final goRouterProvider = Provider((ref) {
       final authStatus = goRouterNotifier.authStatus;
 
       ////////////////////////////////
-      ///RUTAS USUARIOS PUBLICOSf
+      ///RUTAS USUARIOS PUBLICOS
 
       /**
        * Cuando no está autenticado
@@ -252,6 +246,60 @@ final goRouterProvider = Provider((ref) {
          */
         if (user != null) {
           if (user.isAdmin) {
+            final allowedRoutes = [
+              '/dashboard',
+              '/congregaciones',
+              '/eventos',
+              '/cronogramas',
+              '/descargables',
+              '/solicitudes',
+              '/ipuc-en-linea',
+              '/pastores',
+              '/usuario-perfil',
+              '/lideres',
+              '/perfil',
+              '/tema',
+              '/descargables',
+              '/descargable-publico-carpetas',
+              '/descargable-publico-archivos',
+              '/descargable-privado-carpetas',
+            ];
+            if (allowedRoutes.any((route) => isGoingTo.startsWith(route))) {
+              //PERMITE ACCEDER A LAS RUTAS MENCIONADA
+              return null;
+            }
+            //CUANDO INTENTA ACCEDER A OTRAS RURAS, REDIRIGUE A
+            return '/dashboard';
+          }
+
+            if (user.isPastor) {
+            final allowedRoutes = [
+              '/dashboard',
+              '/congregaciones',
+              '/eventos',
+              '/cronogramas',
+              '/descargables',
+              '/solicitudes',
+              '/ipuc-en-linea',
+              '/pastores',
+              '/usuario-perfil',
+              '/lideres',
+              '/perfil',
+              '/tema',
+              '/descargables',
+              '/descargable-publico-carpetas',
+              '/descargable-publico-archivos',
+              '/descargable-privado-carpetas',
+            ];
+            if (allowedRoutes.any((route) => isGoingTo.startsWith(route))) {
+              //PERMITE ACCEDER A LAS RUTAS MENCIONADA
+              return null;
+            }
+            //CUANDO INTENTA ACCEDER A OTRAS RURAS, REDIRIGUE A
+            return '/dashboard';
+          }
+
+            if (user.isLider) {
             final allowedRoutes = [
               '/dashboard',
               '/congregaciones',

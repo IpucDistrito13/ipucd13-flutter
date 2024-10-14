@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-//Lista de menus, para mostrar al publico desde el drawable
+//LISTA DE MENUS, PARA MOSTRAR AL PUBLICO DESDE EL DRAWABLE
 class AppMenuPublicItems {
   final String title;
   final String subTitle;

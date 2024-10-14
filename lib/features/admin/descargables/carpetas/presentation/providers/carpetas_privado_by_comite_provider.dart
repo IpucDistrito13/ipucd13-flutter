@@ -1,10 +1,9 @@
-//3
-//Cada vez que se cierre la pantalla realiza el autoDisponse con el din de limpiar datos
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import '../../domain/domains.dart';
 import '../presentations.dart';
 
+//3.
+//CADA VEZ QUE SE CIERRA LA PANTALLA REALIZA EL autoDisponse, PARA LIMPIAR DATOS
 final carpetasPrivadoByComiteProvider = StateNotifierProvider.family
     .autoDispose<CarpetasNotifier, CarpetasState, String>((ref, uuid) {
   final carpetasRepository = ref.watch(carpetaRepositoryProvider);
@@ -12,7 +11,7 @@ final carpetasPrivadoByComiteProvider = StateNotifierProvider.family
 });
 //3.
 
-//2
+//2.
 class CarpetasNotifier extends StateNotifier<CarpetasState> {
   final CarpetasRepository carpetasRepository;
 

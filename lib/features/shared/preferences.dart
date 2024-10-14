@@ -12,7 +12,7 @@ class Preferences {
   }
 
   static bool get isDarkMode {
-    // Lee el valor de SharedPreferences o devuelve el valor predeterminado
+    //LEE EL VALOR DE SharedPreferences O DEVUELVE EL VALOR PREDETERMINADO
     return _pref.getBool(_isDarkModeKey) ?? _defaultIsDarkMode;
   }
 
@@ -21,7 +21,7 @@ class Preferences {
   }
 
   static int get colorMode {
-    // Lee el valor de SharedPreferences o devuelve el valor predeterminado
+    //LEE EL VALOR DE SharedPreferences O DEVUELVE EL VALOR PREDETERMINADO
     return _pref.getInt(_selectedColorKey) ?? _defaultColorMode;
   }
 

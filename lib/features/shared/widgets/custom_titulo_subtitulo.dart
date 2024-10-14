@@ -7,7 +7,6 @@ class CustomTituloSubtitulo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //final titleStyle = Theme.of(context).textTheme.titleSmall;
 
     const titleStyle = TextStyle(
       fontFamily: 'MyriamPro',
@@ -28,7 +27,7 @@ class CustomTituloSubtitulo extends StatelessWidget {
           const Spacer(),
           if (subTitle != null)
             FilledButton.tonal(
-                //Estilo para el subtitulo
+                //ESTILO PARA EL SUBTITULO
                 style: const ButtonStyle(visualDensity: VisualDensity.compact),
                 onPressed: () {},
                 child: Text(subTitle!))

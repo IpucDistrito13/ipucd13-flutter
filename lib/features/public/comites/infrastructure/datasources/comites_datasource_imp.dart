@@ -14,7 +14,6 @@ class ComitesDatasourceImp extends ComitesDatasource {
 
   @override
   Future<Comite> createUpdateComite(Map<String, dynamic> comiteLike) {
-    // TODO: implement createUpdateComite
     throw UnimplementedError();
   }
 
@@ -24,17 +23,12 @@ class ComitesDatasourceImp extends ComitesDatasource {
       final key = Environment.apiKey;
       final url = '/v1/comite/$id?api_key=$key';
       final response = await dio.get(url);
-      //print('URL: $response');
       if (response.statusCode != 200) throw Exception('Comité no encontrado.');
 
       final comiteDetails = ComiteDetailsResponse.fromJson(response.data);
       final Comite comite = ComiteMapper.comiteDetailstoEntity(comiteDetails);
       return comite;
     } catch (e) {
-      // Registra el error o manejalo según sea necesario
-      //print('Error fetching comite: $e');
-      // Es posible que quieras lanzar una excepción personalizada o devolver una lista vacía
-      // dependiendo de tu estrategia de manejo de errores
       throw Exception('Failed to fetch comite');
     }
   }
@@ -50,22 +44,21 @@ class ComitesDatasourceImp extends ComitesDatasource {
       final comitesResponse = ComitesServerResponse.fromJson(response.data);
 
       final List<Comite> comites = comitesResponse.data
-          //Filtrar para que muestre solo los que tienen portada
+          //EJEMPLO PARA FILTRAR
           //.where((comiteserver) => comiteserver.imagenportada != '')
           .map((comiteServer) => ComiteMapper.comiteToEntity(comiteServer))
           .toList();
 
       return comites;
     } catch (e) {
-      // Manejo de errores
+      //MANEJO DE ERRORES
       //print('Error fetching getComiteByPage: $e');
-      return []; // O maneja el error de otra manera, como lanzando una excepción
+      return [];
     }
   }
 
   @override
   Future<List<Comite>> searchComiteByTerm(String term) {
-    // TODO: implement searchComiteByTerm
     throw UnimplementedError();
   }
 }

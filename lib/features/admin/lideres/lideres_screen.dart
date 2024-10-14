@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '/features/admin/auth/domain/entities/usuario.dart';
 import '/features/admin/usuarios/presentation/provides/usuarios_lideres_provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class LideresScreen extends ConsumerStatefulWidget {
@@ -145,38 +145,61 @@ class SlideCustom extends StatelessWidget {
     );
   }
 
-  void _showDetailsDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(usuario.congregacion),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
+void _showDetailsDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text(usuario.congregacion),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Dirección: ${usuario.nombre}'),
+            Text('Departamento: ${usuario.departamento}'),
+            Text('Municipio: ${usuario.municipio}'),
+            Text('Celular: ${usuario.celular}'),
+          ],
+        ),
+        actions: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Text('Dirección: ${usuario.nombre}'),
-              Text('Departamento: ${usuario.departamento}'),
-              Text('Municipio: ${usuario.municipio}'),
-              Text('Celular: ${usuario.celular}'),
+              TextButton(
+                child: const Text('Llamar'),
+                onPressed: () {
+                  _makePhoneCall(usuario.celular ?? '');
+                  Navigator.of(context).pop(); // Cierra el diálogo
+                },
+              ),
+              TextButton(
+                child: const Text('WhatsApp'),
+                onPressed: () {
+                  _openWhatsApp(usuario.celular ?? '');
+                  Navigator.of(context).pop(); // Cierra el diálogo
+                },
+              ),
             ],
           ),
-          actions: [
-            TextButton(
-              child: const Text('Llamar'),
-              onPressed: () => _makePhoneCall(usuario.celular ?? ''),
-            ),
-            TextButton(
-              child: const Text('Cerrar'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
+          TextButton(
+            child: const Text('Cerrar'),
+            onPressed: () {
+              Navigator.of(context).pop(); // Cierra el diálogo
+            },
+          ),
+        ],
+      );
+    },
+  );
+}
+
+
+void _openWhatsApp(String phoneNumber) async {
+  if (phoneNumber.isEmpty) return;
+  final Uri whatsappUri = Uri.parse("https://wa.me/+57$phoneNumber");
+  await _launchUrl(whatsappUri);
+}
+
 
   void _makePhoneCall(String phoneNumber) async {
     if (phoneNumber.isEmpty) return;

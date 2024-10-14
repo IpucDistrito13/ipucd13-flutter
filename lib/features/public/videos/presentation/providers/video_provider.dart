@@ -1,11 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import '../../domain/domains.dart';
 import '../presentations.dart';
 
-//3
-//Cada vez que se cierre la pantalla realiza el autoDisponse con el din de limpiar datos
-
+//3. 
+//CADA VEZ QUE SE CIERRA LA PANTALLA REALIZA EL autoDisponse, PARA LIMPIAR DATOS
 final videoProvider = StateNotifierProvider.autoDispose
     .family<VideoNotifier, VideoState, String>((ref, videoId) {
   final videosRepository = ref.watch(videosRepositoryProvider);
@@ -14,7 +12,7 @@ final videoProvider = StateNotifierProvider.autoDispose
 });
 //3.
 
-//2
+//2.
 class VideoNotifier extends StateNotifier<VideoState> {
   final VideosRepository videosRepository;
 
@@ -39,16 +37,17 @@ class VideoNotifier extends StateNotifier<VideoState> {
     }
   }
 }
-//2
+//2.
 
-//1
+//1.
 class VideoState {
   final String id;
-  final Video? video; //Opcional
+   //OPCIONAL
+  final Video? video;
   final bool isLoading;
   final bool isSaving;
   VideoState({
-    required this.id, //Nunca a a ser null
+    required this.id,
     this.video,
     this.isLoading = true,
     this.isSaving = false,

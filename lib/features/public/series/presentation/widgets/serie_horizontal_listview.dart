@@ -52,23 +52,25 @@ class _SerieHorizontalListviewState extends State<SerieHorizontalListview> {
   @override
   Widget build(BuildContext context) {
     /**
-     * 1. CustomTituloSubtitulo: Mostramos titulo o subtitulo
-     * 2. CustomSliderHorizontalTextoImagen: Mostramo titulo y imagen
+     * 1. CustomTituloSubtitulo: MOSTRAMOS TITULO O SUBTITULO
+     * 2. CustomSliderHorizontalTextoImagen: MOSTRAMOS TITULO Y IMAGEN
      */
     return SizedBox(
-      height: 337, //Altura sizedBox
+      height: 337,
       child: Column(
         children: [
-          //Si lo dos son null no mostrar nada, Si uno de los dos tiene datos mostrar
+          //SI LOS DOS SON null NO MOSTRAR NADA, CUANDO TIENE DATOS UNO DE LOS DOS MOSTRAR
           if (widget.title != null || widget.subTitle != null)
             CustomTituloSubtitulo(
                 title: widget.title, subTitle: widget.subTitle),
+                
+          //MOSTRAR EL ListView, CUANDO SI EXISTE DATOS
           Expanded(
               child: ListView.builder(
             controller: scrollController,
             itemCount: widget.series.length,
             scrollDirection: Axis.horizontal,
-            //Fisicas tanto android como ios
+            //FISICAS TANTO ANDROID COMO IOS
             physics: const BouncingScrollPhysics(),
             itemBuilder: (context, index) {
               return FadeInRight(
@@ -84,7 +86,6 @@ class _SerieHorizontalListviewState extends State<SerieHorizontalListview> {
   }
 }
 
-///
 class CustomSliderHorizontalTextoImagen extends StatelessWidget {
   final Serie series;
 
@@ -120,6 +121,7 @@ class CustomTextoImagen extends StatefulWidget {
 class _CustomPrincipalImagenTituloState extends State<CustomTextoImagen> {
   @override
   Widget build(BuildContext context) {
+
     const titleStyle = TextStyle(
       fontFamily: 'MyriamPro',
       fontSize: 14,
@@ -159,7 +161,7 @@ class _CustomPrincipalImagenTituloState extends State<CustomTextoImagen> {
             ),
           ),
           // FIN DE IMAGEN
-          //
+          
           //Titulo
           SizedBox(
             width: 150,
@@ -167,8 +169,8 @@ class _CustomPrincipalImagenTituloState extends State<CustomTextoImagen> {
               widget.nombre,
               style: titleStyle,
               overflow: TextOverflow.ellipsis,
-              maxLines: 2, //Maximo 2 lineas
-              textAlign: TextAlign.left, // Centra el texto horizontalmente
+              maxLines: 2,
+              textAlign: TextAlign.left,
             ),
           ),
 
@@ -178,8 +180,8 @@ class _CustomPrincipalImagenTituloState extends State<CustomTextoImagen> {
               widget.descripcion ?? '',
               style: descripcionStyle,
               overflow: TextOverflow.ellipsis,
-              maxLines: 2, //Maximo 2 lineas
-              textAlign: TextAlign.center, // Centra el texto horizontalmente
+              maxLines: 2,
+              textAlign: TextAlign.center,
             ),
           ),
         ],

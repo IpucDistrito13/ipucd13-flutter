@@ -3,11 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 import '../widgets.dart';
 
 class SideMenuPublic extends ConsumerStatefulWidget {
-  //3. Recibimos la informacion del scaffoldKey
+  //3. RECIBIMOS LA INFORMACION DEL scaffoldKey
   final GlobalKey<ScaffoldState> scaffoldKey;
 
   const SideMenuPublic({super.key, required this.scaffoldKey});
@@ -24,7 +23,7 @@ Future<void> launchURL(String urlString) async {
 }
 
 class SideMenuPublicState extends ConsumerState<SideMenuPublic> {
-  //Cual de las opciones es seleccionada
+  //CUAL DE LAS OPCIONES ES SELECCIONADA
   int navDrawerIndex = 0;
 
   @override
@@ -40,7 +39,7 @@ class SideMenuPublicState extends ConsumerState<SideMenuPublic> {
     }
     */
 
-    //hasNotch Nos indica la distancia en el top
+    //hasNotch NOS INDICA LA DISTANCIA EN EL top
     final hasNotch = MediaQuery.of(context).viewPadding.top > 35;
 
     return NavigationDrawer(
@@ -54,12 +53,12 @@ class SideMenuPublicState extends ConsumerState<SideMenuPublic> {
           final menuItem = appMenuItemsPublic[value];
           context.push(menuItem.link);
 
-          //4. LLamamos el scaffoldKey,
+          //4. LLAMAMOS EL scaffoldKey,
           //closeDrawer() siempre vamos a querer cerrar
           widget.scaffoldKey.currentState?.closeDrawer();
         },
 
-        //Opciones de menu
+        //OPCIONES DE MENU
         children: [
           const SizedBox(
             height: 20,
@@ -75,7 +74,7 @@ class SideMenuPublicState extends ConsumerState<SideMenuPublic> {
             ),
           ),
 
-          //Mostrados menus items publicos
+          //MOSTRAMOS MENUS ITEMS PUBLICOS
           ...appMenuItemsPublic.map(
             (item) => NavigationDrawerDestination(
               icon: Icon(item.icon),
@@ -90,10 +89,10 @@ class SideMenuPublicState extends ConsumerState<SideMenuPublic> {
 
           const Padding(
             padding: EdgeInsets.fromLTRB(28, 10, 16, 10),
-            child: Text('Siguenos en:'),
+            child: Text('Siguenos en: '),
           ),
 
-          //Abrir enlaces o aplicaciones mediante url
+          //ABRRIR ENLACES O APLICACIONES MEDIANTE URL
           ListTile(
             leading: const Icon(
               Icons.facebook,
@@ -107,7 +106,7 @@ class SideMenuPublicState extends ConsumerState<SideMenuPublic> {
           ListTile(
             leading: const FaIcon(
               FontAwesomeIcons.instagram,
-              size: 24, // Tamaño del icono
+              size: 24,
               color: Colors.purple,
             ),
             title: const Text('Instagram'),
@@ -118,7 +117,7 @@ class SideMenuPublicState extends ConsumerState<SideMenuPublic> {
           ListTile(
             leading: const FaIcon(
               FontAwesomeIcons.youtube,
-              size: 24, // Tamaño del icono
+              size: 24,
               color: Colors.red,
             ),
             title: const Text('Youtube'),

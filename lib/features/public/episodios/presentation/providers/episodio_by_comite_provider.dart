@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../domain/domains.dart';
 import '../presentations.dart';
 
+//3.
 final episodiosByComiteProvider = StateNotifierProvider.family
     .autoDispose<EpisodiosNotifier, EpisodiosState, String>((ref, podcastId) {
   final episodiosRepository = ref.watch(episodiosRepositoryProvider);
@@ -10,7 +11,7 @@ final episodiosByComiteProvider = StateNotifierProvider.family
 });
 //3.
 
-//2
+//2.
 class EpisodiosNotifier extends StateNotifier<EpisodiosState> {
   final EpisodiosRepository episodiosRepository;
 

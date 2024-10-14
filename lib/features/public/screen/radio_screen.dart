@@ -32,12 +32,14 @@ class _RadioScreenState extends State<RadioScreen> {
       if (_isPlaying) {
         await _audioPlayer.pause();
       } else {
-        // Verificar si el reproductor ya está reproduciendo
+        //VERIFICA QUE EL REPRODUCTOR YA ESTA REPRODUCIENDO
         if (_audioPlayer.state != PlayerState.playing) {
+          //AJUSTAR EL VOLUMEN ANTES DE REPRODUCIR
           await _audioPlayer
-              .setVolume(_volume); // Ajustar el volumen antes de reproducir
+              .setVolume(_volume);
+          //REPRODUCIR LA URL DEL STREAM
           await _audioPlayer
-              .play(UrlSource(streamUrl)); // Reproducir la URL del stream
+              .play(UrlSource(streamUrl));
         }
       }
 
@@ -45,12 +47,13 @@ class _RadioScreenState extends State<RadioScreen> {
         _isPlaying = !_isPlaying;
       });
     } catch (e) {
-      // Mejor manejar errores de forma visible para el usuario
-      _showErrorSnackBar("Error de reproducción.");
+      //MANEJA ERRORES DE FORMA VISIBLE PARA EL USUARIO
+      _showErrorSnackBar("Error de reproducción. $e");
+      print('Radio_screen: error de reproduccion: $e');
     }
   }
 
-// Función auxiliar para mostrar errores
+  //FUNCION AUXILIAR PARA MOSTRAR ERRORES
   void _showErrorSnackBar(String message) {
     final snackBar = SnackBar(content: Text(message));
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -78,21 +81,23 @@ class _RadioScreenState extends State<RadioScreen> {
       ),
       body: Stack(
         children: [
-          // Imagen de fondo
+          //IMAGEN DE FONDO
           Positioned.fill(
             child: Image.asset(
-              'assets/images/radio_ipuc_background.png', // Imagen de fondo
-              fit: BoxFit.cover, // Para que la imagen cubra toda la pantalla
+              'assets/images/radio_ipuc_background.png',
+              //PARA QUE LA IMAGEN CUBRA TODA LA PANTALLA
+              fit: BoxFit.cover,
             ),
           ),
-          // Contenido principal
+
+          //CONTENIDO PRINCIPAL
           Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 const SizedBox(height: 210),
 
-                // Botón circular de reproducir/pausar
+                // BOTON CIRCULAR DE REPRODUCIR/PAUSAR
                 GestureDetector(
                   onTap: _playPause,
                   child: Container(
@@ -102,8 +107,8 @@ class _RadioScreenState extends State<RadioScreen> {
                       shape: BoxShape.circle,
                       color: Theme.of(context).primaryColor,
                       border: Border.all(
-                        color: Colors.white, // Color del borde
-                        width: 1, // Grosor del borde
+                        color: Colors.white,
+                        width: 1,
                       ),
                     ),
                     child: Icon(
@@ -130,7 +135,8 @@ class _RadioScreenState extends State<RadioScreen> {
                 Text(
                   'Volumen: ${(_volume * 100).round()}%',
                   style: const TextStyle(
-                    color: Colors.white, // Cambiar el color del texto a blanco
+                    //CAMBIAR EL COLOR DE TEXTO
+                    color: Colors.white,
                   ),
                 ),
               ],

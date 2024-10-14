@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import '../usuarios/presentation/provides/usuario_my_perfil.dart';
 
 class PerfilScreen extends ConsumerWidget {
@@ -22,7 +21,7 @@ class PerfilScreen extends ConsumerWidget {
               child: Column(
                 children: [
                   const SizedBox(height: 20),
-                  // Stack to place the icon on top of the image
+                  //STACK PARA COLOCAR EL ICONO ENCIMA DE LA IMAGEN
                   Stack(
                     children: [
                       Hero(
@@ -46,6 +45,7 @@ class PerfilScreen extends ConsumerWidget {
                       ),
                       // Ícono con fondo circular en la esquina inferior derecha de la imagen
                       /*
+                      PARA SUBIR IMAGEN DE PERFIL
                       Positioned(
                         bottom: 0,
                         right: 0,
@@ -153,16 +153,21 @@ class PerfilScreen extends ConsumerWidget {
                   style: const TextStyle(
                       fontSize: 18, fontWeight: FontWeight.bold),
                 ),
-                /*
-                // Botón para editar la información
-                // En este caso, se comenta para que no se muestre
-                // Aquí se podría implementar un cuadro de diálogo con los datos del usuario
-                // y permitir al usuario editarlos
-                IconButton(
-                  icon: const Icon(Icons.edit),
-                  onPressed: onEdit,
-                ),
-                */
+
+                
+                /**
+                 * BOTON PARA EDITAR LA INFORMACION
+                 * SE COMENTA PARA QUE NO SE MUESTRE EL ICONO DE EDITAR
+                 * SE PUEDE IMPLEMENTO EL CUADRO DE DIALOGO CON LOS DATOS DEL USUARIO
+                 * PARA SER EDITADOS Y ACTUALIZADOS
+                 * FALTA CONFIGURAR EL BACKEND
+                 */
+                //TODO: CONFIGURAR EL BACKEND PARA ACTUALIZAR LOS DATOS
+                // IconButton(
+                //   icon: const Icon(Icons.edit),
+                //   onPressed: onEdit,
+                // ),
+                
               ],
             ),
             const Divider(),
@@ -215,7 +220,7 @@ class PerfilScreen extends ConsumerWidget {
             TextButton(
               child: const Text('Guardar'),
               onPressed: () {
-                // Aquí iría la lógica para guardar los cambios
+                //AQUI LA LOGICA PARA GIARDAR LOS CAMBIOS
                 Navigator.of(context).pop();
               },
             ),

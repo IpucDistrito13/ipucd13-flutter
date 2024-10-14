@@ -20,7 +20,6 @@ class GaleriasDatasourceImpl extends GaleriasDatasource {
   @override
   Future<List<Galeria>> getGalriaPrivadaByUUid(
       {int limit = 10, int offset = 0}) {
-    // TODO: implement getGalriaPrivadaByUUid
     throw UnimplementedError();
   }
 
@@ -37,11 +36,8 @@ class GaleriasDatasourceImpl extends GaleriasDatasource {
 
     try {
       final response = await dio.get(url);
-
-      // Parse the response
       final galeriaServer = GaleriaByUsuarioResponse.fromJson(response.data);
 
-      // Map the server data to the Galeria model
       final List<Galeria> galerias = galeriaServer.data
           .map((galeriaServer) => GaleriaMapper.galeriaByUsuario(galeriaServer))
           .toList();
@@ -49,14 +45,12 @@ class GaleriasDatasourceImpl extends GaleriasDatasource {
       return galerias;
     } catch (e) {
       if (e is DioException) {
-        // Handle Dio-specific exceptions
         //print('Dio error occurred: ${e.message}');
         //print('Response data: ${e.response?.data}');
       } else {
-        // Handle other types of exceptions
         //print('An error occurred: $e');
       }
-      return []; // Return an empty list or handle the error as needed
+      return []; 
     }
   }
 }

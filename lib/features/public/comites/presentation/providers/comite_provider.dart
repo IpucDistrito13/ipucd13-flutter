@@ -2,8 +2,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../domain/domain.dart';
 
-//3
-//Cada vez que se cierre la pantalla realiza el autoDisponse con el din de limpiar datos
+//3.
+//CADA VEZ QUE SE CIERRA LA PANTALLA REALIZA EL autoDisponse, PARA LIMPIAR DATOS
 final comiteProvider = StateNotifierProvider.autoDispose
     .family<ComiteNotifier, ComiteState, String>((ref, comiteId) {
   final comitesRepository = ref.watch(comitesRepositoryProvider);
@@ -30,7 +30,7 @@ class ComiteNotifier extends StateNotifier<ComiteState> {
 
       state = state.copyWith(
         isLoading: false,
-        comite: comite, //Opcional
+        comite: comite,
       );
     } catch (e) {
       //print('Error loading comite: $e');

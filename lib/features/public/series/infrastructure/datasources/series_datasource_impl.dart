@@ -21,7 +21,6 @@ class SeriesDatasourceImpl extends SeriesDatasource {
 
   @override
   Future<Serie> createUpdateSerie(Map<String, dynamic> serieLike) {
-    // TODO: implement createUpdateSerie
     throw UnimplementedError();
   }
 
@@ -57,15 +56,14 @@ class SeriesDatasourceImpl extends SeriesDatasource {
 
       return series;
     } catch (e) {
-      // Manejo de errores
+      //MANEJO DE ERRORES
       //print('Error fetching comites: $e');
-      return []; // O maneja el error de otra manera, como lanzando una excepción
+      return [];
     }
   }
 
   @override
   Future<List<Serie>> searchSeriesByTerm(String term) {
-    // TODO: implement searchSeriesByTerm
     throw UnimplementedError();
   }
 
@@ -95,10 +93,9 @@ class SeriesDatasourceImpl extends SeriesDatasource {
         throw Exception('Error al obtener las series: ${response.statusCode}');
       }
     } catch (e) {
-      // Maneja cualquier excepción ocurrida durante la solicitud o el procesamiento
-      //print('Exception caught: $e');
+      //MANEJO DE ERRORES
       //throw Exception('Error al obtener las series: $e');
-      return []; // O maneja el error de otra manera, como lanzando una excepción
+      return [];
     }
   }
 }

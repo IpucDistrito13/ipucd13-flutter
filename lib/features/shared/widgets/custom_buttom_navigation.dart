@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 import '../../public/screen/screens.dart';
 
 class CustomButtomNavigation extends StatelessWidget {
@@ -13,12 +12,13 @@ class CustomButtomNavigation extends StatelessWidget {
   });
 
   void onItemTapped(BuildContext context, int index) {
+    //CUANDO pulsamos ENVIVO NAVEGAR A TransmisionScreen 
     if (index == 1) {
-      // Navegar a TransmisionScreen y luego a la nueva pantalla
-      context.go('/home/1'); // Navegar a TransmisionScreen
+      //TODO:: ...
+      context.go('/home/1');
       Navigator.of(context).push(
         MaterialPageRoute(
-            builder: (context) => const TransmisionScreen()), // Nueva pantalla
+            builder: (context) => const TransmisionScreen()),
       );
     } else {
       switch (index) {

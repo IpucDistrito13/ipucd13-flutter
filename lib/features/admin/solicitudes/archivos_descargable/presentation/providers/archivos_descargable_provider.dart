@@ -1,8 +1,10 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '/features/admin/solicitudes/archivos_descargable/domain/entities/archivo_descargable.dart';
 import '/features/admin/solicitudes/archivos_descargable/domain/repositories/archivos_descargable_repository.dart';
 import '/features/admin/solicitudes/archivos_descargable/presentation/providers/archivos_descargable_repository_provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+//3.
+//CADA VEZ QUE SE CIERRA LA PANTALLA REALIZA EL autoDisponse, PARA LIMPIAR DATOS
 final archivosDescargableProvider = StateNotifierProvider<
     ArchivosDescargableNotifier, ArchivosDescargableState>((ref) {
   final archivosDescargableRepository =
@@ -12,7 +14,7 @@ final archivosDescargableProvider = StateNotifierProvider<
 });
 //3.
 
-//2
+//2.
 class ArchivosDescargableNotifier
     extends StateNotifier<ArchivosDescargableState> {
   final ArchivosDescargableRepository archivosDescargableRepository;
@@ -43,7 +45,8 @@ class ArchivosDescargableNotifier
 
     //print('Nuevas congregaciones');
   }
-} //2.
+} 
+//2.
 
 //1.
 class ArchivosDescargableState {

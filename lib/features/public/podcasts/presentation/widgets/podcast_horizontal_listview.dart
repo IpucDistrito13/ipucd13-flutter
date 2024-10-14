@@ -52,16 +52,19 @@ class _PodcastHorizontalListviewState extends State<PodcastHorizontalListview> {
   @override
   Widget build(BuildContext context) {
     /**
-     * 1. CustomTituloSubtitulo: Mostramos titulo o subtitulo
-     * 2. CustomSliderHorizontalTextoImagen: Mostramo titulo y imagen
+     * 1. CustomTituloSubtitulo: MOSTRAMOS TITULO O SUBTITULO
+     * 2. CustomSliderHorizontalTextoImagen: MOSTRAMOS TITULO Y IMAGEN
      */
     return SizedBox(
-      height: 337, //Altura sizedBox
+      height: 337,
       child: Column(
         children: [
+          //SI LOS DOS SON null NO MOSTRAR NADA, CUANDO TIENE DATOS UNO DE LOS DOS MOSTRAR
           if (widget.title != null || widget.subTitle != null)
             CustomTituloSubtitulo(
                 title: widget.title, subTitle: widget.subTitle),
+
+          //MOSTRAR EL ListView, CUANDO SI EXISTE DATOS
           Expanded(
             child: ListView.builder(
               controller: scrollController,

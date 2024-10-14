@@ -39,14 +39,14 @@ class IpucEnLineaScreenState extends State<IpucEnLineaScreen> {
     super.dispose();
   }
 
-  Future<void> _launchURL() async {
-    const url = 'http://online.tiipuc.org/Seguridad/Login?ReturnUrl=%2F';
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'No se pudo abrir $url';
-    }
+Future<void> _launchURL() async {
+  const String url = 'http://online.tiipuc.org/Seguridad/Login?ReturnUrl=%2F';
+  final Uri uri = Uri.parse(url);
+  
+  if (!await launchUrl(uri)) {
+    throw 'No se pudo abrir $url';
   }
+}
 
   @override
   Widget build(BuildContext context) {

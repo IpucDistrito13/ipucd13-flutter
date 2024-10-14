@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-
 import '../../../../../config/config.dart';
 import '../../domain/domains.dart';
 import '../infrastructure.dart';
@@ -18,7 +17,6 @@ class PodcastsDatasourceImpl extends PodcastsDatasource {
 
   @override
   Future<Podcast> createUpdatePodcast(Map<String, dynamic> podcastLike) {
-    // TODO: implement createUpdatePodcast
     throw UnimplementedError();
   }
 
@@ -33,10 +31,7 @@ class PodcastsDatasourceImpl extends PodcastsDatasource {
           PodcastMapper.podcastDetailstoEntity(podcastDetails);
       return podcast;
     } catch (e) {
-      // Registra el error o manejalo según sea necesario
-      //print('Error fetching podcast: $e');
-      // Es posible que quieras lanzar una excepción personalizada o devolver una lista vacía
-      // dependiendo de tu estrategia de manejo de errores
+      //MANEJO DE ERRORES
       throw Exception('Failed to fetch podcast');
     }
   }
@@ -58,18 +53,15 @@ class PodcastsDatasourceImpl extends PodcastsDatasource {
       return podcasts;
     } on DioException catch (e) {
       //print('DioException occurred: ${e.message}');
-      // Handle the error (e.g., return an empty list or rethrow)
       return [];
     } catch (e) {
       //print('An unexpected error occurred: $e');
-      // Handle other types of errors
       return [];
     }
   }
 
   @override
   Future<List<Podcast>> searchPodcastByTerm(String term) {
-    // TODO: implement searchPodcastByTerm
     throw UnimplementedError();
   }
 

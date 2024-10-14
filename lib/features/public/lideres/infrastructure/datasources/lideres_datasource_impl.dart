@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-
 import '../../../../../config/config.dart';
 import '../../domain/domains.dart';
 import '../infrastructure.dart';
@@ -18,7 +17,6 @@ class LideresDatasourceImpl extends LideresDatasource {
 
   @override
   Future<List<Lider>> createUpdateLideres(Map<String, dynamic> lideresLike) {
-    // TODO: implement createUpdateLideres
     throw UnimplementedError();
   }
 
@@ -46,10 +44,7 @@ class LideresDatasourceImpl extends LideresDatasource {
 
       return lideres;
     } catch (e) {
-      // Registra el error o manejalo según sea necesario
-      //print('Error fetching lider: $e');
-      // Es posible que quieras lanzar una excepción personalizada o devolver una lista vacía
-      // dependiendo de tu estrategia de manejo de errores
+      //MANEJO DE ERRORES
       //throw Exception('Failed to fetch lider ');
       return [];
     }
@@ -57,13 +52,11 @@ class LideresDatasourceImpl extends LideresDatasource {
 
   @override
   Future<List<Lider>> getLideresByPage({int limit = 10, int offset = 0}) {
-    // TODO: implement getLideresByPage
     throw UnimplementedError();
   }
 
   @override
   Future<List<Lider>> searchLiderByTerm(String term) {
-    // TODO: implement searchLiderByTerm
     throw UnimplementedError();
   }
 }

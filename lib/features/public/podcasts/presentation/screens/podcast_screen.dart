@@ -223,8 +223,8 @@ class PodcastScreenState extends ConsumerState<PodcastScreen>
                       },
                     ),
                     onTap: () {
-                      // TODO: Implement episode detail navigation if needed
-                    },
+                      //
+                                        },
                   ),
                   Divider(
                     color: Colors.grey.shade300,

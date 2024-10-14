@@ -62,7 +62,6 @@ class _ComitesViewState extends ConsumerState {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Text('Cargando...'),
                   const SizedBox(height: 10),
 
                   // SLIDER PRINCIPAL

@@ -1,8 +1,9 @@
-//3
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../domain/domain.dart';
 
+//3.
+//CADA VEZ QUE SE CIERRA LA PANTALLA REALIZA EL autoDisponse, PARA LIMPIAR DATOS
 final comitesProvider =
     StateNotifierProvider<ComitesNotifier, ComitesState>((ref) {
   final comitesRepository = ref.watch(comitesRepositoryProvider);
@@ -10,7 +11,7 @@ final comitesProvider =
 });
 //3.
 
-//2
+//2.
 class ComitesNotifier extends StateNotifier<ComitesState> {
   final ComitesRepository comitesRepository;
 
@@ -19,7 +20,6 @@ class ComitesNotifier extends StateNotifier<ComitesState> {
   }
 
   Future loadNextPage() async {
-    //print('Petición comites ');
     if (state.isLoading || state.isLastPage) return;
 
     state = state.copyWith(isLoading: true);
@@ -38,7 +38,8 @@ class ComitesNotifier extends StateNotifier<ComitesState> {
         offset: state.offset + 10,
         comites: [...state.comites, ...comites]);
   }
-} //2.
+} 
+//2.
 
 //1.
 class ComitesState {

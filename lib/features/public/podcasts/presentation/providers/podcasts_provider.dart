@@ -1,9 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import '../../domain/domains.dart';
 import '../presentations.dart';
 
-//3
+//3.
+//CADA VEZ QUE SE CIERRA LA PANTALLA REALIZA EL autoDisponse, PARA LIMPIAR DATOS
 final podcastsProvider =
     StateNotifierProvider<PodcatsNotifier, PodcastsState>((ref) {
   final podcatsRepository = ref.watch(podcastsRepositoryProvider);
@@ -38,7 +38,8 @@ class PodcatsNotifier extends StateNotifier<PodcastsState> {
         offset: state.offset + 10,
         podcasts: [...state.podcasts, ...podcasts]);
   }
-} //2.
+} 
+//2.
 
 //1.
 class PodcastsState {

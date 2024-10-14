@@ -31,11 +31,9 @@ class CronogramasDatasourceImpl extends CronogramaDatasource {
       return cronogramas;
     } on DioException catch (e) {
       //print('DioException occurred: ${e.message}');
-      // Handle the error (e.g., return an empty list or rethrow)
       return [];
     } catch (e) {
       //print('An unexpected error occurred: $e');
-      // Handle other types of errors
       return [];
     }
   }

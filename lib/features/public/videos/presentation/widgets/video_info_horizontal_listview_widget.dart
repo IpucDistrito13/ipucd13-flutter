@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:animate_do/animate_do.dart';
-
 import '../../../../shared/shared.dart';
 import '../../domain/domains.dart';
+import 'package:animate_do/animate_do.dart';
+import 'package:flutter/material.dart';
 
 class VideoInfoHorizontalListviewWidget extends StatefulWidget {
   final List<Video> videos;
@@ -36,7 +35,7 @@ class _PodcatsHorizontalListViewState
 
       if ((scrollController.position.pixels + 200) >=
           scrollController.position.maxScrollExtent) {
-        //print('Load next videos info');
+        //print('Cargando nuevos videos info');
 
         widget.loadNextPage!();
       }
@@ -51,12 +50,19 @@ class _PodcatsHorizontalListViewState
 
   @override
   Widget build(BuildContext context) {
+    /**
+     * 1. CustomTituloSubtitulo: MOSTRAMOS TITULO O SUBTITULO
+     * 2. CustomSliderHorizontalTextoImagen: MOSTRAMOS TITULO Y IMAGEN
+     */
     return SizedBox(
-      height: 250, // Increased height for a more prominent design
+      height: 250,
       child: Column(
         children: [
+          //SI LOS DOS SON null NO MOSTRAR NADA, CUANDO TIENE DATOS UNO DE LOS DOS MOSTRAR
           if (widget.title != null || widget.subTitle != null)
             _Title(title: widget.title, subTitle: widget.subTitle),
+            
+          //MOSTRAR EL ListView, CUANDO SI EXISTE DATOS
           Expanded(
             child: ListView.builder(
               controller: scrollController,

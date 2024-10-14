@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:ipucd13_flutter/features/admin/auth/infrastructure/infrastructure.dart';
 
 import '../../../../../../config/config.dart';
 import '../../domain/domains.dart';
@@ -20,7 +21,7 @@ class CarpetasDatasourceImp extends CarpetasDatasource {
     final carpetaServerResponse = CarpetasByComiteResponse.fromJson(json);
 
     final List<Carpeta> carpetas = carpetaServerResponse.data
-        //Filtrar para que muestre solo los que tienen portada
+        //EJEMPLO PARA FILTRAR
         //.where((congregacionesServer) =>
         //    congregacionesServer.direccion != 'PENDIENTE')
         .map((congregacionesServer) =>
@@ -32,13 +33,11 @@ class CarpetasDatasourceImp extends CarpetasDatasource {
 
   @override
   Future<Carpeta> createUpdateCarpeta(Map<String, dynamic> carpetaLike) {
-    // TODO: implement createUpdateCarpeta
     throw UnimplementedError();
   }
 
   @override
   Future<List<Carpeta>> getCarpetaByPage({int limit = 10, int offset = 0}) {
-    // TODO: implement getCarpetaByPage
     throw UnimplementedError();
   }
 
@@ -61,10 +60,25 @@ class CarpetasDatasourceImp extends CarpetasDatasource {
           .toList();
 
       return carpetas;
+    } on DioException catch (e) {
+      //MUESTRA ERROR SEGUN RESPUESTA DEL SERVIDOR
+      if (e.response != null) {
+        //print(e.response.toString());
+        if (e.response?.statusCode == 401) {
+          throw CustomError(
+              e.response?.data['message'] ?? 'Credenciales incorrectas.');
+        }
+      } else {
+        //print('Error sin respuesta: ${e.type}');
+        throw CustomError('Revisar conexión a internet');
+      }
+
+      if (e.type == DioErrorType.connectionTimeout) {
+        throw CustomError('Revisar conexión a internet');
+      }
+      throw Exception();
     } catch (e) {
-      // Handle exceptions, such as network errors, API errors, or JSON parsing errors.
-      //print('Error fetching carpetas: $e');
-      return []; // Return an empty list or handle the error accordingly.
+      throw Exception();
     }
   }
 
@@ -88,7 +102,6 @@ class CarpetasDatasourceImp extends CarpetasDatasource {
         ),
       );
 
-      // Imprimir el status code para ver la respuesta
       if (response.statusCode == 200) {
         return _jsonToCarpeta(response.data);
       } else {

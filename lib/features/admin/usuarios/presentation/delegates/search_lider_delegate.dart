@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 class SearchLiderDelegate extends SearchDelegate {
   @override
   List<Widget>? buildActions(BuildContext context) {
+    //CONSTRUIR ICONOS
     return [
       FadeIn(
         animate: query.isNotEmpty,
@@ -28,11 +29,13 @@ class SearchLiderDelegate extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
+    //RESULTADO CUANDO EL USUARIO PRECIONA ENTER
     return const Text('buildResults');
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
+    //CADA VEZ QUE SE OPRIMA TECLAS SE EMITE EL OnQueryChange
     return const Text('buildSuggestions');
   }
 }

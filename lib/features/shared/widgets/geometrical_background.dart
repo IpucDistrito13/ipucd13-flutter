@@ -9,8 +9,9 @@ class GeometricalBackground extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final backgroundColor = Theme.of(context).scaffoldBackgroundColor;
+    //ESTE ES EL TAMAÑO PARA COLOCAR 7 ELEMENTOS
     final borderSize =
-        size.width / 7; // Este es el tamaño para colocar 7 elementos
+        size.width / 7;
 
     final shapeWidgets = [
       _Circle(borderSize),
@@ -27,7 +28,7 @@ class GeometricalBackground extends StatelessWidget {
         children: [
           Positioned(child: Container(color: backgroundColor)),
 
-          // Background with shapes
+          // Background CON SHAPES
           Container(
               height: size.height * 0.7,
               decoration: const BoxDecoration(
@@ -45,7 +46,7 @@ class GeometricalBackground extends StatelessWidget {
                 ],
               )),
 
-          // Child widget
+          
           child,
         ],
       ),
@@ -53,9 +54,10 @@ class GeometricalBackground extends StatelessWidget {
   }
 }
 
-/// El objetivo de este widget es crear una final de figuras geometricas
-/// Es Stateful porque quiero mantener el estado del mismo
-/// El initState rompe la referencia para que lo pueda usar en varios lugares
+/// EL OBJETIVO DE ESTE WIDGET ES CREAR UNA FINAL DE FIGURAS GEOMÉTRICAS
+/// ES STATEFUL PORQUE QUIERO MANTENER EL ESTADO DEL MISMO
+/// EL INITSTATE ROMPE LA REFERENCIA PARA QUE LO PUEDA USAR EN VARIOS LUGARES
+
 class ShapeRow extends StatefulWidget {
   const ShapeRow({
     super.key,

@@ -4,6 +4,8 @@ import '../../domain/domains.dart';
 import '../../infrastructure/infrastructure.dart';
 
 final eventosRepositoryProvider = Provider<EventosRepository>((ref) {
+  //PERMITE REALIZAR PETICIONES A APIS PUBLICAS, EXECPTO
+  //REQUIERE TOKEN PARA TURAS PROTEGIDAS
   final accessToken = ref.watch(authProvider).user?.token ?? '';
 
   final eventoRepository =

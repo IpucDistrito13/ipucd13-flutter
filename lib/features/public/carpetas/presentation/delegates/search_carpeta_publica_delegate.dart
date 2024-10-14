@@ -1,8 +1,6 @@
 import 'dart:async';
-
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
-
 import '../../domain/domains.dart';
 
 typedef SearchCarpetasCallback = Future<List<Carpeta>> Function(String query);
@@ -23,9 +21,11 @@ class SearchCarpetaPublicaDelegate extends SearchDelegate<Carpeta?> {
       {required this.searchCarpetas, required this.initialCaretas})
       : super(searchFieldLabel: 'Buscar carpeta');
 
+  //FUNCION ENCARGADA PARA EMITIR LOS NUEVOS RESULTADOS
   void _onQueryChanged(String query) {
-    //print('Query string cambio');
+    //CUANDO ESCRIBE, COMIENZA A GIRAR LA ANIMACION DE CARGANDO
     isLoadingStream.add(true);
+    //print('Query stream cambio');
 
     if (_debounceTimer?.isActive ?? false) _debounceTimer?.cancel();
 
@@ -38,7 +38,7 @@ class SearchCarpetaPublicaDelegate extends SearchDelegate<Carpeta?> {
       final carpetas = await searchCarpetas(query);
       debouncedCarpetas.add(carpetas);
       initialCaretas = carpetas;
-      //print('Buscando carpeta');
+      //SE DETIENE LA ANIMACION, CUANDO SE OPTIENE LOS DATOS
       isLoadingStream.add(false);
     });
   }
@@ -88,18 +88,18 @@ class SearchCarpetaPublicaDelegate extends SearchDelegate<Carpeta?> {
     return StreamBuilder(
       initialData: initialCaretas,
       stream: debouncedCarpetas.stream,
-      //future: searchCarpetas(query),
       builder: (context, snapshot) {
-        //print('Realizando petición');
         final carpetas = snapshot.data ?? [];
 
         return GridView.builder(
           padding: const EdgeInsets.all(10),
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3, // Número de columnas en la cuadrícula
+            //NUMERO DE COLUMNAS EN CUADRICULA
+            crossAxisCount: 3,
             crossAxisSpacing: 10,
             mainAxisSpacing: 10,
-            childAspectRatio: 0.75, // Relación de aspecto para los elementos
+            //RELACION DE ASPECTO PARA LOS ELEMENTOS
+            childAspectRatio: 0.75,
           ),
           itemCount: carpetas.length,
           itemBuilder: (context, index) => _CarpetaItem(
@@ -116,6 +116,7 @@ class SearchCarpetaPublicaDelegate extends SearchDelegate<Carpeta?> {
 
   @override
   Widget? buildLeading(BuildContext context) {
+    //CONSTRUIR ICONOS
     return IconButton(
       onPressed: () {
         clearStreams();
@@ -127,12 +128,14 @@ class SearchCarpetaPublicaDelegate extends SearchDelegate<Carpeta?> {
 
   @override
   Widget buildResults(BuildContext context) {
+    //RESULTADO CUANDO EL USUARIO PRECIONA ENTER
     return _buildResultsAndSuggestions();
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    _onQueryChanged(query); // Aplica el debounced
+    //CADA VEZ QUE SE OPRIMA TECLAS SE EMITE EL OnQueryChange
+    _onQueryChanged(query);
     return _buildResultsAndSuggestions();
   }
 }
@@ -147,25 +150,24 @@ class _CarpetaItem extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         onCarpetaSelected(context, carpeta);
-        //
         //close(context, carpeta);
       },
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            // Icono de la carpeta
             const Icon(
+              //ICONO DE CARPETA
               Icons.folder,
               size: 60,
               color:
-                  Colors.blue, // Puedes cambiar el color según tu preferencia
+                  Colors.blue,
             ),
             const SizedBox(height: 8),
-            // Nombre de la carpeta
+            //NOMBRE DE LA CARPETA
             Text(
               carpeta
-                  .nombre, // Asumiendo que 'nombre' es un atributo de 'Carpeta'
+                  .nombre,
               textAlign: TextAlign.center,
               style: const TextStyle(fontSize: 14),
               maxLines: 2,

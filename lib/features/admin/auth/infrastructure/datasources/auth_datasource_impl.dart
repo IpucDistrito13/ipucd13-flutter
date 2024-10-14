@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-
 import '../../../../../config/config.dart';
 import '../../domain/domain.dart';
 import '../infrastructure.dart';

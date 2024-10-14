@@ -1,10 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
-import '/features/public/carpetas/presentation/delegates/search_carpeta_publica_delegate.dart';
-
 import '../../domain/domains.dart';
 import '../presentations.dart';
+import '/features/public/carpetas/presentation/delegates/search_carpeta_publica_delegate.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class CarpetasPublicoScreen extends ConsumerStatefulWidget {
   static const name = 'descargable-public-screen';
@@ -36,11 +35,12 @@ class DescargableComiteCarpetasState
     return Scaffold(
       appBar: AppBar(
         title: Text('Descargables Publico - ${widget.comite}'),
+        //BUSCAR CARPETA
         actions: [
           IconButton(
             onPressed: () {
               final searchedCarpetas = ref.read(
-                  searchedCarpetasProvider); //Carpetas previamente buscadas
+                  searchedCarpetasProvider);
               final searchQuery = ref.read(searchQueryCarpetasProvider);
               showSearch<Carpeta?>(
                 query: searchQuery,
@@ -52,7 +52,6 @@ class DescargableComiteCarpetasState
                       .searchCarpetasByQuery(query, comiteSlug: widget.slug),
                 ),
               ).then((carpeta) {
-                //print(carpeta?.nombre);
                 if (carpeta == null) return;
 
                 context.push(
@@ -71,17 +70,17 @@ class DescargableComiteCarpetasState
                   child: GridView.builder(
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3, // Número de columnas
-                      crossAxisSpacing:
-                          10.0, // Espacio horizontal entre los ítems
-                      mainAxisSpacing: 10.0, // Espacio vertical entre los ítems
+                      //NUMERO DE COLUMNAS
+                      crossAxisCount: 3,
+                      //ESPACIO HORIZONTAL ENTRE ITEMS
+                      crossAxisSpacing: 10.0, 
+                      mainAxisSpacing: 10.0,
                     ),
                     itemCount: carpetasState.carpetas.length,
                     itemBuilder: (context, index) {
                       final carpeta = carpetasState.carpetas![index];
                       return GestureDetector(
                         onTap: () {
-                          // Navegar a la nueva ruta usando GoRouter
                           context.push(
                             '/descargable-publico-archivos/${carpeta.nombre}/${carpeta.slug}',
                           );

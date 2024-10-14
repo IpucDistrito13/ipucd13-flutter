@@ -1,9 +1,9 @@
-import 'package:dio/dio.dart';
 import '/config/constants/environment.dart';
 import '/features/admin/solicitudes/archivos_descargable/domain/datasources/archivos_descargable_datasource.dart';
 import '/features/admin/solicitudes/archivos_descargable/domain/entities/archivo_descargable.dart';
 import '/features/admin/solicitudes/archivos_descargable/infrastructure/mappers/archivo_descargable_mapper.dart';
 import '/features/admin/solicitudes/archivos_descargable/infrastructure/models/archivo_response.dart';
+import 'package:dio/dio.dart';
 
 class ArchivosDescargableImpl extends ArchivosDescargableDatasource {
   late final Dio dio;
@@ -22,7 +22,6 @@ class ArchivosDescargableImpl extends ArchivosDescargableDatasource {
   @override
   Future<ArchivoDescargable> createOrUpdateArchivo(
       Map<String, dynamic> archivoDescargableLike) {
-    // TODO: implement createOrUpdateArchivo
     throw UnimplementedError();
   }
 
@@ -47,14 +46,12 @@ class ArchivosDescargableImpl extends ArchivosDescargableDatasource {
       return archivosDescargable;
     } catch (e) {
       //print('An unexpected error occurred: $e');
-      // Handle other types of errors
       return [];
     }
   }
 
   @override
   Future<List<ArchivoDescargable>> searchArchivosByTerm(String term) {
-    // TODO: implement searchArchivosByTerm
     throw UnimplementedError();
   }
 }

@@ -1,9 +1,9 @@
-//3
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '/features/public/eventos/domain/domains.dart';
-
 import 'providers.dart';
 
+//3.
+//CADA VEZ QUE SE CIERRA LA PANTALLA REALIZA EL autoDisponse, PARA LIMPIAR DATOS
 final eventosProvider =
     StateNotifierProvider<EventosNotifier, EventosState>((ref) {
   final eventosRepository = ref.watch(eventosRepositoryProvider);
@@ -11,7 +11,7 @@ final eventosProvider =
 });
 //3.
 
-//2
+//2.
 class EventosNotifier extends StateNotifier<EventosState> {
   final EventosRepository eventosRepository;
 
@@ -40,7 +40,8 @@ class EventosNotifier extends StateNotifier<EventosState> {
       eventos: [...state.eventos, ...eventos],
     );
   }
-} //2.
+} 
+//2.
 
 //1.
 class EventosState {

@@ -109,7 +109,10 @@ class CustomCongregacionAlertStatehURL extends State<CustomCongregacionAlert>
                     ],
                   ),
                   onPressed: () =>
-                      _openGoogleMaps(widget.congregacion.googlemaps),
+                      _openGoogleMaps((widget.congregacion.googlemaps)),
+                      // _openGoogleMaps(double.parse(widget.congregacion.latitud), 
+                      // double.parse(widget.congregacion.longitud)),
+                    
                 ),
             ],
           ),
@@ -137,6 +140,7 @@ class CustomCongregacionAlertStatehURL extends State<CustomCongregacionAlert>
     }
   }
 
+  
   Future<void> _openGoogleMaps(String googleMapsUrl) async {
     final Uri url = Uri.parse(googleMapsUrl);
     try {
@@ -149,4 +153,31 @@ class CustomCongregacionAlertStatehURL extends State<CustomCongregacionAlert>
       //print('Error al abrir Google Maps: $e');
     }
   }
+  
+
+  //TODO:: CONFIGURAR CUANDO SE TERMINE DE REGISTRAR TODAS LAS CONGREGACIONES
+  /*
+  Future<void> _openMaps(double latitude, double longitude) async {
+  String aplicacionMapsUrl;
+
+  //VERIFICA EL SISTEMA OPERATIVO
+  if (Theme.of(context).platform == TargetPlatform.iOS) {
+    aplicacionMapsUrl = 'https://maps.apple.com/?q=$latitude,$longitude';
+  } else {
+    aplicacionMapsUrl = 'https://www.google.com/maps/search/?api=1&query=$latitude,$longitude';
+  }
+
+  final Uri url = Uri.parse(aplicacionMapsUrl);
+  try {
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url, mode: LaunchMode.externalApplication);
+    } else {
+      throw 'Could not launch Google Maps';
+    }
+  } catch (e) {
+    // Manejo de errores
+    print('Error al abrir Google Maps: $e');
+  }
+}
+*/
 }

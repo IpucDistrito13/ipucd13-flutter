@@ -1,8 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import '../../domain/domains.dart';
 import '../presentations.dart';
 
+//3.
+//CADA VEZ QUE SE CIERRA LA PANTALLA REALIZA EL autoDisponse, PARA LIMPIAR DATOS
 final cronogramasProvider =
     StateNotifierProvider<CronogramasNotifier, CronogramasState>((ref) {
   final cronogramasRepository = ref.watch(cronogramasRepositoryProvider);
@@ -10,7 +11,7 @@ final cronogramasProvider =
 });
 //3.
 
-//2
+//2.
 class CronogramasNotifier extends StateNotifier<CronogramasState> {
   final CronogramasRepository cronogramasRepository;
 
@@ -40,7 +41,8 @@ class CronogramasNotifier extends StateNotifier<CronogramasState> {
       cronogramas: [...state.cronogramas, ...cronogramas],
     );
   }
-} //2.
+} 
+//2.
 
 //1.
 class CronogramasState {

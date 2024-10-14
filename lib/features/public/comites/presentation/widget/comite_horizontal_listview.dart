@@ -50,23 +50,25 @@ class _ComiteHorizontalListviewState extends State<ComiteHorizontalListview> {
   @override
   Widget build(BuildContext context) {
     /**
-     * 1. CustomTituloSubtitulo: Mostramos titulo o subtitulo
-     * 2. CustomSliderHorizontalTextoImagen: Mostramo titulo y imagen
+     * 1. CustomTituloSubtitulo: MOSTRAMOS TITULO O SUBTITULO
+     * 2. CustomSliderHorizontalTextoImagen: MOSTRAMOS TITULO Y IMAGEN
      */
     return SizedBox(
       height: 337, //350
       child: Column(
         children: [
-          //Si lo dos son null no mostrar nada, Si uno de los dos tiene datos mostrar
+          //SI LOS DOS SON null NO MOSTRAR NADA, CUANDO TIENE DATOS UNO DE LOS DOS MOSTRAR
           if (widget.title != null || widget.subTitle != null)
             CustomTituloSubtitulo(
                 title: widget.title, subTitle: widget.subTitle),
+
+          //MOSTRAR EL ListView, CUANDO SI EXISTE DATOS
           Expanded(
               child: ListView.builder(
             controller: scrollController,
             itemCount: widget.comites.length,
             scrollDirection: Axis.horizontal,
-            //Fisicas tanto android como ios
+            //FISICAS TANTO ANDROID COMO IOS
             physics: const BouncingScrollPhysics(),
             itemBuilder: (context, index) {
               return FadeInRight(

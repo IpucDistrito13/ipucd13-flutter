@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-
 import '../../../../../config/config.dart';
 import '../../domain/domains.dart';
 import '../infrastructure.dart';
@@ -20,7 +19,7 @@ class CarpetasDatasourceImp extends CarpetasDatasource {
     final carpetaServerResponse = CarpetasByComiteResponse.fromJson(json);
 
     final List<Carpeta> carpetas = carpetaServerResponse.data
-        //Filtrar para que muestre solo los que tienen portada
+        //EJEMPLO PARA FILTRAR
         //.where((congregacionesServer) =>
         //    congregacionesServer.direccion != 'PENDIENTE')
         .map((congregacionesServer) =>
@@ -32,13 +31,11 @@ class CarpetasDatasourceImp extends CarpetasDatasource {
 
   @override
   Future<Carpeta> createUpdateCarpeta(Map<String, dynamic> carpetaLike) {
-    // TODO: implement createUpdateCarpeta
     throw UnimplementedError();
   }
 
   @override
   Future<List<Carpeta>> getCarpetaByPage({int limit = 10, int offset = 0}) {
-    // TODO: implement getCarpetaByPage
     throw UnimplementedError();
   }
 
@@ -62,9 +59,8 @@ class CarpetasDatasourceImp extends CarpetasDatasource {
 
       return carpetas;
     } catch (e) {
-      // Handle exceptions, such as network errors, API errors, or JSON parsing errors.
-      print('Error fetching carpetas: $e');
-      return []; // Return an empty list or handle the error accordingly.
+      //print('Error fetching carpetas: $e');
+      return []; 
     }
   }
 
@@ -83,16 +79,15 @@ class CarpetasDatasourceImp extends CarpetasDatasource {
         options: Options(
           validateStatus: (status) {
             return status! <
-                500; // Considera todas las respuestas con status < 500 como válidas
+                500; 
           },
         ),
       );
 
-      // Imprimir el status code para ver la respuesta
       if (response.statusCode == 200) {
         return _jsonToCarpeta(response.data);
       } else {
-        //print('Request failed with status: ${response.statusCode}');
+        print('Request failed with status: ${response.statusCode}');
         return [];
       }
     } catch (e) {

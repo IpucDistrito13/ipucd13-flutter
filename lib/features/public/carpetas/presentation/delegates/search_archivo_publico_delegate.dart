@@ -20,6 +20,7 @@ class SearchArchivoPublicoDelegate extends SearchDelegate {
 
   @override
   Widget? buildLeading(BuildContext context) {
+    //CONSTRUIR ICONOS
     return IconButton(
       onPressed: () => close(context, null),
       icon: const Icon(Icons.arrow_back),
@@ -28,11 +29,13 @@ class SearchArchivoPublicoDelegate extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
+    //RESULTADO CUANDO EL USUARIO PRECIONA ENTER
     return const Text('buildResults');
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
+    //CADA VEZ QUE SE OPRIMA TECLAS SE EMITE EL OnQueryChange
     return const Text('buildSuggestions');
   }
 }

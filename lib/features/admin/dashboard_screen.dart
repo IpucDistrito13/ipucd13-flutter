@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
 import '../shared/shared.dart';
-import '../shared/widgets/widgets.dart';
 
 class DashboardScreen extends StatefulWidget {
   static const String name = 'home-screen';
@@ -58,10 +56,9 @@ class _ResponsiveGridView extends StatelessWidget {
   Widget build(BuildContext context) {
     int crossAxisCount;
     double childAspectRatio;
+    //376.7 cell grande - 304
+    //print('Tamaño pantalla maxWidth: ${maxWidth}'); 
 
-    //print('maxWidth: ${maxWidth}'); //376.7 cell grande - 304
-
-    //600
     if (maxWidth < 376) {
       crossAxisCount = 2;
       childAspectRatio = 0.8;
@@ -76,13 +73,13 @@ class _ResponsiveGridView extends StatelessWidget {
     return GridView.builder(
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: crossAxisCount,
-        crossAxisSpacing: 10,
-        mainAxisSpacing: 10,
+        crossAxisSpacing: 7,
+        mainAxisSpacing: 9,
         childAspectRatio: childAspectRatio,
       ),
-      itemCount: appMenuItemsAdmin.length,
+      itemCount: appMenuItemsAdminPastor.length,
       itemBuilder: (context, index) {
-        final menuItem = appMenuItemsAdmin[index];
+        final menuItem = appMenuItemsAdminPastor[index];
         return _CustomGridCard(menuItem: menuItem);
       },
     );
@@ -106,12 +103,12 @@ class _CustomGridCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(15),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(5.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(menuItem.icon, size: 40, color: colors.primary),
-              const SizedBox(height: 5),
+              const SizedBox(height: 4),
               Text(
                 menuItem.title,
                 textAlign: TextAlign.center,
@@ -121,7 +118,6 @@ class _CustomGridCard extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
               ),
               const SizedBox(height: 10),
-              // Uncomment if you want to add subtitle
               Text(
                 menuItem.subTitle,
                 textAlign: TextAlign.center,

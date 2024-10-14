@@ -1,10 +1,10 @@
-//3
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import '../../../auth/domain/entities/usuario.dart';
 import '../../domain/domains.dart';
 import '../presentations.dart';
 
+//3.
+//CADA VEZ QUE SE CIERRA LA PANTALLA REALIZA EL autoDisponse, PARA LIMPIAR DATOS
 final usuariosProvider =
     StateNotifierProvider<UsuariosNotifier, UsuariosState>((ref) {
   final usuariosRepository = ref.watch(usuariosRepositoryProvider);
@@ -12,7 +12,7 @@ final usuariosProvider =
 });
 //3.
 
-//2
+//2.
 class UsuariosNotifier extends StateNotifier<UsuariosState> {
   final UsuariosRepository usuariosRepository;
 
@@ -39,10 +39,9 @@ class UsuariosNotifier extends StateNotifier<UsuariosState> {
         isLoading: false,
         offset: state.offset + 10,
         usuarios: [...state.usuarios, ...usuarios]);
-
-    //print('Cargando nuevos usuarios...');
   }
-} //2.
+} 
+//2.
 
 //1.
 class UsuariosState {
@@ -109,7 +108,6 @@ class LideresNotifier extends StateNotifier<UsuariosState> {
         isLoading: false,
         offset: state.offset + 10,
         usuarios: [...state.usuarios, ...usuarios]);
-
-    //print('Cargando nuevos usuarios...');
   }
-} //2.
+} 
+//1.

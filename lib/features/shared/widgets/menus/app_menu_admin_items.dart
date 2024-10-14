@@ -1,6 +1,6 @@
-//Lista de menus, para mostrar al admin desde el drawable
 import 'package:flutter/material.dart';
 
+//LISTA DE MENUS, PARA MOSTRAR AL ROL DE ADMIN Y PASTOR DESDE EL DRAWABLE
 class AppMenuAdminItems {
   final String title;
   final String subTitle;
@@ -14,7 +14,7 @@ class AppMenuAdminItems {
       required this.icon});
 }
 
-const appMenuItemsAdmin = <AppMenuAdminItems>[
+const appMenuItemsAdminPastor = <AppMenuAdminItems>[
   AppMenuAdminItems(
       title: 'Congregaciones',
       subTitle: 'Listado de congregaciones',

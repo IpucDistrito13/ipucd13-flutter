@@ -77,16 +77,16 @@ class _CustomPrincipalImagenTituloState extends State<CustomTextoImagen> {
             ),
           ),
           // FIN DE IMAGEN
-          //
-          //Titulo
+
+          //TITULO
           SizedBox(
             width: 150,
             child: Text(
               widget.nombre,
               style: titleStyle,
               overflow: TextOverflow.ellipsis,
-              maxLines: 2, //Maximo 2 lineas
-              textAlign: TextAlign.left, // Centra el texto horizontalmente
+              maxLines: 2,
+              textAlign: TextAlign.left,
             ),
           ),
 
@@ -96,8 +96,8 @@ class _CustomPrincipalImagenTituloState extends State<CustomTextoImagen> {
               widget.descripcion ?? '',
               style: descripcionStyle,
               overflow: TextOverflow.ellipsis,
-              maxLines: 2, //Maximo 2 lineas
-              textAlign: TextAlign.center, // Centra el texto horizontalmente
+              maxLines: 2,
+              textAlign: TextAlign.center,
             ),
           ),
         ],

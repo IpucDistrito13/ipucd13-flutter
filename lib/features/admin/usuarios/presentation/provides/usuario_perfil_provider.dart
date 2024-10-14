@@ -1,20 +1,19 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '/features/admin/auth/domain/entities/usuario.dart';
-
 import '../../domain/domains.dart';
 import '../presentations.dart';
-//Cada vez que se cierre la pantalla realiza el autoDisponse con el din de limpiar datos
 
+//3.
+//CADA VEZ QUE SE CIERRA LA PANTALLA REALIZA EL autoDisponse, PARA LIMPIAR DATOS
 final usuarioPerfilProvider = StateNotifierProvider.autoDispose
     .family<UsuarioNotifier, UsuarioState, String>((ref, uuid) {
-  //print('usuarioPerfilProvider: $uuid');
   final usuariosRepository = ref.watch(usuariosRepositoryProvider);
 
   return UsuarioNotifier(usuariosRepository: usuariosRepository, uuid: uuid);
 });
 //3.
 
-//2
+//2.
 class UsuarioNotifier extends StateNotifier<UsuarioState> {
   final UsuariosRepository usuariosRepository;
 
@@ -27,31 +26,27 @@ class UsuarioNotifier extends StateNotifier<UsuarioState> {
 
   Future<void> loadUsuarioPerfil() async {
     try {
-      //print('Cargando usuario con UUID: ${state.uuid}');
       final usuario = await usuariosRepository.getUsuarioByUuid(state.uuid);
 
-      //print('Usuario cargado: $usuario');
       state = state.copyWith(
         isLoading: false,
         usuario: usuario,
       );
     } catch (e, stackTrace) {
-      //print('Error loading usuario: $e');
-      //print('Stack trace: $stackTrace');
-      // Manejar el error adecuadamente
+      print('Error cargando usuario (loadUsuarioPerfil): $e');
     }
   }
 }
-//2
+//2.
 
-//1
+//1.
 class UsuarioState {
   final String uuid;
-  final Usuario? usuario; //Opcional
+  final Usuario? usuario;
   final bool isLoading;
   final bool isSaving;
   UsuarioState({
-    required this.uuid, //Nunca a a ser null
+    required this.uuid,
     this.usuario,
     this.isLoading = true,
     this.isSaving = false,

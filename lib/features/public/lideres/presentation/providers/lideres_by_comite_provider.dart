@@ -1,11 +1,9 @@
-//3
-//Cada vez que se cierre la pantalla realiza el autoDisponse con el din de limpiar datos
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import '../../domain/domains.dart';
 import '../presentations.dart';
 
-//3
+//3. 
+//CADA VEZ QUE SE CIERRA LA PANTALLA REALIZA EL autoDisponse, PARA LIMPIAR DATOS
 final lideresByComiteProvider = StateNotifierProvider.family
     .autoDispose<LideresNotifier, LideresState, String>((ref, comiteId) {
   final lideresRepository = ref.watch(lideresRepositoryProvider);

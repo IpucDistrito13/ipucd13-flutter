@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 
 
 class CustomProductField extends StatelessWidget {
-
-  final bool isTopField; // La idea es que tenga bordes redondeados arriba
-  final bool isBottomField; // La idea es que tenga bordes redondeados abajo
+  //BORDES REDONDOS ARRIBA
+  final bool isTopField;
+  //BORDES REDONDOS ABAJO
+  final bool isBottomField;
   final String? label;
   final String? hint;
   final String? errorMessage;

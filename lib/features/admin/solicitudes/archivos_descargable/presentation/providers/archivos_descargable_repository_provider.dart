@@ -6,7 +6,8 @@ import '/features/admin/solicitudes/archivos_descargable/infrastructure/reposito
 
 final archivosDescargableRepositoryProvider =
     Provider<ArchivosDescargableRepository>((ref) {
-  //Permite relizar peticiones a a pis publicas
+  //PERMITE REALIZAR PETICIONES A APIS PUBLICAS, EXECPTO
+  //REQUIERE TOKEN PARA TURAS PROTEGIDAS
   final accessToken = ref.watch(authProvider).user?.token ?? '';
 
   final congregacionesRepository = ArchivosDescargableRepositoryImpl(

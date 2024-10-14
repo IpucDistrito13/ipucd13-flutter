@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '/features/admin/solicitudes/archivos_descargable/presentation/providers/archivos_descargable_provider.dart';
-import '/features/admin/solicitudes/certificados/bautisamo_screen.dart';
-import 'package:url_launcher/url_launcher.dart';
 import '../../../config/config.dart';
+import '/features/admin/solicitudes/archivos_descargable/presentation/providers/archivos_descargable_provider.dart';
+import 'certificados/bautismo_screen.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SolicitudesScreen extends ConsumerStatefulWidget {
   static const name = 'solicitud-descargable-screen';
@@ -63,7 +63,7 @@ class SolicitudesScreenState extends ConsumerState<SolicitudesScreen> {
         ),
         body: TabBarView(
           children: [
-            // Tab 1: Archivos descargables
+            // Tab 1: ARCHIVOS DESCARGABLES
             archivosState.isLoading && archivosState.archivos.isEmpty
                 ? const Center(child: CircularProgressIndicator())
                 : archivosState.archivos.isEmpty
@@ -105,7 +105,7 @@ class SolicitudesScreenState extends ConsumerState<SolicitudesScreen> {
                         },
                       ),
 
-            // Tab 2: Certificado de bautismo
+            // Tab 2: CERTIFICADO DE BAUTISMO
             const BautisamoScreen(),
           ],
         ),
@@ -114,17 +114,18 @@ class SolicitudesScreenState extends ConsumerState<SolicitudesScreen> {
   }
 
   Future<void> _launchURL(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('No se pudo abrir el enlace')),
-      );
-    }
+  final Uri uri = Uri.parse(url);
+  if (await canLaunchUrl(uri)) {
+    await launchUrl(uri);
+  } else {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('No se pudo abrir el enlace')),
+    );
   }
+}
 
   Future<void> _downloadFile(String url, String fileName) async {
+    // TODO:: IMPLEMENTAR DESCARGAR ARCHIVO
     //print('Nombre archivo: $fileName');
-    // Implementación de descarga aquí
   }
 }

@@ -1,8 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import '../../domain/domains.dart';
 import 'congregaciones_repository_provider.dart';
 
+//3.
+//CADA VEZ QUE SE CIERRA LA PANTALLA REALIZA EL autoDisponse, PARA LIMPIAR DATOS
 final congregacionesProvider =
     StateNotifierProvider<ComitesNotifier, CongregacionesState>((ref) {
   final congregacionesRepository = ref.watch(congregacionesRepositoryProvider);
@@ -10,7 +11,7 @@ final congregacionesProvider =
 });
 //3.
 
-//2
+//2.
 class ComitesNotifier extends StateNotifier<CongregacionesState> {
   final CongregacionesRepository congregacionesRepository;
 
@@ -37,10 +38,10 @@ class ComitesNotifier extends StateNotifier<CongregacionesState> {
         isLoading: false,
         offset: state.offset + 10,
         congregaciones: [...state.congregaciones, ...congregaciones]);
-
     //print('Nuevas congregaciones');
   }
-} //2.
+} 
+//2.
 
 //1.
 class CongregacionesState {

@@ -1,13 +1,13 @@
-import 'package:flutter/material.dart';
+import '../../../../../config/config.dart';
+import '/features/public/archivos/presentation/providers/archivos_by_carpeta_provider.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:open_file/open_file.dart';
-import '/features/public/archivos/presentation/providers/archivos_by_carpeta_provider.dart';
-import 'package:url_launcher/url_launcher.dart';
-import '../../../../../config/config.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:dio/dio.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ArchivosCarpetaScreen extends ConsumerStatefulWidget {
   static const String name = 'archivos-screen';
@@ -31,8 +31,13 @@ class ArchivosCarpetaScreenState extends ConsumerState<ArchivosCarpetaScreen> {
   Future<void> initNotifications() async {
     const AndroidInitializationSettings initializationSettingsAndroid =
         AndroidInitializationSettings('@mipmap/ic_launcher');
-    final InitializationSettings initializationSettings =
-        const InitializationSettings(android: initializationSettingsAndroid);
+        
+    const DarwinInitializationSettings initializationSettingsIOS = DarwinInitializationSettings();
+
+    const InitializationSettings initializationSettings =
+        InitializationSettings(android: initializationSettingsAndroid,
+        iOS: initializationSettingsIOS);
+
     await flutterLocalNotificationsPlugin.initialize(
       initializationSettings,
       onDidReceiveNotificationResponse: (NotificationResponse details) async {
@@ -76,8 +81,10 @@ class ArchivosCarpetaScreenState extends ConsumerState<ArchivosCarpetaScreen> {
   }
 
   Future<void> _launchURL(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
+    final Uri uri = Uri.parse(url);
+    
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('No se pudo abrir el enlace')),
@@ -87,26 +94,25 @@ class ArchivosCarpetaScreenState extends ConsumerState<ArchivosCarpetaScreen> {
 
   Future<void> _downloadFile(String url, String fileName) async {
     try {
-      // Directorio de descarga
+      //DIRECTORIO DE DESCARGA
       final dir = await getApplicationDocumentsDirectory();
       final filePath = '${dir.path}/$fileName';
 
-      // Descarga del archivo
+      //DESCARGA DEL ARCHIVO
       Dio dio = Dio();
       await dio.download(url, filePath);
 
-      // Mostrar notificación al usuario cuando la descarga haya terminado
+      //MOSTRAR NOTIFICACION AL USUARIO CUANDO LA DESCARGA TERMINE
       await showNotification(filePath);
 
-      // Mostrar mensaje de éxito
+      //MOSTRAR MENSAJE DE EXITO
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Archivo descargado: $fileName')),
       );
     } catch (e) {
-      //print(e);
-      // Manejo de errores
+      //MANEJO DE ERRORES
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error al descargar archivo: $e')),
+        const SnackBar(content: Text('Error al descargar archivo.')),
       );
     }
   }

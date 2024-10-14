@@ -25,11 +25,10 @@ class SearchCongregacionDelegate extends SearchDelegate<Congregacion?> {
   //Periodo de tiempo
   Timer? _debounceTimer;
 
-  //Funcion encargada para emitir los nuesvos resultados de las congregaciones
+  //FUNCION ENCARGADA PARA EMITIR LOS NUEVOS RESULTADOS
   void _onQueryChanged(String query) {
-    //Cuando escribe, comienza a girar la animacion de cargando
+    //CUANDO ESCRIBE, COMIENZA A GIRAR LA ANIMACION DE CARGANDO
     isLoadingStream.add(true);
-    //
     //print('Query stream cambio');
 
     if (_debounceTimer?.isActive ?? false) _debounceTimer!.cancel();
@@ -43,11 +42,8 @@ class SearchCongregacionDelegate extends SearchDelegate<Congregacion?> {
       initialCongregaciones = congregaciones;
       debounceCongregaciones.add(congregaciones);
 
-      //se detiene la animacion tam prondo tenga datos
+      //SE DETIENE LA ANIMACION, CUANDO SE OPTIENE LOS DATOS
       isLoadingStream.add(false);
-
-      //Cuando deja de escribir, muestra
-      //print('Buscando congregación');
     });
   }
 
@@ -60,10 +56,9 @@ class SearchCongregacionDelegate extends SearchDelegate<Congregacion?> {
 
   Widget _buildResultsAndSuggestions() {
     return StreamBuilder(
-      initialData: initialCongregaciones, //La data tenga el valor anterior
+      initialData: initialCongregaciones,
       stream: debounceCongregaciones.stream,
       builder: (context, snapshot) {
-        //prnt('Realizando peticion)
         final congregaciones = snapshot.data ?? [];
 
         return ListView.builder(
@@ -77,8 +72,7 @@ class SearchCongregacionDelegate extends SearchDelegate<Congregacion?> {
 
   @override
   List<Widget>? buildActions(BuildContext context) {
-    //Construir  acciones
-    //print('query: $query');
+
     return [
       StreamBuilder(
         initialData: false,
@@ -107,9 +101,7 @@ class SearchCongregacionDelegate extends SearchDelegate<Congregacion?> {
 
   @override
   Widget? buildLeading(BuildContext context) {
-    // TODO: implement buildLeading
-    //Construir icono
-
+    //CONSTRUIR ICONOS
     return IconButton(
       onPressed: () {
         clearStreams();
@@ -121,21 +113,16 @@ class SearchCongregacionDelegate extends SearchDelegate<Congregacion?> {
 
   @override
   Widget buildResults(BuildContext context) {
-    // TODO: implement buildResults
-    //Resultado cuando el usuario presione enter
-
+    //RESULTADO CUANDO EL USUARIO PRECIONA ENTER
     return _buildResultsAndSuggestions();
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    // TODO: implement buildSuggestions
-
-    //Cada vez que se oprima teclas se emite el OnQueryChange
+    //CADA VEZ QUE SE OPRIMA TECLAS SE EMITE EL OnQueryChange
     _onQueryChanged(query);
 
-    //Cuando el usuario esta escribiendo, que es lo que se va hacer
-    // return const Text('buildSuggestions');
+    //CUANDO EL USUARIO ESTA ESCRIBIENDO
     return _buildResultsAndSuggestions();
   }
 }

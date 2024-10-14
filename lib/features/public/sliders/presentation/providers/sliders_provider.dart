@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import '../../domain/domains.dart';
 import 'providers.dart';
 
+//3.
 final slidersProvider =
     StateNotifierProvider<ComitesNotifier, SlidersState>((ref) {
   final slidersRepository = ref.watch(slidersRepositoryProvider);
@@ -10,7 +10,7 @@ final slidersProvider =
 });
 //3.
 
-//2
+//2.
 class ComitesNotifier extends StateNotifier<SlidersState> {
   final SlidersRepository slidersRepository;
 
@@ -38,7 +38,8 @@ class ComitesNotifier extends StateNotifier<SlidersState> {
       sliders: [...state.sliders, ...sliders],
     );
   }
-} //2.
+} 
+//2.
 
 //1.
 class SlidersState {

@@ -1,10 +1,9 @@
-import 'package:dio/dio.dart';
-
 import '../../../../../config/config.dart';
 import '../../domain/datasources/congregaciones_datasource.dart';
 import '../../domain/entities/congregacion.dart';
 import '../mappers/congregacion_mapper.dart';
 import '../models/congregacion_server.dart';
+import 'package:dio/dio.dart';
 
 class CongregacionesDatasourceImpl extends CongregacionesDatasource {
   late final Dio dio;
@@ -23,6 +22,7 @@ class CongregacionesDatasourceImpl extends CongregacionesDatasource {
         CongregacionesServerResponse.fromJson(json);
 
     final List<Congregacion> congregaciones = congregacionServerResponse.data
+        //EJEMPLO PARA FILTRAR
         //.where((congregacionesServer) =>
         //    congregacionesServer.direccion != 'PENDIENTE')
         .map((congregacionesServer) =>
@@ -35,7 +35,6 @@ class CongregacionesDatasourceImpl extends CongregacionesDatasource {
   @override
   Future<Congregacion> createUpdateCongregacion(
       Map<String, String> congregacionLike) {
-    // TODO: implement createUpdateCongregacion
     throw UnimplementedError();
   }
 
@@ -50,15 +49,13 @@ class CongregacionesDatasourceImpl extends CongregacionesDatasource {
       if (response.statusCode == 200) {
         return _jsonToCongregacion(response.data);
       } else {
-        //print('Request failed with status: ${response.statusCode}');
         return [];
       }
     } catch (e) {
       if (e is DioError) {
-        //print('Error status code: ${e.response?.statusCode}');
-        //print('Error response data: ${e.response?.data}');
+        //
       } else {
-        //print('Error: $e');
+        print('Error CONGREGACIONES: $e');
       }
       return [];
     }
@@ -66,7 +63,6 @@ class CongregacionesDatasourceImpl extends CongregacionesDatasource {
 
   @override
   Future<Congregacion> getCongregacionById(String id) {
-    // TODO: implement getCongregacionById
     throw UnimplementedError();
   }
 

@@ -1,4 +1,3 @@
-import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '/features/public/congregaciones/presentation/delegates/search_congregacion_delegate.dart';
@@ -45,7 +44,7 @@ class CongregacionesScreenState extends ConsumerState<CongregacionesScreen> {
           IconButton(
             icon: const Icon(Icons.search),
             onPressed: () {
-              //
+              
               final searchedCongregaciones =
                   ref.read(searchedCongregacionesProvider);
               //searchQuery para mantener el estado

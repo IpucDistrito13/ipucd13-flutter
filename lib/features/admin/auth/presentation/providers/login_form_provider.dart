@@ -4,7 +4,7 @@ import 'package:formz/formz.dart';
 import '../../../../shared/shared.dart';
 import 'providers.dart';
 
-//! 3 - StateNotifierProvider - consume afuera
+//! 3 - StateNotifierProvider
 final loginFormProvider =
     StateNotifierProvider.autoDispose<LoginFormNotifier, LoginFormState>((ref) {
   final loginUserCallback = ref.watch(authProvider.notifier).loginUser;
@@ -12,7 +12,7 @@ final loginFormProvider =
   return LoginFormNotifier(loginUserCallback: loginUserCallback);
 });
 
-//! 2 - Como implementamos un notifier
+//! 2 - COMO IMPLEMENTAMOS UN NOTIFIER
 class LoginFormNotifier extends StateNotifier<LoginFormState> {
   final Function(String, String) loginUserCallback;
 
@@ -57,7 +57,7 @@ class LoginFormNotifier extends StateNotifier<LoginFormState> {
   }
 }
 
-//! 1 - State del provider
+//! 1 - State DEL PROVIDER
 class LoginFormState {
   final bool isPosting;
   final bool isFormPosted;

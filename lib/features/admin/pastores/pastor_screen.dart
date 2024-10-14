@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:photo_view/photo_view.dart';
 import '/features/admin/galerias/presentation/provider/galeria_by_usuario_provider.dart';
 import '/features/admin/usuarios/presentation/provides/usuario_perfil_provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/material.dart';
+import 'package:photo_view/photo_view.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class PastorScreen extends ConsumerStatefulWidget {

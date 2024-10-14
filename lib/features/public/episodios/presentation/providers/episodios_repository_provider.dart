@@ -4,7 +4,8 @@ import '../../domain/domains.dart';
 import '../../infrastructure/infrastructures.dart';
 
 final episodiosRepositoryProvider = Provider<EpisodiosRepository>((ref) {
-  //Permite relizar peticiones a a pis publicas
+  //PERMITE REALIZAR PETICIONES A APIS PUBLICAS, EXECPTO
+  //REQUIERE TOKEN PARA TURAS PROTEGIDAS
   final accessToken = ref.watch(authProvider).user?.token ?? '';
 
   final episodioRepository =

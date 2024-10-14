@@ -18,7 +18,7 @@ class BackTransmisionScreen extends ConsumerWidget {
           IconButton(
             icon: const Icon(Icons.refresh),
             onPressed: () {
-              // Actualiza el estado cuando se presiona el botón
+              //ACTUALIZA EL ESTADO CUANDO SE PRESIONA EL BOTON
               ref.refresh(transmisionProvider);
             },
           ),
@@ -28,19 +28,21 @@ class BackTransmisionScreen extends ConsumerWidget {
         child: transmisionAsyncValue.when(
           data: (data) {
             final url = data['url'];
+            //print('URL....... $url');
             if (url == null) {
               return const Text('No hay transmisión en vivo');
             } else {
               return ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red, // Cambia el color del botón
+                  backgroundColor: Colors.red,
                   padding:
                       const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
                   shape: RoundedRectangleBorder(
                     borderRadius:
-                        BorderRadius.circular(30), // Bordes redondeados
+                        BorderRadius.circular(30),
                   ),
-                  elevation: 8, // Agrega sombra
+
+                  elevation: 8,
                 ),
                 onPressed: () {
                   Navigator.push(
@@ -52,8 +54,9 @@ class BackTransmisionScreen extends ConsumerWidget {
                 child: const Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
+                    //ICONO DEL BOTON
                     Icon(Icons.play_arrow,
-                        color: Colors.white), // Icono en el botón
+                        color: Colors.white),
                     SizedBox(width: 8),
                     Text(
                       'Ver transmisión ahora',

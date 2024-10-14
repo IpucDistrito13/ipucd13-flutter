@@ -1,11 +1,12 @@
-import 'package:flutter/material.dart';
-import 'package:dio/dio.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:intl/intl.dart';
 import 'dart:io';
-import 'package:path_provider/path_provider.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:open_file/open_file.dart';
+import 'package:path_provider/path_provider.dart';
+import '../../../shared/widgets/widgets.dart';
 
 final dioProvider = Provider((ref) => Dio());
 
@@ -19,8 +20,16 @@ class CertificadoNotifier extends StateNotifier<AsyncValue<String?>> {
   Future<void> initNotifications() async {
     const AndroidInitializationSettings initializationSettingsAndroid =
         AndroidInitializationSettings('@mipmap/ic_launcher');
-    final InitializationSettings initializationSettings =
-        InitializationSettings(android: initializationSettingsAndroid);
+
+        const DarwinInitializationSettings initializationSettingsIOS = DarwinInitializationSettings();
+
+        const InitializationSettings initializationSettings =
+        InitializationSettings(
+          android: initializationSettingsAndroid,
+          iOS: initializationSettingsIOS,
+          );
+
+        
     await flutterLocalNotificationsPlugin.initialize(
       initializationSettings,
       onDidReceiveNotificationResponse: (NotificationResponse details) async {
@@ -61,7 +70,6 @@ class CertificadoNotifier extends StateNotifier<AsyncValue<String?>> {
           'https://ipucdistrito13.org/api/v2/certificado/bautismo/download';
 
       final Uri uri = Uri.parse(baseUrl).replace(queryParameters: params);
-      //print('URL completa: $uri');
 
       final response = await dio.getUri(
         uri,
@@ -79,7 +87,7 @@ class CertificadoNotifier extends StateNotifier<AsyncValue<String?>> {
         final nombreBautizado = params['nombre'];
         final filePath = await guardarArchivo(nombreBautizado, bytes);
 
-        // Mostrar la notificación
+        //MOSTRAR LA NOTIFICACION
         await showNotification(filePath);
 
         state = AsyncValue.data(filePath);
@@ -94,11 +102,12 @@ class CertificadoNotifier extends StateNotifier<AsyncValue<String?>> {
 
   Future<String> guardarArchivo(String nombreBautizado, List<int> bytes) async {
     try {
-      // Obtener el directorio de documentos de la aplicación
+      //print('GUARDAR ARCHIVO: $nombreBautizado');
+      //OBTENER EL DIRECTORIO DE DOCUMENTOS DE LA APLICACION
       final appDocDir = await getApplicationDocumentsDirectory();
       final file = File('${appDocDir.path}/$nombreBautizado.pdf');
 
-      // Escribir los bytes en el archivo
+      //ESCRIBIR LOS bytes EN EL ARCHIVO
       await file.writeAsBytes(bytes);
 
       //print('Archivo guardado en: ${file.path}');
@@ -116,13 +125,13 @@ final certificadoProvider =
 });
 
 class BautisamoScreen extends ConsumerStatefulWidget {
-  const BautisamoScreen({Key? key}) : super(key: key);
+  const BautisamoScreen({super.key});
 
   @override
-  _BautisamoScreenState createState() => _BautisamoScreenState();
+  BautisamoScreenState createState() => BautisamoScreenState();
 }
 
-class _BautisamoScreenState extends ConsumerState<BautisamoScreen> {
+class BautisamoScreenState extends ConsumerState<BautisamoScreen> {
   final _formKey = GlobalKey<FormState>();
   final _nombreController = TextEditingController();
   final _ubicacionController = TextEditingController();
@@ -218,24 +227,13 @@ class _BautisamoScreenState extends ConsumerState<BautisamoScreen> {
                   ),
                 ),
                 const SizedBox(height: 24),
-                ElevatedButton(
-                  onPressed: certificadoState.isLoading
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: CustomFilledButton(
+                      onPressed: certificadoState.isLoading
                       ? null
                       : () => _generarCertificado(),
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 12),
-                    child: Text(
-                      certificadoState.isLoading
-                          ? 'Generando...'
-                          : 'Generar Certificado',
-                      style: const TextStyle(fontSize: 18),
-                    ),
-                  ),
+                      text: 'Generar certificado'),
                 ),
               ],
             ),

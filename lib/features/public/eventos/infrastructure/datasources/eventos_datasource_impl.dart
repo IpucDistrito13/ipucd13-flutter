@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-
 import '../../../../../config/config.dart';
 import '../../domain/domains.dart';
 import '../infrastructure.dart';
@@ -30,11 +29,9 @@ class EventosDatasourceImpl extends EventosDatasource {
       return eventos;
     } on DioException catch (e) {
       //print('DioException occurred: ${e.message}');
-      // Handle the error (e.g., return an empty list or rethrow)
       return [];
     } catch (e) {
       //print('An unexpected error occurred: $e');
-      // Handle other types of errors
       return [];
     }
   }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../public/screen/screens.dart';
 
 class CustomRadioTransmision extends StatelessWidget {

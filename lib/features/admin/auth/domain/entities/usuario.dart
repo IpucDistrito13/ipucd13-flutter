@@ -14,7 +14,6 @@ class Usuario {
   final String departamento;
   final String imagen;
   final String direccion;
-
   final String token;
 
   Usuario({

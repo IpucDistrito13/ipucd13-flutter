@@ -25,7 +25,8 @@ class VideoScreenState extends ConsumerState<VideoScreen> {
         mute: false,
       ),
     );
-    // Establece las orientaciones preferidas solo en horizontal
+
+    //ESTABLECE LAS ORIENTACION EN HORIZONTAL
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeRight,
       DeviceOrientation.landscapeLeft,
@@ -35,7 +36,7 @@ class VideoScreenState extends ConsumerState<VideoScreen> {
   @override
   void dispose() {
     _controller.dispose();
-    // Restablecer la configuración de orientación predeterminada del sistema
+    //ESTABLECE LA CONFIGURACION DE ORIENTACION PREDETERMINADO DEL SISTEMA
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,

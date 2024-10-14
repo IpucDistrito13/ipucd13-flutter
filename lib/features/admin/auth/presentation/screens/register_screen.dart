@@ -22,7 +22,7 @@ class RegisterScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const SizedBox(height: 80),
-            // Icon Banner
+            // ICON BANNER
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -44,7 +44,7 @@ class RegisterScreen extends StatelessWidget {
             const SizedBox(height: 50),
 
             Container(
-              height: size.height - 260, // 80 los dos sizebox y 100 el ícono
+              height: size.height - 260, //80
               width: double.infinity,
               decoration: BoxDecoration(
                 color: scaffoldBackgroundColor,

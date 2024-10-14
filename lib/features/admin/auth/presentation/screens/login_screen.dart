@@ -10,7 +10,6 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final scaffoldBackgroundColor = Theme.of(context).scaffoldBackgroundColor;
 
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
@@ -22,22 +21,25 @@ class LoginScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const SizedBox(height: 60),
-            // Icon Banner
-            // Imagen desde assets
+            
             SizedBox(
-              width: 260, // Ajusta el ancho según lo necesites
-              height: 100, // Ajusta la altura según lo necesites
+              //AJUSTA EL ANCHO SEGUN DEL LOGO
+              width: 260, 
+              //AJUSTA LA ALTURA  SEGUN DEL LOGO
+              height: 100,
               child: Image.asset(
                 'assets/images/ipuc_logosimbolo_copia.png',
+                //AJUSTA LA IMAGEN DE FORMA CORRECTA
                 fit: BoxFit
-                    .fill, // Esto asegura que la imagen se ajuste correctamente
+                    .fill,
               ),
             ),
 
             const SizedBox(height: 10),
 
             Container(
-              height: size.height - 180, // 280 los dos sizebox y 100 el ícono
+              // 280 los dos sizebox y 100 el ícono
+              height: size.height - 180, 
               width: double.infinity,
               decoration: const BoxDecoration(
                 color: Colors.white,
@@ -70,8 +72,6 @@ class _LoginForm extends ConsumerWidget {
       showSnackbar(context, next.errorMessage);
     });
 
-    //final textStyles = Theme.of(context).textTheme;
-
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 50),
       child: Column(
@@ -82,7 +82,7 @@ class _LoginForm extends ConsumerWidget {
                   fontFamily: 'MyriamPro',
                   fontSize: 25,
                   fontWeight: FontWeight.bold,
-                  color: Colors.black) // Asegura que el texto sea negro),
+                  color: Colors.black,) 
               ),
           const SizedBox(height: 80),
           CustomTextFormField(
@@ -109,8 +109,9 @@ class _LoginForm extends ConsumerWidget {
             child: CustomFilledButton(
               text: 'Ingresar',
               buttonColor: const Color(0xFFF0AB00),
+
               textColor:
-                  Colors.white, // Añadido para especificar el color del texto
+                  Colors.white, 
               onPressed: loginForm.isPosting
                   ? null
                   : ref.read(loginFormProvider.notifier).onFormSubmit,
@@ -126,7 +127,7 @@ class _LoginForm extends ConsumerWidget {
                   'Olvidé mi contraseña',
                   style: TextStyle(
                       color: Colors
-                          .black), // Asegura que el texto del botón sea visible
+                          .black,), 
                 ),
               )
             ],

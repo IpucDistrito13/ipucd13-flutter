@@ -18,12 +18,11 @@ class UsuariosMapper {
         imagen: (usuario.imagen != null && usuario.imagen!.isNotEmpty)
             ? '${Environment.apiStorage}/${usuario.imagen}'
             : '${Environment.apiStorage}/public/No_imagen/no_image_portada.png',
-        //roles: [], // Convertir el campo "role" en una lista
-        token: '', direccion: '', // O asigna un valor real si lo tienes
+        //roles: [],
+        token: '', direccion: '',
       );
 
   static Usuario pastoresToEntity(UsuarioServer pastores) => Usuario(
-        //type: '',
         codigo: '',
         uuid: pastores.uuid,
         documento: '',
@@ -43,7 +42,6 @@ class UsuariosMapper {
       );
 
   static Usuario lideresToEntity(UsuarioServer pastores) => Usuario(
-        //type: '',
         codigo: '',
         uuid: pastores.uuid,
         documento: '',
@@ -64,7 +62,6 @@ class UsuariosMapper {
 
   static Usuario usuarioPerfilToEntity(UsuarioDetailsResponse usuario) =>
       Usuario(
-        //type: '',
         codigo: '',
         uuid: usuario.data.uuid,
         documento: '',

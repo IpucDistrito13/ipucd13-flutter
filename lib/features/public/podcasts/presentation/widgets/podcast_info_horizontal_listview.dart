@@ -51,16 +51,21 @@ class _PodcatsHorizontalListViewState
     super.dispose();
   }
 
+  @override
   Widget build(BuildContext context) {
+    /**
+     * 1. CustomTituloSubtitulo: MOSTRAMOS TITULO O SUBTITULO
+     * 2. CustomSliderHorizontalTextoImagen: MOSTRAMOS TITULO Y IMAGEN
+     */
     return SizedBox(
       height: 240, //350
       child: Column(
         children: [
-          // Si lo dos son null no mostrar nada, Si uno de los dos tiene datos mostrar
+          //SI LOS DOS SON null NO MOSTRAR NADA, CUANDO TIENE DATOS UNO DE LOS DOS MOSTRAR
           if (widget.title != null || widget.subTitle != null)
             _Title(title: widget.title, subTitle: widget.subTitle),
-
-          // Mostrar el ListView solo si podcasts no está vacío o es null
+            
+          //MOSTRAR EL ListView, CUANDO EXISTE DATOS
           Expanded(
             child: ListView.builder(
               controller: scrollController,
@@ -103,7 +108,6 @@ class _Title extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //final titleStyle = Theme.of(context).textTheme.titleSmall;
 
     const titleStyle = TextStyle(
       fontFamily: 'MyriamPro',
@@ -124,7 +128,7 @@ class _Title extends StatelessWidget {
           const Spacer(),
           if (subTitle != null)
             FilledButton.tonal(
-                //Estilo para el subtitulo
+                //ESTILO PARA EL SUBTITULO
                 style: const ButtonStyle(visualDensity: VisualDensity.compact),
                 onPressed: () {
                   //print('Subtitle pressed');

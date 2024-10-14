@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import '/config/router/app_router_notifier.dart';
 import '../../../admin/auth/presentation/providers/providers.dart';
 import '../../shared.dart';
 
 class SideMenuAdmin extends ConsumerStatefulWidget {
+  //3. RECIBIMOS LA INFORMACION DEL scaffoldKey
   final GlobalKey<ScaffoldState> scaffoldKey;
 
   const SideMenuAdmin({super.key, required this.scaffoldKey});
@@ -31,11 +33,19 @@ class SideMenuState extends ConsumerState<SideMenuAdmin> {
             navDrawerIndex = value;
           });
 
-          // final menuItem = appMenuItems[value];
-          // context.push( menuItem.link );
+          final menuItem = appMenuItemsAdminPastor[value];
+          context.push( menuItem.link );
+
+          //4. LLAMAMOS EL scaffoldKey,
+          //closeDrawer() siempre vamos a querer cerrar
           widget.scaffoldKey.currentState?.closeDrawer();
         },
+
+        //OPCIONES DE MENU
         children: [
+          const SizedBox(
+            height: 20,
+          ),
           Padding(
             padding: EdgeInsets.fromLTRB(20, hasNotch ? 0 : 20, 16, 0),
             child: const Center(
@@ -66,21 +76,17 @@ class SideMenuState extends ConsumerState<SideMenuAdmin> {
           Padding(
             padding: const EdgeInsets.fromLTRB(20, 0, 16, 10),
             child: Text(
+        
               user.roles.join(
                 ', ',
-              ), // Combina los roles en una sola cadena separados por comas
+              ),
+              //COMBINA LOS ROLES EN UNA SOLA CADENA, SEPARANDO POR ,
               style: textStyles.titleSmall,
             ),
           ),
-          /*
-          const NavigationDrawerDestination(
-            icon: Icon(Icons.home_outlined),
-            label: Text('Productos'),
-          ),
-          */
 
-          //Mostrados menus items publicos
-          ...appMenuItemsAdmin.map(
+          //MOSTRAMOS MENUS ITEMS PUBLICOS
+          ...appMenuItemsAdminPastor.map(
             (item) => NavigationDrawerDestination(
               icon: Icon(item.icon),
               label: Text(item.title),

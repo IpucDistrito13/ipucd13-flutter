@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-
 import '../../../../../config/config.dart';
 import '../../domain/datasource/archivos_datasource.dart';
 import '../../domain/domains.dart';
@@ -39,26 +38,22 @@ class ArchivosDatasourceImpl extends ArchivosDatasource {
 
       return archivos;
     } catch (e) {
-      //print('Error fetching archivos: $e');
       return [];
     }
   }
 
   @override
   Future<List<Archivo>> getArchivosByPage({int limit = 10, int offset = 0}) {
-    // TODO: implement getArchivosByPage
     throw UnimplementedError();
   }
 
   @override
   Future<Archivo> saveOrUpdateArchivo(Map<String, dynamic> archivoLike) {
-    // TODO: implement saveOrUpdateArchivo
     throw UnimplementedError();
   }
 
   @override
   Future<List<Archivo>> searchArchivosByTerm(String term) {
-    // TODO: implement searchArchivosByTerm
     throw UnimplementedError();
   }
 }

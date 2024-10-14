@@ -1,5 +1,4 @@
 import '/features/admin/auth/domain/entities/usuario.dart';
-
 import '../../domain/domains.dart';
 
 class UsuariosRepositoryImpl extends UsuariosRepository {

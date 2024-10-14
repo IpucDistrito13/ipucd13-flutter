@@ -1,8 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import '../../domain/domains.dart';
 import '../presentations.dart';
 
+//3.
+//CADA VEZ QUE SE CIERRA LA PANTALLA REALIZA EL autoDisponse, PARA LIMPIAR DATOS
 final archivosByCarpetaProvider = StateNotifierProvider.family
     .autoDispose<ArchivosNotifier, ArchivosState, String>((ref, uuid) {
   final archivosRepository = ref.watch(archivoRepositoryProvider);
@@ -10,7 +11,7 @@ final archivosByCarpetaProvider = StateNotifierProvider.family
 });
 //3.
 
-//2
+//2.
 class ArchivosNotifier extends StateNotifier<ArchivosState> {
   final ArchivosRepository archivosRepository;
 

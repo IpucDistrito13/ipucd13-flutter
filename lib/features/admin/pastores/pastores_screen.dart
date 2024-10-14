@@ -60,8 +60,7 @@ class PastoresScreenState extends ConsumerState<PastoresScreen> {
             usuarios: usuariosState.usuarios,
             scrollController: _scrollController,
           ),
-          if (usuariosState
-              .isLoading) // Asegúrate de tener un indicador de carga en tu estado
+          if (usuariosState.isLoading)
             const Center(
               child: CircularProgressIndicator(),
             ),
@@ -109,7 +108,6 @@ class SlideCustom extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        //final route = widget.route;
         final route = usuario.uuid;
         context.push('/usuario-perfil/$route');
       },
@@ -117,18 +115,23 @@ class SlideCustom extends StatelessWidget {
           padding: const EdgeInsets.all(16.0),
           child: Row(
             crossAxisAlignment:
-                CrossAxisAlignment.center, // Centrar la imagen verticalmente
+                //CENTRAR LA IMAGEN EN VERTICAL
+                CrossAxisAlignment.center,
             children: [
-              // Imagen del usuario en formato rectangular
+              //IMAGEN DEL PASTOR EN FORMATO RESCTANGULAR
               Container(
-                width: 70, // Ajusta el ancho según lo que prefieras
-                height: 90, // Ajusta la altura según lo que prefieras
+                //AJUSTA EL ANCHO 
+                width: 70,
+                //AJUSTA LA ALTURA
+                height: 90,
                 decoration: BoxDecoration(
                   borderRadius:
-                      BorderRadius.circular(8), // Opcional: bordes redondeados
+                      //BORDES REDONDEADOS
+                      BorderRadius.circular(8),
                   image: DecorationImage(
                     image: NetworkImage(
-                        usuario.imagen), // URL de la imagen del usuario
+                        //URL IMAGEN DEL PASTOR
+                        usuario.imagen),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -136,8 +139,11 @@ class SlideCustom extends StatelessWidget {
                     ? const Icon(Icons.person, size: 60)
                     : null,
               ),
-              const SizedBox(width: 16), // Espacio entre la imagen y los datos
-              // Columna para los datos del usuario
+              
+              //ESPACIO ENTRE LA IMAGEN Y LOS DATOS
+              const SizedBox(width: 17),
+
+              //COLUMNA PARA LOS DATOS DEL USUARIO
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -186,6 +192,7 @@ class SlideCustom extends StatelessWidget {
           ),
           actions: [
             /*
+            BUSCAR PASTOR
             if (congregacion.direccion.isNotEmpty)
               TextButton(
                 child: const Row(

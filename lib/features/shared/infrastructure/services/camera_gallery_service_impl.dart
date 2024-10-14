@@ -1,5 +1,4 @@
 import 'package:image_picker/image_picker.dart';
-
 import 'camera_gallery_service.dart';
 
 class CameraGalleryServiceImpl extends CameraGalleryService {
@@ -15,7 +14,6 @@ class CameraGalleryServiceImpl extends CameraGalleryService {
     if (photo == null) return null;
 
     //print('Tenemos una imagen ${ photo.path }');
-
     return photo.path;
   }
 

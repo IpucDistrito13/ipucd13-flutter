@@ -1,6 +1,5 @@
 class UsuarioAuth {
   final int id;
-  //final String uuid;
   final String nombre;
   final String apellidos;
   final String email;
@@ -9,7 +8,6 @@ class UsuarioAuth {
 
   UsuarioAuth({
     required this.id,
-    //required this.uuid,
     required this.nombre,
     required this.apellidos,
     required this.email,
@@ -21,25 +19,16 @@ class UsuarioAuth {
     return roles.contains('Administrador');
   }
 
-  bool get isSuper {
+  bool get isPastor {
     return roles.contains('Pastor');
   }
 
-  bool get isUser {
+    bool get isLider {
+    return roles.contains('Lider');
+  }
+
+  bool get isDeveloper {
     return roles.contains('Developer');
   }
 
-/*
-  bool get isAdmin {
-    return roles.contains('admin');
-  }
-
-  bool get isSuper {
-    return roles.contains('super');
-  }
-
-  bool get isUser {
-    return roles.contains('user');
-  }
-   */
 }
