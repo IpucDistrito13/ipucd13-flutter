@@ -86,3 +86,44 @@ minSdk = flutter.minSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
     }
+
+
+# Proceso para generar archivo - Android
+
+1. Cambiamos de version de la aplicacion
+2. Buscamos y configuramos la key
+3. Generar el appbundle - flutter build appbundle
+4. Subimos la aplicacion a la play store
+5. Prueba interna, solo los desarrolladores
+6. Prueba cerrada, invitamos a otra personas a probar la aplicacion
+7. prueba abierda, prueba un numero amplio de personas
+Documentacion completa: https://docs.flutter.dev/deployment/android
+
+
+android {
+    namespace = "com.example.[project]"
+    // Any value starting with "flutter." gets its value from
+    // the Flutter Gradle plugin.
+    // To change from these defaults, make your changes in this file.
+    compileSdk = flutter.compileSdkVersion
+    ndkVersion = flutter.ndkVersion
+
+    ...
+
+    defaultConfig {
+        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
+        applicationId = "com.example.[project]"
+        // You can update the following values to match your application needs.
+        minSdk = flutter.minSdkVersion
+        targetSdk = flutter.targetSdkVersion
+        // These two properties use values defined elsewhere in this file.
+        // You can set these values in the property declaration
+        // or use a variable.
+        versionCode = flutterVersionCode.toInteger()
+        versionName = flutterVersionName
+    }
+
+    buildTypes {
+        ...
+    }
+}

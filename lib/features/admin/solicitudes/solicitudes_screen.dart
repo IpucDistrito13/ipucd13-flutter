@@ -114,15 +114,15 @@ class SolicitudesScreenState extends ConsumerState<SolicitudesScreen> {
   }
 
   Future<void> _launchURL(String url) async {
-  final Uri uri = Uri.parse(url);
-  if (await canLaunchUrl(uri)) {
-    await launchUrl(uri);
-  } else {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('No se pudo abrir el enlace')),
-    );
+    final Uri uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('No se pudo abrir el enlace')),
+      );
+    }
   }
-}
 
   Future<void> _downloadFile(String url, String fileName) async {
     // TODO:: IMPLEMENTAR DESCARGAR ARCHIVO

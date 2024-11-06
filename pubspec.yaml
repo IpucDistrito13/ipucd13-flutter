@@ -1,6 +1,6 @@
 name: ipucd13_flutter
 description: "A new Flutter project."
-publish_to: 'none'
+publish_to: "none"
 version: 0.1.0
 
 environment:
@@ -13,6 +13,7 @@ dependencies:
   card_swiper: ^3.0.1
   change_app_package_name: ^1.4.0
   dio: ^5.7.0
+  file_picker: ^8.1.3
   flutter:
     sdk: flutter
   flutter_dotenv: ^5.0.2
@@ -26,6 +27,7 @@ dependencies:
   image_picker: ^1.1.2
   intl: ^0.19.0
   open_file: ^3.5.8
+  permission_handler: ^11.3.1
   photo_view: ^0.15.0
   shared_preferences: ^2.3.2
   url_launcher: ^6.3.1
@@ -59,10 +61,10 @@ flutter:
 flutter_native_splash:
   color: "#00338d"
   color_dark: "#00338d"
-  
+
   # Asegúrate de que esta ruta sea correcta
   background_image: "assets/images/logo_texto_color_splash.png"
-  
+
   android_12:
     color: "#00338d"
     color_dark: "#00338d"
@@ -74,7 +76,6 @@ flutter_native_splash:
   color_dark_android: "#00338d"
   color_ios: "#00338d"
   color_dark_ios: "#00338d"
-
   # Descomenta estas líneas si no quieres generar splash screen para web
   # android: true
   # ios: true

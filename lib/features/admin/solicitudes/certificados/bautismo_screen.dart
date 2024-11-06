@@ -21,15 +21,15 @@ class CertificadoNotifier extends StateNotifier<AsyncValue<String?>> {
     const AndroidInitializationSettings initializationSettingsAndroid =
         AndroidInitializationSettings('@mipmap/ic_launcher');
 
-        const DarwinInitializationSettings initializationSettingsIOS = DarwinInitializationSettings();
+    const DarwinInitializationSettings initializationSettingsIOS =
+        DarwinInitializationSettings();
 
-        const InitializationSettings initializationSettings =
+    const InitializationSettings initializationSettings =
         InitializationSettings(
-          android: initializationSettingsAndroid,
-          iOS: initializationSettingsIOS,
-          );
+      android: initializationSettingsAndroid,
+      iOS: initializationSettingsIOS,
+    );
 
-        
     await flutterLocalNotificationsPlugin.initialize(
       initializationSettings,
       onDidReceiveNotificationResponse: (NotificationResponse details) async {
@@ -50,6 +50,7 @@ class CertificadoNotifier extends StateNotifier<AsyncValue<String?>> {
       showWhen: false,
       icon: '@drawable/notificacion',
     );
+
     const NotificationDetails platformChannelSpecifics =
         NotificationDetails(android: androidPlatformChannelSpecifics);
     await flutterLocalNotificationsPlugin.show(
@@ -109,6 +110,7 @@ class CertificadoNotifier extends StateNotifier<AsyncValue<String?>> {
 
       //ESCRIBIR LOS bytes EN EL ARCHIVO
       await file.writeAsBytes(bytes);
+      print('Archivo bautismo guardado exitosamente en: ${file.path}');
 
       //print('Archivo guardado en: ${file.path}');
       return file.path;
@@ -231,8 +233,8 @@ class BautisamoScreenState extends ConsumerState<BautisamoScreen> {
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: CustomFilledButton(
                       onPressed: certificadoState.isLoading
-                      ? null
-                      : () => _generarCertificado(),
+                          ? null
+                          : () => _generarCertificado(),
                       text: 'Generar certificado'),
                 ),
               ],
